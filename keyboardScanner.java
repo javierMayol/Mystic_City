@@ -21,7 +21,7 @@ public class keyboardScanner
   public String getInput()
   {
      Scanner scan = new Scanner(System.in);
-     this.input = CleanLineScanner.getCleanLine(scan);
+     this.input = CleanLineScanner.getCleanLine(scan.nextLine());
      return input;
   }
   public String commandLinePrompt(String prompt)

@@ -56,11 +56,12 @@ public class Player extends Character
     new Player(where, ID_, inputName, inputDesc);
     System.out.println("We have created "+inputName+". It lives in "+where.name()+".");
   }
+
   public static void minPlayerNum(int players_qty)
   {
     if(players_qty > 2) 
     {
-      for(int i = 2; i < players_qty; i++)
+      for(int i = 1; i < players_qty; i++)
         createNewPlayer();
     }
     else if(players_qty > 15)

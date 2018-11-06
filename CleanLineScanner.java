@@ -34,4 +34,12 @@ public class CleanLineScanner {
     // return the clean line
     return line;
   }
+  public static String getCleanLine( String str )
+  {
+     str = str.replaceAll("(?:/\\*(?:[^*]|(?:\\*+[^*/]))*\\*+/)|(?://.*)|(?::-)","");
+     str = str.trim();
+     if(str.length() > 0) return str;
+       return str;
+    //End of Clean Line method.
+  }
 }
