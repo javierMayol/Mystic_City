@@ -1,26 +1,76 @@
-//package proj1;
-/*
-	Name : Neel Patel
-	netID: npate315	
-	uin  : 674004711
+ /*
+ *  Neel Patel 	NetID : npate315	UIN : 674004711
+ * Keval Patel
+ * Javier Mayol NetID : cmayol2		UIN : 671352495
+ */
+import java.util.*;
 
-	it has information about non playing characters 
-*/
+public class NPC extends Character
+{
+  private static String random_artifact;
+  private static boolean request_artifact;
+  //private static TreeMap<String, NPC>dummies = new TreeMap<String, NPC>();
 
-import java.util.Scanner;
+  public NPC(Scanner scan) 
+  {
+    super(scan);
+    decider = new AI();
+    random_artifact = new String();
+    request_artifact = false;
+    //dummies.put(Integer.toString(this.ID), this);
+  } 
 
-public class NPC extends Character {
-	
-	private DecisionMaker dm = new AI();
-	public NPC(Scanner sc, int version) {
-		super(sc, version);
-		// TODO Auto-generated constructor stub
-	}
-	
-	// they also do things but their own because they are crazy out of controls
-	public void makeMove() {
-		
-		Move m = dm.getMove(this, super.current);
-		((GO)m).execute();
-	}
+  public NPC(Place place, int id, String name_character, String desc)
+  {
+    super(place, id, name_character, desc);
+    decider = new AI();
+    random_artifact = new String();
+    request_artifact = false;
+    //dummies.put(Integer.toString(this.ID), this);
+  }
+
+  public void makeMove ()
+  {
+    Move move = decider.getMove(this, current);
+    while(move == null)
+      move = decider.getMove(this, current);
+    move.execute();
+  }
+
+  public static Character sendDummy()
+  {
+    Random rand = new Random();
+    List<String>keys = new ArrayList<String>(characters.keySet());
+    String randK = keys.get(rand.nextInt(keys.size()));
+    while(!(getCharacterByID(Integer.parseInt(randK)) instanceof NPC))
+      randK = keys.get(rand.nextInt(keys.size()));
+//    System.out.println(dummies.get(randK).name()+" coming at you.");
+    return getCharacterByID(Integer.parseInt(randK));
+  }
+
+  public static void dummyMoves(int n)
+  {
+    for(int i = 0; i < n; i++)
+    {
+      for(Character j : characters.values())
+      {
+	 if(j instanceof NPC)
+           j.makeMove();
+      }
+    }
+  }
+
+  public LinkedList<Artifact> emptyInventory()
+  {
+    LinkedList<Artifact> loot = new LinkedList<Artifact>(inventory.values());
+    this.inventory.clear();
+    this.points = 0;
+    this.artifacts_weight = 0;
+    return loot;    
+  }
+ 
+  public static String randomArtifact(String thing)
+  {
+    return thing;
+  }
 }

@@ -1,5 +1,7 @@
-/*
-* Javier Mayol, accc: cmayol
+/* 
+ * Neel Patel 	NetID : npate315	UIN : 674004711
+ * Keval Patel
+ * Javier Mayol NetID : cmayol2		UIN : 671352495
 * cs-342 Software Development
 * Professor John Bell
 * Game version 2.0
@@ -27,7 +29,7 @@ public class Artifact {
       this.mobility = s.nextInt();
       this.keyPattern = s.nextInt();
       this.name = s.findInLine("[[a-zA-Z'-]+\\s]+").trim();
-      NPC.addItemName(this.name);//Ogre's wrong doing.
+      //NPC.addItemName(this.name);//Ogre's wrong doing.
       s.nextLine();
       int n = s.nextInt();
       this.description = s.nextLine();

@@ -1,3 +1,8 @@
+ /*
+ *  Neel Patel 	NetID : npate315	UIN : 674004711
+ * Keval Patel
+ * Javier Mayol NetID : cmayol2		UIN : 671352495
+ */
 import java.util.*;
 
 public class Use implements Move
@@ -67,6 +72,5 @@ public class Use implements Move
   {
     String scroll = "&&************** Old Parchment Scroll *****************&&\n   This is just an old scroll.";
     System.out.println("\n"+scroll+"\n\n&&*****************************************************&&");
-    keyboard.getInput();
   } 
 }

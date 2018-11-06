@@ -1,3 +1,8 @@
+ /*
+ *  Neel Patel 	NetID : npate315	UIN : 674004711
+ * Keval Patel
+ * Javier Mayol NetID : cmayol2		UIN : 671352495
+ */
 import java.util.*;
 
 public class Riddle implements Move
@@ -5,8 +10,8 @@ public class Riddle implements Move
   private static Character Ogre;
   private Character victim;
   private keyboardScanner keyboard;
-  private LinkedList<String>riddles;//Try includding riddles in the GDF document.
-  private LinkedList<String>answers;
+  private static LinkedList<String>riddles = new LinkedList<String>();//Try includding riddles in the GDF document.
+  private static LinkedList<String>answers = new LinkedList<String>();
 
   public Riddle(){}
 
@@ -14,9 +19,6 @@ public class Riddle implements Move
   {
     victim = A;
     keyboard = keyboard.getInstance();
-    riddles = new LinkedList<String>();
-    answers = new LinkedList<String>();
-    addRiddle();
   }
 
   public static Character getOgre()
@@ -35,7 +37,7 @@ public class Riddle implements Move
     String answer = keyboard.getInput();
     if(!(answer.equalsIgnoreCase(right_answer)))
     {
-      loot(victim);
+      loot(victim.emptyInventory());
       System.out.println("\n\n\n\n\n\nHA HAHA HA!!! YOU LOSE !!!!!!\n");
       victim.message("\n>You have a new message:\n\n  "+Ogre.name()+" has stolen everything from you.");
     }
@@ -53,40 +55,30 @@ public class Riddle implements Move
      return answer;
   }
 
-  private void loot(Character poor_guy)
+  private void loot(LinkedList<Artifact>things)
   {
-    int n = NPC.nameListSize();
-    String item = new String();
-
-    Drop dropped = new Drop();
-    Get getit = new Get();
-    
-    for(int i = 0; i < n; i++)
-    {
-       item = NPC.removeItemName();
-//       System.out.println("Artifact name ogre's list "+item);
-       if(!poor_guy.hasSomething()) break;
-         dropped = new Drop(poor_guy, item);
-         dropped.execute();
-       if(dropped == null)
-        continue;
-       getit = new Get(Ogre, item);
-       getit.execute();
-       if(getit == null)
-         continue;
-       NPC.addItemName(item);
-       Ogre.display();
-    }
+    for(Artifact i : things)
+      Ogre.addArtifact(i);
   }
 
-  private void addRiddle()
+  public static void addRiddle(Scanner scan)
   {
-     String riddle1 = "Which of the following is NOT true of static class\nmethods?\nA. Static class methods can be called through any\ninstance of the class.\nB. Static class methods can be called through the\nname of the class, without using a class object.\nC. Static class methods can only access static data of\nthe class. ( Unless an object is passed in. )\nD. Static class methods can only access public and\nprotected data of the class.\nE. Static class methods do not have a “this” reference\n";
+    String line = CleanLineScanner.getCleanLine(scan);
+    Scanner lineScan = new Scanner(line);
 
-    String riddle2 = "What is the difference between Objects and Classes?\nA. In Java, Objects are any descendent of the\nObject class, and Classes descend from Class.\nB. Java programmers write Classes, and C++\nprogrammers write Objects.\nC. Objects are instantiations of Classes.\nD. Objects in mirrors may be closer than they\nappear.\nE. There is no difference. The two terms are\nsynonyms.";
-    riddles.add(riddle1);
-    riddles.add(riddle2);
-    answers.add("D");
-    answers.add("C");
+    int lines = lineScan.nextInt();
+    String riddle = "";
+    for(int i = 0; i < lines; i++)
+      riddle += CleanLineScanner.getCleanLine(scan)+"\n";
+    
+    line = CleanLineScanner.getCleanLine(scan);
+    lineScan = new Scanner(line);
+
+    String answer = lineScan.next();
+
+    System.out.println(riddle+"\n\n"+answer);
+
+    riddles.add(riddle);
+    answers.add(answer.trim());
   }
 }

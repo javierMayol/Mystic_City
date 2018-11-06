@@ -1,3 +1,8 @@
+ /*
+ *  Neel Patel 	NetID : npate315	UIN : 674004711
+ * Keval Patel
+ * Javier Mayol NetID : cmayol2		UIN : 671352495
+ */
 import java.util.*;
 
 public class Exit implements Move
@@ -12,6 +17,7 @@ public class Exit implements Move
   public void execute()
   {
     String name = character.name();
+    character.dropAll();
     character.removePlayer();
     Player.decreasePlayer_num();
     character.getCurrentPlace().removeCharacter(name);
