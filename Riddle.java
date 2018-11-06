@@ -42,7 +42,10 @@ public class Riddle implements Move
       victim.message("\n>You have a new message:\n\n  "+Ogre.name()+" has stolen everything from you.");
     }
     else
+    {
       System.out.println("\n\n\n\n\n\nYikes!! YOU'RE SO SMART.\n");
+      getPrize();
+    }
   }
 
   private String pickRiddle()
@@ -59,6 +62,22 @@ public class Riddle implements Move
   {
     for(Artifact i : things)
       Ogre.addArtifact(i);
+  }
+
+  private void getPrize()
+  {
+    if(!Ogre.hasSomething())
+    {
+      System.out.println("YOU WON! But the Ogre has nothing for you :(");
+      return;
+    }
+    System.out.println("YOU WON! You get to pick one item from the Ogre's inventory");
+    Ogre.viewInventory();
+    String prize = keyboard.getInput();
+    Drop thing = new Drop(Ogre, prize.trim());
+    thing.execute();
+    Get that = new Get(victim, prize.trim());
+    that.execute();
   }
 
   public static void addRiddle(Scanner scan)
