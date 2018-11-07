@@ -29,7 +29,7 @@ public class NPC extends Character
     //dummies.put(Integer.toString(this.ID), this);
   }
 
-  public void makeMove ()
+  public void makeMove()
   {
     Move move = decider.getMove(this, current);
     while(move == null)
@@ -48,9 +48,9 @@ public class NPC extends Character
     return getCharacterByID(Integer.parseInt(randK));
   }
 
-  public static void dummyMoves(int n)
+  public void dummyMove()
   {
-    for(int i = 0; i < n; i++)
+    for(int i = 0; i < 5; i++)
     {
       for(Character j : characters.values())
       {

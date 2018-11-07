@@ -147,12 +147,18 @@ abstract class Character
     return player_out;
   }
 
+/*
   public static LinkedList<Character> getList()
   {
-    System.out.println(characters.size());
-
     return new LinkedList<Character>(characters.values());
   }
+*/
+
+  public static Iterator<Character> getIterator()
+  {
+    return characters.values().iterator();
+  }
+
 
 //****************************** Methods : Artifact related *********************
   public boolean hasSomething()

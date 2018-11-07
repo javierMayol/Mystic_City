@@ -16,7 +16,6 @@ import java.util.*;
 public class Game {
 
   private String game_name;// name of the game
-  private static LinkedList<Character>players;	
   private int nCharacters;
   private keyboardScanner keyboard;		
   // game constructor that we are not using anymore
@@ -94,7 +93,6 @@ public class Game {
     int nRiddles = keyCount(file,"RIDDLES");
     for(int i = 0; i < nRiddles; i++)
       Riddle.addRiddle(file);
-    players = Player.getList();
     keyboard = keyboard.getInstance();
   }
   // helper method to find the number of places, directions, characters, and 
@@ -116,36 +114,17 @@ public class Game {
      return count;
   }
 
-  private static void removePlayer(int index)
-  {
-    if(index == 0 && !players.isEmpty())
-    {
-      Character tmp = players.remove();
-      return;
-    }
-    for(int i = 0; i < index; i++)
-    {
-      if(!players.isEmpty())
-      {
-        Character tmp = players.remove();
-        players.add(tmp);
-      }
-    }
-    if(!players.isEmpty())
-      players.remove();
-  }
   //play() : Infinte loop that takes command line input to navigate through the game.
   public void play() 
   {
     try 
     {
-      players = Character.getList();
-      Character curr_player = players.get(0);//For initiallizing.
-      Character dummy = NPC.sendDummy();
       System.out.println("*********************"+ this.game_name +"  started!"+"********************");
       int Player_num = 0;
-      for(Character c : players)
-       {
+      Iterator<Character> characterIterator = Character.getIterator();
+      while(characterIterator.hasNext())
+      {
+        Character c = characterIterator.next();
         if (c instanceof Player)
         {
           Player_num++;
@@ -158,29 +137,24 @@ public class Game {
       //Infinet loop. Uses scanner objects to get inputs from the user.
       while(true) 
       { 
-        if(Player.retrievePlayer_num() < 1)break;
-        //Place.printAll();
-        for(Character c : players)
-        { 
-          curr_player = c;
-          if(c instanceof Player)
+        characterIterator = Character.getIterator();
+        while(characterIterator.hasNext())
+        {
+          Character c = characterIterator.next();
+          if(!c.is_out())
           {
-            System.out.println(">Current place: "+curr_player.current.name());
-            System.out.println("\nOK, "+curr_player.name().toUpperCase()+", YOUR TURN.\n");
-            if(curr_player.gotNotification())
-               curr_player.notification();
-            curr_player.makeMove();
-            System.out.print("\n\n\n");
-            if(curr_player.is_out())
+            if(c instanceof Player)
             {
-              index = players.indexOf(c);
-              break;
+              System.out.println(">Current place: "+c.current.name());
+              System.out.println("\nOK, "+c.name().toUpperCase()+", YOUR TURN.\n");
             }
+            if(c.gotNotification())
+              c.notification();
+            c.makeMove();
           }
+          if(Player.retrievePlayer_num() < 1)break;
         }
-        if(curr_player.is_out()) removePlayer(index); 
-        NPC.dummyMoves(players.size());
-        System.out.print("\n\n\n");
+        if(Player.retrievePlayer_num() < 1)break;
       } 
     } 
     catch(InputMismatchException ie){ 
