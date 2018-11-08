@@ -32,9 +32,12 @@ public class NPC extends Character
   public void makeMove()
   {
     Move move = decider.getMove(this, current);
-    while(move == null)
-      move = decider.getMove(this, current);
-    move.execute();
+    for(int i = 0; i < 3; i++)
+    {
+      while(move == null)
+        move = decider.getMove(this, current);
+      move.execute();
+    }
   }
 
   public static Character sendDummy()

@@ -16,7 +16,6 @@ public class Artifact {
   private String name, description;
   private Printer printer;
   private static HashMap<Integer, Integer> prizes = new HashMap<Integer, Integer>();
-
   
   //Void argument constructor. Constructs a non-artifact.
   public Artifact(){}
@@ -70,16 +69,10 @@ public class Artifact {
     return keyPattern;
   }
 
-/*
-  //Passes this artifact to the current place in the game. If it is a key, tries to open a door.
-  //Uses String Argument. 
-  public void useKey(Character client, String dir){
-//    System.out.println("Artifact use(String) "+dir);
-    Place curr = client.getCurrentPlace();
-    curr.useKey(this, dir);
+  public void use()
+  {
+    System.out.println("needs implementation");
   }
-*/
-
   public int open(int ID)
   {
     if(prizes.isEmpty()) return 0;

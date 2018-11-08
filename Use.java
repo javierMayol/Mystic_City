@@ -25,16 +25,21 @@ public class Use implements Move
   {
     parse(); 
     if(this.thing == null)return;
+
+    //If it's a key
     if(this.thing.get_key() > 0)// && this.character instanceof Player)
     {
       character.current.useKey(thing.get_key(), direction);
       Go going = new Go(character, direction);
       going.execute();
     }
+
+    //If artifact is immovable and can be openned.
     else if(this.direction.equals("open"))
       openArtifact();
-    else if("Parchment scroll".equalsIgnoreCase(this.thing.name()))
-       readScroll();
+
+    else
+      this.thing.use();
   }
 
   private void parse()
@@ -67,10 +72,4 @@ public class Use implements Move
       character.current.addArtifact(this.thing);
     }
   }
-
-  private void readScroll()
-  {
-    String scroll = "&&************** Old Parchment Scroll *****************&&\n   This is just an old scroll.";
-    System.out.println("\n"+scroll+"\n\n&&*****************************************************&&");
-  } 
 }

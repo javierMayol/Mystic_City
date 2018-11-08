@@ -195,6 +195,12 @@ abstract class Character
   {
     if((thing = hasThing(thing)) != null)
       return inventory.get(thing);
+    else if(this instanceof Player)
+      for(String k : inventory.keySet())
+      {
+        thing = strCheck(k, thing);
+        use(thing);
+      }
     return null;
   }  
   
@@ -209,6 +215,16 @@ abstract class Character
       return removed;
     }
     else if(this instanceof Player)
+      for(String k : inventory.keySet())
+      {
+        key = strCheck(k, key);
+        if(key.contains(k))
+        {
+          key = k;
+          drop(key);
+        }
+      }
+    if(this instanceof Player)
       System.out.println("\n\n\n\n\n\n  :ARTIFACT NOT FOUND IN THE INVENTORY.\n");
     return null;
   }  
@@ -313,6 +329,23 @@ abstract class Character
         System.out.println("-----------Total points: "+this.points+"-------------\nweigth "+artifacts_weight);
     }
   }
+
+//******************************** String check method **********************************
+  private String strCheck(String buff, String input)
+  {
+    keyboard = keyboard.getInstance();
+    str_format.strSpellCheck(buff, input);//Input check enhancement.
+    if(str_format.match())
+    {
+      System.out.println("Did you mean "+buff+"? > [ 'y' | 'n' ]");
+      String str = keyboard.getInput();
+      if(str.equalsIgnoreCase("y")||str.equalsIgnoreCase("yes"))
+        return str_format.getString(); 
+      else
+        return input; 
+    }
+    return input;
+  } 
 
 //******************************** Stdout printing methods **********************************
   //display() : Displays information of the character. User friendly.

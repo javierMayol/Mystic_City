@@ -12,12 +12,16 @@
  */		 
 
 import java.util.*;
+import java.lang.reflect.Method;
 
 public class Game {
 
   private String game_name;// name of the game
   private int nCharacters;
   private keyboardScanner keyboard;		
+
+  Game(){};
+
   // game constructor that we are not using anymore
   Game(String name){
     game_name = name;
@@ -145,7 +149,8 @@ public class Game {
           {
             if(c instanceof Player)
             {
-              System.out.println(">Current place: "+c.current.name());
+  	       Place.printAll();
+              System.out.println(">Current place: "+c.current.name()+"\n"+c.current.description());
               System.out.println("\nOK, "+c.name().toUpperCase()+", YOUR TURN.\n");
             }
             if(c.gotNotification())

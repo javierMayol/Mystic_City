@@ -118,12 +118,12 @@ public class UI implements DecisionMaker
 
   private void info()
   {
-   System.out.println("Just type GO and the direction you want to travel to.\n\tExample: 'GO South' or 'GO S'.");
-   System.out.println("To get an item from the current place type 'GET' SPACE 'name of the artifact'.");
-   System.out.println("To drop an item in the current place type 'DROP' SPACE 'name of the artifact'.");
-   System.out.println("If you want to use a key type 'USE' SPACE 'name of the artifact key'.");
+   System.out.println("\nSOME COMMANDS:\nJust type GO and the direction you want to travel to.\n\tExample: 'GO South' or 'GO S'.");
+   System.out.println("To get an item from the current place, type 'GET' SPACE 'name of the artifact'.");
+   System.out.println("To drop an item in the current place, type 'DROP' SPACE 'name of the artifact'.");
+   System.out.println("If you want to use a key, type 'USE' SPACE 'name of the artifact key'.");
    System.out.println("To know what items you have in the invetory just type 'Inventory' or 'inve'.");
-   System.out.println("Type 'Quit', 'Exit' or 'q' to stop the game.\n");   
+   System.out.println("Type 'Quit', 'Exit' or 'q' to exit the game.\n");   
    character.getCurrentPlace().display();
   }
 }
