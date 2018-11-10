@@ -9,7 +9,7 @@ public class keyboardScanner
 {
   private static keyboardScanner instance = null;
   private String input;
-
+  private int num;
   protected keyboardScanner(){};
   
   public static keyboardScanner getInstance()
@@ -24,6 +24,13 @@ public class keyboardScanner
      this.input = CleanLineScanner.getCleanLine(scan.nextLine());
      return input;
   }
+ public int getInt()
+{
+	Scanner scan = new Scanner(System.in);
+	this.num = scan.nextInt();
+	return num;
+
+}
   public String commandLinePrompt(String prompt)
   {
     this.input = prompt+">";

@@ -45,9 +45,13 @@ abstract class Character
 			lineScan = new Scanner(line);
 
 			this.ID = lineScan.nextInt();
+		
+			this.age = lineScan.nextInt();
 			lineScan.skip("[ \t]*");
+		
 			this.name = lineScan.nextLine();
-
+		//	System.out.println(name);
+				
 			line = CleanLineScanner.getCleanLine(scan);
 			lineScan = new Scanner(line);
 
@@ -80,7 +84,7 @@ abstract class Character
 		}
 	}
 
-	public Character(Place place, int id, String name_character, String desc)
+	public Character(Place place, int id, int age, String name_character, String desc)
 	{
 		this.player_out = false;
 		this.artifact_handler = false;
@@ -91,6 +95,7 @@ abstract class Character
 		this.points = 0;
 		this.current = place;
 		this.ID = id;
+		this.age = age;
 		this.name = name_character;
 		this.description = desc;
 		this.inventory = new TreeMap<String, Artifact>(String.CASE_INSENSITIVE_ORDER);
