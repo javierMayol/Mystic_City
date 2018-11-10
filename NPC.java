@@ -29,6 +29,7 @@ public class NPC extends Character
 		//dummies.put(Integer.toString(this.ID), this);
 	}
 
+<<<<<<< HEAD
 	public void makeMove()
 	{
 		Move move = decider.getMove(this, current);
@@ -36,6 +37,18 @@ public class NPC extends Character
 			move = decider.getMove(this, current);
 		move.execute();
 	}
+=======
+  public void makeMove()
+  {
+    Move move = decider.getMove(this, current);
+    for(int i = 0; i < 3; i++)
+    {
+      while(move == null)
+        move = decider.getMove(this, current);
+      move.execute();
+    }
+  }
+>>>>>>> bf1f5c68d2f87f09434f46680a81e17056b9009d
 
 	public static Character sendDummy()
 	{

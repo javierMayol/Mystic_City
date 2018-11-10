@@ -187,8 +187,8 @@ public class StringPairCompare
        //System.out.println("Catch length "+n+"\nMatch length "+d);
      }
      double mean = n / d;
-//     System.out.println("Mean is : "+mean+"\nmatchT len :"+matchT.length+"\ncatchT len :"+catchT.length+"\n"+counter);
-//     System.out.println("Buffer len :"+lBuffer.length()+"\nuserInput :"+userInput.length());
+     //System.out.println("Mean is : "+mean+"\nmatchT len :"+matchT.length+"\ncatchT len :"+catchT.length+"\n"+counter);
+     //System.out.println("Buffer len :"+lBuffer.length()+"\nuserInput :"+userInput.length());
 
      String tok = "";
 

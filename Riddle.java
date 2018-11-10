@@ -95,7 +95,7 @@ public class Riddle implements Move
 
     String answer = lineScan.next();
 
-    System.out.println(riddle+"\n\n"+answer);
+ //   System.out.println(riddle+"\n\n"+answer);
 
     riddles.add(riddle);
     answers.add(answer.trim());

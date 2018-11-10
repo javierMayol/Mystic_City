@@ -17,8 +17,6 @@ public class Trade implements Move
   {
     this.lender = A;
     this.requester = B;
-    offer = new String();
-    good = new String();
     keyboard = keyboard.getInstance();
   }
 
@@ -26,14 +24,18 @@ public class Trade implements Move
   {
     if(requester.isAwaiting())
     {
-      System.out.println("Would you like to accept "+requester.name()+" offer?");
+      System.out.println("Would you like to accept "+requester.name()+" offer?"+offer+" "+good);
       String answer = keyboard.getInput();
       if("Yes".equalsIgnoreCase(answer) || "Y".equalsIgnoreCase(answer))
       {
         Drop thing = new Drop(requester, offer);
+        thing.execute();
         Get that = new Get(lender, offer);
+        that.execute();
         thing = new Drop(lender, good);
+        thing.execute();
         that = new Get(requester, good);
+        that.execute();
         requester.awaiting(false);
         String greeting = "\n>You have a message from "+lender.name()+"\n\nThanks for your business!";
         requester.message(greeting);
@@ -53,6 +55,6 @@ public class Trade implements Move
   
   public static void setGood(String that)
   {
-    offer = that;
+    good = that;
   }
 }

@@ -214,6 +214,14 @@ public class Place {
       return removed;    
     }
     else if(isPlayer)
+      for(String k : artifacts.keySet())
+      {
+        key = strCheck(k, key);
+        Artifact removed = artifacts.get(key);
+        artifacts.remove(key);
+        return removed;    
+      }
+    else if(isPlayer)
       System.out.println("\n\n\n\n\n\n  :ARTIFACT NOT FOUND IN CURRENT PLACE.\n");
     return null; //Artifact();//try retun null at this point.
   }

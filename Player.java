@@ -32,12 +32,12 @@ public class Player extends Character
       return;
     }
 
-    keyboard = keyboard.getInstance(); //Initialize keyboard;
-
+    int id = player_num;
     //1. Name the character.
     System.out.println("How do you want to name your character?");
     String inputName = keyboard.getInput();
-
+    if(inputName.equals("\n"));//If the user doesn't input a name.
+      inputName = Integer.toString(id++);//We create one to avoid error of player counts.
     //2. Describe the character.
     System.out.println("In few words describe "+inputName+".");
     String inputDesc = keyboard.getInput();
