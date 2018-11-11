@@ -27,7 +27,9 @@ public class keyboardScanner
  public int getInt()
 {
 	Scanner scan = new Scanner(System.in);
-	this.num = scan.nextInt();
+        if(scan.hasNextInt())
+	  this.num = scan.nextInt();
+        else this.num = 0;
 	return num;
 
 }

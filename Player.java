@@ -36,7 +36,7 @@ public class Player extends Character
     //1. Name the character.
     System.out.println("How do you want to name your character?");
     String inputName = keyboard.getInput();
-    if(inputName.equals("\n"));//If the user doesn't input a name.
+    if(inputName == null || inputName.isEmpty())//If the user doesn't input a name.
       inputName = Integer.toString(id++);//We create one to avoid error of player counts.
     //2. Describe the character.
     System.out.println("In few words describe "+inputName+".");
