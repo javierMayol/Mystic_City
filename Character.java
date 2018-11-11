@@ -367,6 +367,7 @@ abstract class Character
 
   public void print()
   {
+    String name_age = this.name+" age:"+this.age;
     String curr = this.current.name();
     String type = new String();
     List<String>secA = new ArrayList<String>();
@@ -384,13 +385,6 @@ abstract class Character
       type = "Player";
     else
       type = "NPC";
-    printer.print_info(this.name, this.ID, secA,type,curr);
+    printer.print_info(name_age, this.ID, secA,type,curr);
   }
-<<<<<<< HEAD
-=======
-
-	//****************************** Atributes ***************************************
-
-
->>>>>>> 5aeb415ea0e68133df0a0d195575f0c1dc7096bd
 }

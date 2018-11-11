@@ -15,7 +15,7 @@ import java.util.*;
 public class GameTeaster {
 
   public static void main(String[] args) throws Exception{
-    String fileName = "MysticCity4.txt";
+    String fileName = "MysticCity5.txt";
     Scanner sc = null;
     int player_qty = 2;
 
