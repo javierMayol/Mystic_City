@@ -11,14 +11,14 @@ public class NPC extends Character
 	private static boolean request_artifact;
 	//private static TreeMap<String, NPC>dummies = new TreeMap<String, NPC>();
 
-	public NPC(Scanner scan) 
+	public NPC(Scanner scan)
 	{
 		super(scan);
 		decider = new AI();
 		random_artifact = new String();
 		request_artifact = false;
 		//dummies.put(Integer.toString(this.ID), this);
-	} 
+	}
 
 	public NPC(Place place, int id, int age, String name_character, String desc)
 	{
@@ -29,7 +29,7 @@ public class NPC extends Character
 		//dummies.put(Integer.toString(this.ID), this);
 	}
 
-<<<<<<< HEAD
+
 	public void makeMove()
 	{
 		Move move = decider.getMove(this, current);
@@ -37,18 +37,18 @@ public class NPC extends Character
 			move = decider.getMove(this, current);
 		move.execute();
 	}
-=======
-  public void makeMove()
-  {
-    Move move = decider.getMove(this, current);
-    for(int i = 0; i < 3; i++)
-    {
-      while(move == null)
-        move = decider.getMove(this, current);
-      move.execute();
-    }
-  }
->>>>>>> bf1f5c68d2f87f09434f46680a81e17056b9009d
+
+  // public void makeMove()
+  // {
+  //   Move move = decider.getMove(this, current);
+  //   for(int i = 0; i < 3; i++)
+  //   {
+  //     while(move == null)
+  //       move = decider.getMove(this, current);
+  //     move.execute();
+  //   }
+  // }
+
 
 	public static Character sendDummy()
 	{
@@ -79,7 +79,7 @@ public class NPC extends Character
 		this.inventory.clear();
 		this.points = 0;
 		this.artifacts_weight = 0;
-		return loot;    
+		return loot;
 	}
 
 	public static String randomArtifact(String thing)
