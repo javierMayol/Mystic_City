@@ -26,6 +26,7 @@ public class Message implements Move
     String message = "\n>You have a messag from "+character.name()+":\n\n  ";
     message += keyboard.getInput(); 
     supplier.message(message);
+    return;
  }
 }
         

@@ -22,7 +22,7 @@ public class Trade implements Move
 
   public void execute()
   {
-    if(requester.isAwaiting())
+    if(requester.isAwaiting()&&(offer != null || good != null))
     {
       System.out.println("Would you like to accept "+requester.name()+" offer?"+offer+" "+good);
       String answer = keyboard.getInput();

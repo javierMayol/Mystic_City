@@ -17,10 +17,10 @@ public class GameTeaster {
   public static void main(String[] args) throws Exception{
     String fileName = "MysticCity4.txt";
     Scanner sc = null;
-    int player_qty = 1;
+    int player_qty = 2;
 
     if(args.length > 0) fileName = args[0];
-    if(args.length > 1) player_qty += Integer.parseInt(args[1]);
+    if(args.length > 1) player_qty = Integer.parseInt(args[1]);
 
     File file = null;
 
