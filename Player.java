@@ -16,9 +16,9 @@ public class Player extends Character
     player_num++;
   } 
 
-  public Player(Place place, int id, String name_character, String desc)
+  public Player(Place place, int id, int age, String name_character, String desc)
   {
-    super(place, id, name_character, desc);
+    super(place, id, age, name_character, desc);
     decider = new UI();
     player_num++;
   }
@@ -49,11 +49,16 @@ public class Player extends Character
     Random rand = new Random();
     int ID_;
     ID_ = rand.nextInt(50);
+
+    //5. Age of the character.
+    System.out.println("How old is "+inputName);
+    int age = keyboard.getInt();
+
     while(characters.containsKey(ID_))
       ID_ = rand.nextInt(50);
     //5. Finish.
 
-    new Player(where, ID_, inputName, inputDesc);
+    new Player(where, ID_, age, inputName, inputDesc);
     System.out.println("We have created "+inputName+". It lives in "+where.name()+".");
   }
 

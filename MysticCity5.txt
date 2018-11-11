@@ -143,24 +143,24 @@ DIRECTIONS 35	//Thirty five directions defined ( No number 15 )
 CHARACTERS 4	// Really should have more, but let's start with two of each.
 
 PLAYER 		 12		// A player in the Entrance Hall, where expected
-42	Zaphod Beeblrox		25   // 25 year old
+42	25	Zaphod Beeblrox	  // 25 year old
 2
 Zaphod Beeblebrox is the President of the Universe
 He has 2 heads and 3 arms, and likes to have a good time.
 
 NPC		13		// An Ogre for the Ogre's Lair
-2		The Ugly Green Ogre	0  // age does not matter for NPC player
+2	0	The Ugly Green Ogre	  // age does not matter for NPC player
 2
 The Ugly Green Ogre is huge, green, slimy, and ill-tempered.
 He can't stand up in a normal room, which has lead to a permanent slouch.
 
 NPC		0		//  Where oh where can the Leprechaun be ?
-3		A Cheerful Leprechaun	0  // age does not matter for NPC player
+3	0	A Cheerful Leprechaun	  // age does not matter for NPC player
 1
 The Cheerful Leprechaun sings and dances about his pot o' gold !
 
 PLAYER		0		// A player in a random spot?  Interesting!
-10		Lost Wanderer	50   // 50 year old
+10	50	Lost Wanderer	   // 50 year old
 3
 This lost wanderer needs help.
 He took a wrong turn somewhere, and now can't find the way out!

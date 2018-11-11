@@ -269,34 +269,46 @@ public class Place {
   //display() : Displays information of the place. User friendly.
   public void display()
   { 
-    System.out.println("\n>Currently at "+this.name()+".");
-    System.out.println("----------------------------------------------------------------------------------");
-    System.out.println(this.description());
-    System.out.println("\n>Artifacts available:");
+	  System.out.println("\n>Currently at "+this.name()+".");
+	  System.out.println("----------------------------------------------------------------------------------");
+	  System.out.println(this.description());
+	  System.out.println("\n>Artifacts available:");
 
-    if(artifacts.isEmpty())
-      System.out.println("\tnone");
-    else
-    {
-      for(String i: artifacts.keySet())
-        System.out.println("  *"+artifacts.get(i).name());
-    }
-    System.out.println("\n>Characters in this place:");
-    if(!characters.isEmpty())
-    {
-      for(String i: characters.keySet())
-      {
-         if(characters.get(i) instanceof NPC)
-           System.out.print("NPC: ");
-         else if(characters.get(i) instanceof Player)
-           System.out.print("Player: ");
-         characters.get(i).display();
-      }
-    }
-    else 
-      System.out.println("\tnone");
+	  if(artifacts.isEmpty())
+		  System.out.println("\tnone");
+	  else
+	  {
+		  for(String i: artifacts.keySet())
+			  System.out.println("  *"+artifacts.get(i).name());
+	  }
+	  System.out.println("\n>Characters in this place:");
+	  if(!characters.isEmpty())
+	  {
+		  for(String i: characters.keySet())
+		  {
+			  if(characters.get(i) instanceof NPC)
+				  System.out.print("NPC: ");
+			  else if(characters.get(i) instanceof Player)
+				  System.out.print("Player: ");
+			  characters.get(i).display();
+		  }
+	  }
+	  else{ 
+		  System.out.println("\tnone");
+	  }
+
+	  System.out.println("\n>Directions available:");
+	  if(!directions.isEmpty()){
+		  for(Direction d : directions){
+			  //System.out.println(d.print());i
+				d.print();
+		  }	
+
+	  }
+	  else{
+		  System.out.println("You locked in");
+	  }
   }
-
   //helper for printAll()
   private void print_directions()
   {

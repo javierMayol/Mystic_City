@@ -10,10 +10,11 @@ abstract class Character
 //****************************** Atributes ***************************************
   protected Place current;
   protected int ID;
+  protected int age;
   protected String name;
   protected String description;
   //protected static HashMap<Integer, Character> characters = new HashMap<Integer, Character>();
-  protected static HashMap<String, Character> characters = new HashMap<String, Character>(); 
+  protected static HashMap<String, Character> characters = new HashMap<String, Character>();
   protected TreeMap<String, Artifact> inventory;
   protected static keyboardScanner keyboard;
   protected StringPairCompare str_format;
@@ -32,9 +33,9 @@ abstract class Character
 
   public Character(Scanner scan)
   {
-    try 
+    try
     {
-      //while(!scan.hasNextInt())scan.nextLine();   
+      //while(!scan.hasNextInt())scan.nextLine();
       String line = CleanLineScanner.getCleanLine(scan);
       Scanner lineScan = new Scanner(line);
 
@@ -44,12 +45,14 @@ abstract class Character
       lineScan = new Scanner(line);
 
       this.ID = lineScan.nextInt();
+      this.age = lineScan.nextInt();
+
       lineScan.skip("[ \t]*");
       this.name = lineScan.nextLine();
-      
+
       line = CleanLineScanner.getCleanLine(scan);
       lineScan = new Scanner(line);
- 
+
       int n = lineScan.nextInt();
       this.description = "";
       for(int i = 0; i < n; i++)
@@ -79,7 +82,7 @@ abstract class Character
     }
   }
 
-  public Character(Place place, int id, String name_character, String desc)
+  public Character(Place place, int id, int age, String name_character, String desc)
   {
     this.player_out = false;
     this.artifact_handler = false;
@@ -90,6 +93,7 @@ abstract class Character
     this.points = 0;
     this.current = place;
     this.ID = id;
+    this.age = age;
     this.name = name_character;
     this.description = desc;
     this.inventory = new TreeMap<String, Artifact>(String.CASE_INSENSITIVE_ORDER);
@@ -116,11 +120,11 @@ abstract class Character
   }
 
   //name() : Returns the name of the character.
-  public String name() 
+  public String name()
   {
     return this.name.trim();
   }
- 
+
   //removeCharacter() : Remove character if command was exit.
   public void removeCharacter()
   {
@@ -139,7 +143,7 @@ abstract class Character
   public boolean is_out()
   {
     return player_out;
-  }  
+  }
 
   public boolean removePlayer()
   {
@@ -169,6 +173,9 @@ abstract class Character
   public void addArtifact(Artifact a)
   {
     this.artifacts_weight += a.size();
+  //  if(this.age > 65){
+
+
     if(!artifact_handler && artifacts_weight >=20)
     {
       this.artifacts_weight -= a.size();
@@ -177,10 +184,12 @@ abstract class Character
         System.out.println("\n\n\n\n\n\n  TOO MUCH WEIGHT. You'd need something to carry your items.\n");
       return;
     }
+  //  System.out.println("\n You are too old to carry this weight");
+//  }
     this.points += a.value();
     inventory.put(a.name(), a);
   }
-  
+
   public String hasThing(String key)
   {
     for(String k : inventory.keySet())
@@ -202,8 +211,8 @@ abstract class Character
         use(thing);
       }
     return null;
-  }  
-  
+  }
+
   public Artifact drop(String key)
   {
     if(inventory.containsKey(key.toLowerCase()))
@@ -227,13 +236,13 @@ abstract class Character
     if(this instanceof Player)
       System.out.println("\n\n\n\n\n\n  :ARTIFACT NOT FOUND IN THE INVENTORY.\n");
     return null;
-  }  
+  }
 
   public void canLift()
   {
     artifact_handler = true;
   }
-  
+
   public boolean liftMore()
   {
     return artifact_handler;
@@ -275,7 +284,7 @@ abstract class Character
 //****************************** Methods : Move related *********************
   abstract void makeMove();
 
-  public void goTo( Place new_current ) 
+  public void goTo( Place new_current )
   {
      current = new_current;
   }
@@ -320,7 +329,7 @@ abstract class Character
       System.out.println("---------Items in the inventory---------");
       int i = 0, val = 0;
       for(String k : inventory.keySet())
-      { 
+      {
         String key = k;
         i++;
         System.out.println(i+". "+inventory.get(key).name()+"\t pts : "+inventory.get(key).value());
@@ -340,12 +349,12 @@ abstract class Character
       System.out.println("Did you mean "+buff+"? > [ 'y' | 'n' ]");
       String str = keyboard.getInput();
       if(str.equalsIgnoreCase("y")||str.equalsIgnoreCase("yes"))
-        return str_format.getString(); 
+        return str_format.getString();
       else
-        return input; 
+        return input;
     }
     return input;
-  } 
+  }
 
 //******************************** Stdout printing methods **********************************
   //display() : Displays information of the character. User friendly.
@@ -355,7 +364,7 @@ abstract class Character
     viewInventory();
     System.out.println("----------------------------------------------------------------------------------");
   }
-  
+
   public void print()
   {
     String curr = this.current.name();
@@ -366,7 +375,7 @@ abstract class Character
     //Format list of artifacts.
     int n = inventory.size();
     for(String i : inventory.keySet())
-    {   
+    {
       String val = Integer.toString(inventory.get(i).value());
       String thing_val = inventory.get(i).name()+" pts:"+val;
       secA.add(thing_val);
@@ -377,4 +386,11 @@ abstract class Character
       type = "NPC";
     printer.print_info(this.name, this.ID, secA,type,curr);
   }
+<<<<<<< HEAD
+=======
+
+	//****************************** Atributes ***************************************
+
+
+>>>>>>> 5aeb415ea0e68133df0a0d195575f0c1dc7096bd
 }
