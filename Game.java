@@ -43,7 +43,7 @@ public class Game {
 			
     // check for version of the file wather it's valid or not
     double version = lineScan.nextDouble();
-    if(version != 3.1 && version != 4.0) {
+    if(version != 3.1 && version != 4.0 && version != 5.0){
       System.err.println("Not valid version of the file!!");
       System.exit(-2);
     }			
