@@ -12,6 +12,8 @@
 
 	this is a helper class to clean the line from data file 
 	clean out comments and space or tabs from the data file
+        Uses polymorphism to evaluate either a scanner or a string
+ 	object passed as argument.
 */
 
 import java.util.Scanner;
@@ -39,7 +41,7 @@ public class CleanLineScanner {
      str = str.replaceAll("(?:/\\*(?:[^*]|(?:\\*+[^*/]))*\\*+/)|(?://.*)|(?::-)","");
      str = str.trim();
      if(str.length() > 0) return str;
-       return str;
+     return str;
     //End of Clean Line method.
   }
 }

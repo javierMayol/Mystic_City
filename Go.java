@@ -19,7 +19,11 @@ public class Go implements Move
   public void execute()
   {
      character.getCurrentPlace().removeCharacter(character.name());
-     Place next = character.current.followDirection(direction); 
+     Place next = null;
+     if(direction.equalsIgnoreCase("None"))
+       next = Place.chooseRandomPlace();
+     else
+       next = character.current.followDirection(direction); 
      if(next.getID() == character.current.getID() && character instanceof Player)
        System.out.println("Oh no!! This direction is locked.");
      character.goTo(next);

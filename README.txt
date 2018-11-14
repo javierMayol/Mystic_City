@@ -1,14 +1,3 @@
-#How to play
-	what about Eclipse
-	Step by step navigtion
-	commands available
-		Messaging and request/trade
-#File compilation. Error checking. 
-		   Initialization.
-#Added classes : Riddle, StringPairCompare.
-		 Talk... etc.
-
-
 #	Javier Mayol 	ACCC: cmayol
 #  	Neel Patel 	NETID : npate315	UIN : 674004711
 # 	Keval Patel
@@ -72,15 +61,27 @@ See ##GAME COMMANDS section below for game commands.
 ##GAME COMMANDS:
 
   GO [DIRECTION]:
-  	Direction is one of the cardinal positions that a player can move in a game, e.g. south.
-  'GO south easth-south' or GO ses' are commands that are equivalent.
+  	Direction is one of the cardinal positions that a player can move to in a game, e.g. south.
+  "GO south-easth south" or "GO ses" are commands that are equivalent.
+
+  GET [NAME OF ARTIFACT]
+    This command puts the artifacts in the current place into the player's inventory.
+
+  INVENTORY
+    By typing INVENTORY or INVE or simply I, the player can see what artifacts are in the inventory.
+
+  LOOK
+    Display information about the current place.
+
+  USE [NAME OF ARTIFACT]
+    Allow the user to use an artifact.
 
   USE [KEY ARTIFACT] [DIRECTION]:
 	If a direction is locked in the current place and the player wants to try a key artifact, the
   'USE' command needs to follow the order 'USE[SPACE][KEY ARTIFACT][SPACE][DIRECTION]'. In other words,
   the command 'USE' needs two arguments to open a locked direction with a key: first argument 'key 
-  artifact' second argument 'locked direction'. This will allowed the player to be immediatelly sent to
-  the place where the now open direction leads to. SO, the next time the player has it's turn in the 
+  artifact' second argument 'locked direction'. This will allow the player to be immediately sent to
+  the place where the now open direction leads to. So, the next time the player has the turn in the 
   game, the current place will have changed to the new current place formerly closed. 
 
   USE open [NAME OF ARTIFACT]:
@@ -121,7 +122,20 @@ See ##GAME COMMANDS section below for game commands.
 
 ----------------------------------------
 ## Design Patterns:
-	Singleton
-	Command
+	Singleton :
+	Command : Move
+	Prototype : ArtifactUse.java
 
+----------------------------------------
+## Riddle class
 
+The Ogre can now challenge a player with a "riddle". If a player finds the Ogre, he is needs to answer a 
+question in order to continue. If the player does not has anything it is possession the Ogre will leave
+her/him alone. If the player fails the answer, the Ogre takes everything from the players inventory. If the
+player wins and the Ogre has somthing in the inventry, then the player gets to choose one artifact from the 
+Ogre.
+
+----------------------------------------
+## HollyWand.java
+
+Moves the character to a randomly picked place.

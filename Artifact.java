@@ -8,10 +8,13 @@
 * Implementation of the Artifact Class for the project 2.
 * This class implements the functions described in the handouut
 * for the behavior and atributes of artifacts in the game.
+* Implements prototype design pattern.
 */
+
 import java.util.*;
 
-public class Artifact {
+public class Artifact
+{
   private int ID, value, mobility, keyPattern;
   private String name, description;
   private Printer printer;
@@ -28,7 +31,6 @@ public class Artifact {
       this.mobility = s.nextInt();
       this.keyPattern = s.nextInt();
       this.name = s.findInLine("[[a-zA-Z'-]+\\s]+").trim();
-      //NPC.addItemName(this.name);//Ogre's wrong doing.
       s.nextLine();
       int n = s.nextInt();
       this.description = s.nextLine();
@@ -69,10 +71,6 @@ public class Artifact {
     return keyPattern;
   }
 
-  public void use()
-  {
-    System.out.println("needs implementation");
-  }
   public int open(int ID)
   {
     if(prizes.isEmpty()) return 0;
@@ -85,6 +83,5 @@ public class Artifact {
       String mov = "mobility "+this.mobility;
       String pattern = "Pattern "+this.keyPattern;
       printer.print_info(this.name, this.ID,val,mov,pattern); 
-  }
-  
+  } 
 }

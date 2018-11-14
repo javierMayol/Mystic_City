@@ -39,7 +39,7 @@ public class Use implements Move
       openArtifact();
 
     else
-      this.thing.use();
+      setArtifact();
   }
 
   private void parse()
@@ -58,6 +58,14 @@ public class Use implements Move
       if((this.thing = this.character.use(Key)) == null)return;
     }
   }
+
+  private void setArtifact()
+  {
+    ArtifactCache.loadCache();
+    ArtifactUse a = ArtifactCache.getArtifact(this.thing.getID());
+    a.setCharacter(this.character);
+    a.use();
+  } 
 
   private void openArtifact()
   {

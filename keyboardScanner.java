@@ -24,15 +24,15 @@ public class keyboardScanner
      this.input = CleanLineScanner.getCleanLine(scan.nextLine());
      return input;
   }
- public int getInt()
-{
-	Scanner scan = new Scanner(System.in);
-        if(scan.hasNextInt())
-	  this.num = scan.nextInt();
-        else this.num = 0;
-	return num;
+  public int getInt()
+  {
+     Scanner scan = new Scanner(System.in);
+     if(scan.hasNextInt())
+       this.num = scan.nextInt();
+     else this.num = 0;
+     return num;
+  }
 
-}
   public String commandLinePrompt(String prompt)
   {
     this.input = prompt+">";
