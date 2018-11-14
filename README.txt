@@ -6,7 +6,7 @@
 #File compilation. Error checking. 
 		   Initialization.
 #Added classes : Riddle, StringPairCompare.
-		 Talk... etc.
+		 Talk, Pet ... etc.
 
 
 #	Javier Mayol 	ACCC: cmayol
