@@ -38,7 +38,7 @@ Direction.java		Inventory.java		Place.java		Trade.java
 Drop.java		Player.java		UI.java
 
 The program takes a .gdf file specially formatted to initialize the different classes. In our implementation
-we have changed the format from .gdf to .txt. The content of MysticCity4.txt follows the same GDF form.
+we have changed the format from .gdf to .txt. The content of MysticCity5.txt follows the same GDF form.
 Use makefile to link the files. Simply type “make” to the command line and run the program by typing 
 “java GameTester” to the command line as well. If you’re using an IDE, refer to the instructions given by 
 the developer to compile makefiles.
@@ -51,7 +51,10 @@ The Clean Line Method in CleanLineScanner class checks if a user has inputed a f
 The file name for the game is hardcoded in case the user do not want to input another file. To correctly initialize
 a GDF file must be provided if MysticCity4.txt is not found, the user has one more opportunity to upload a file by 
 inputing the file name when prompted.
-
+                     
+                         java GameTester filename numPlayer
+		ex:
+			java GameTester MysticCity5.txt 5
 ________________________________________
 ##More than 2 players
 
