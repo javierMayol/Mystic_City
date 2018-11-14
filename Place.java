@@ -106,6 +106,51 @@ public class Place {
     return places.containsKey(Integer.toString(ID));
   }
 
+  /***********************************my implementation**********************************************/
+  public boolean checkPlayerInstance(Character obj){
+     // NPC npc = null;
+     // Player player = null;
+      if (obj instanceof Player){
+          return true;
+      }
+      else{return false;}
+  }
+
+  public Place goToRoom(Character ponpc, int ID){
+      boolean state = checkPlayerInstance(ponpc);
+      String[] playerRoomLockout = new String[]{"Room 101", "Room 102", "Room 103", "Room 104"}; //deny player access to four rooms
+      String[] npcRoomLockout = new String[4];
+      //Place testplace = new Place(101, "Room 101", "This is room 101 of the catacombs. There are doors to the west and northeast");
+      //use randomization to select the rooms for which npc would be denied access
+      for(int i = 0; i < npcRoomLockout.length; i++){
+          String placename = chooseRandomPlace().name;
+          if (!placename.equalsIgnoreCase(playerRoomLockout[i])) {
+              npcRoomLockout[i] = placename;
+          }
+      }
+      if(state){
+          //ponpc = new Player();
+          //Player p  = (Player)ponpc;
+
+          Place room = getPlaceByID(ID);
+          if(Arrays.stream(playerRoomLockout).anyMatch(room.name::equals)){return null;}
+          else{
+              return room;
+          }
+
+      }
+      else{
+          Place room = getPlaceByID(ID);
+          if(Arrays.stream(npcRoomLockout).anyMatch(room.name::equals)){return null;}
+          else{
+              return room;
+          }
+
+      }
+
+  }
+ /***********************************************************************************************************************************************/
+
 //****************************** Methods : for game navigation *********************
   public static Place getPlaceByID(int ID){
     if(firstTime){
@@ -269,46 +314,34 @@ public class Place {
   //display() : Displays information of the place. User friendly.
   public void display()
   { 
-	  System.out.println("\n>Currently at "+this.name()+".");
-	  System.out.println("----------------------------------------------------------------------------------");
-	  System.out.println(this.description());
-	  System.out.println("\n>Artifacts available:");
+    System.out.println("\n>Currently at "+this.name()+".");
+    System.out.println("----------------------------------------------------------------------------------");
+    System.out.println(this.description());
+    System.out.println("\n>Artifacts available:");
 
-	  if(artifacts.isEmpty())
-		  System.out.println("\tnone");
-	  else
-	  {
-		  for(String i: artifacts.keySet())
-			  System.out.println("  *"+artifacts.get(i).name());
-	  }
-	  System.out.println("\n>Characters in this place:");
-	  if(!characters.isEmpty())
-	  {
-		  for(String i: characters.keySet())
-		  {
-			  if(characters.get(i) instanceof NPC)
-				  System.out.print("NPC: ");
-			  else if(characters.get(i) instanceof Player)
-				  System.out.print("Player: ");
-			  characters.get(i).display();
-		  }
-	  }
-	  else{ 
-		  System.out.println("\tnone");
-	  }
-
-	  System.out.println("\n>Directions available:");
-	  if(!directions.isEmpty()){
-		  for(Direction d : directions){
-			  //System.out.println(d.print());i
-				d.print();
-		  }	
-
-	  }
-	  else{
-		  System.out.println("You locked in");
-	  }
+    if(artifacts.isEmpty())
+      System.out.println("\tnone");
+    else
+    {
+      for(String i: artifacts.keySet())
+        System.out.println("  *"+artifacts.get(i).name());
+    }
+    System.out.println("\n>Characters in this place:");
+    if(!characters.isEmpty())
+    {
+      for(String i: characters.keySet())
+      {
+         if(characters.get(i) instanceof NPC)
+           System.out.print("NPC: ");
+         else if(characters.get(i) instanceof Player)
+           System.out.print("Player: ");
+         characters.get(i).display();
+      }
+    }
+    else 
+      System.out.println("\tnone");
   }
+
   //helper for printAll()
   private void print_directions()
   {
