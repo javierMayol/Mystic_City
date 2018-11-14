@@ -20,7 +20,7 @@ public class Go implements Move
   {
      character.getCurrentPlace().removeCharacter(character.name());
      Place next = null;
-     if(direction.equalsIgnoreCase("None"))
+     if(this.direction.equalsIgnoreCase("None"))
        next = Place.chooseRandomPlace();
      else
        next = character.current.followDirection(direction); 
