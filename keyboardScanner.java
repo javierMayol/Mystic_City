@@ -20,31 +20,18 @@ public class keyboardScanner
     return instance;
   }
 
-  //Try wildcard with this
-  public String getInput()
-  {
-     Scanner scan = new Scanner(System.in);
-     if(scan.hasNextInt())
-       this.input = CleanLineScanner.getCleanLine(scan.nextLine());
-     else
-       this.input = CleanLineScanner.getCleanLine(scan.nextLine());
-     return input;
-  }
-
-/*  
   public String getInput()
   {
      Scanner scan = new Scanner(System.in);
      this.input = CleanLineScanner.getCleanLine(scan.nextLine());
      return input;
   }
-*/
 
   public String commandLinePrompt(String prompt)
   {
     this.input = prompt+">";
     io.display(input);
     //System.out.print(input);
-    return getInput();
+    return io.getLine();
   }
 }

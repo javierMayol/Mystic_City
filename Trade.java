@@ -11,21 +11,23 @@ public class Trade implements Move
   private static String good;
   private Character lender;
   private Character requester;
-  private keyboardScanner keyboard;
+  //private keyboardScanner keyboard;
+  private IO io;
 
   public Trade(Character A, Character B)
   {
     this.lender = A;
     this.requester = B;
-    keyboard = keyboard.getInstance();
+    //keyboard = keyboard.getInstance();
+    this.io = new IO();
   }
 
   public void execute()
   {
     if(requester.isAwaiting()&&(offer != null || good != null))
     {
-      System.out.println("Would you like to accept "+requester.name()+" offer?"+offer+" "+good);
-      String answer = keyboard.getInput();
+      io.display("Would you like to accept "+requester.name()+" offer?"+offer+" "+good);
+      String answer = io.getLine();
       if("Yes".equalsIgnoreCase(answer) || "Y".equalsIgnoreCase(answer))
       {
         Drop thing = new Drop(requester, offer);

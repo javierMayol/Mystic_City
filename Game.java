@@ -18,7 +18,8 @@ public class Game {
 
   private String game_name;// name of the game
   private int nCharacters;
-  private keyboardScanner keyboard;		
+  //private keyboardScanner keyboard;		
+  private IO io;
 
   Game(){};
 
@@ -97,8 +98,10 @@ public class Game {
     int nRiddles = keyCount(file,"RIDDLES");
     for(int i = 0; i < nRiddles; i++)
       Riddle.addRiddle(file);
-    keyboard = keyboard.getInstance();
+    //keyboard = keyboard.getInstance();
+    this.io = new IO();
   }
+
   // helper method to find the number of places, directions, characters, and 
   //artifacts during the file reading to make file reading easier
   private int keyCount(Scanner file, String key) {
@@ -123,7 +126,7 @@ public class Game {
   {
     try 
     {
-      System.out.println("*********************"+ this.game_name +"  started!"+"********************");
+      io.display("*********************"+ this.game_name +"  started!"+"********************");
       int Player_num = 0;
       Iterator<Character> characterIterator = Character.getIterator();
       while(characterIterator.hasNext())
@@ -132,10 +135,10 @@ public class Game {
         if (c instanceof Player)
         {
           Player_num++;
-          System.out.println("Player "+Player_num+": "+c.name()+". Location: "+c.getCurrentPlace().name());
+          io.display("Player "+Player_num+": "+c.name()+". Location: "+c.getCurrentPlace().name());
         }
       }
-      System.out.println("*****************************LET'S PLAY*****************************");
+      io.display("*****************************LET'S PLAY*****************************");
 
       int index = 0;
       //Infinet loop. Uses scanner objects to get inputs from the user.
@@ -149,9 +152,9 @@ public class Game {
           {
             if(c instanceof Player)
             {
-  	      //Place.printAll();//For debugging purposess.
-              System.out.println(">Current place: "+c.current.name()+"\n"+c.current.description());
-              System.out.println("\nOK, "+c.name().toUpperCase()+", YOUR TURN.\n");
+  	      Place.printAll();//For debugging purposess.
+              io.display(">Current place: "+c.current.name()+"\n"+c.current.description());
+              io.display("\nOK, "+c.name().toUpperCase()+", YOUR TURN.\n");
             }
             if(c.gotNotification())
               c.notification();
@@ -163,7 +166,8 @@ public class Game {
       } 
     } 
     catch(InputMismatchException ie){ 
-      System.out.println("Mismatched input.");
+      io.display("Mismatched input.");
     }
+    io.display("Exit the Game. Hope you enjoyed it!!");
   }	
 }

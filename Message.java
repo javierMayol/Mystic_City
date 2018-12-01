@@ -4,15 +4,17 @@ public class Message implements Move
 {
   private Character character;
   private String argument;
-  private keyboardScanner keyboard;
+  //private keyboardScanner keyboard;
   private StringPairCompare str_format;
+  private IO io;
 
   public Message(Character A, String arg)
   {
     this.character = A;
     this.argument = arg;
-    keyboard = keyboard.getInstance();
+    //keyboard = keyboard.getInstance();
     str_format = str_format.getInstance();
+    this.io = new IO();
   }
 
   public void execute()
@@ -24,7 +26,7 @@ public class Message implements Move
     Character supplier = character.current.listening(player.toLowerCase().trim());
     if(supplier == null)return;
     String message = "\n>You have a messag from "+character.name()+":\n\n  ";
-    message += keyboard.getInput(); 
+    message += io.getLine(); 
     supplier.message(message);
     return;
  }

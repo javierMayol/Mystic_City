@@ -28,8 +28,8 @@ public class Place {
   private StringPairCompare str_format; 
   private static Printer printer;
   private boolean isPlayer;
-  private keyboardScanner keyboard;
-
+ // private keyboardScanner keyboard;
+  private static IO io;
 //******************************* Constructors ************************************
   public Place(){}
 
@@ -58,7 +58,8 @@ public class Place {
     printer = printer.getInstance();
     isPlayer = false;
     firstTime = true;
-    keyboard = keyboard.getInstance();
+    //keyboard = keyboard.getInstance();
+    this.io =  new IO();
   }
   
   //Old constructor.
@@ -74,7 +75,8 @@ public class Place {
     printer = printer.getInstance();
     isPlayer = false;
     firstTime = true;
-    keyboard = keyboard.getInstance();
+    //keyboard = keyboard.getInstance();
+    this.io =  new IO();
   }
 
 //****************************** Methods : atribute related *********************
@@ -195,7 +197,7 @@ public class Place {
       }
     }
     if(!q && isPlayer)
-      System.out.println("\n\n\n\n\n\n  :THIS KEY WON'T OPEN THIS DOOR.\n");
+      io.display("\n\n\n\n\n\n  :THIS KEY WON'T OPEN THIS DOOR.\n");
   }
 
 //****************************** Other methods : Character related *********************
@@ -210,7 +212,7 @@ public class Place {
     if(characters.containsKey(name))
       characters.remove(name);
     else if(isPlayer)
-      System.out.println("Character not found in current place.");
+      io.display("Character not found in current place.");
   }
 
   // Used to randomly assign a place to characters.
@@ -267,7 +269,7 @@ public class Place {
         return removed;    
       }
     else if(isPlayer)
-      System.out.println("\n\n\n\n\n\n  :ARTIFACT NOT FOUND IN CURRENT PLACE.\n");
+      io.display("\n\n\n\n\n\n  :ARTIFACT NOT FOUND IN CURRENT PLACE.\n");
     return null; //Artifact();//try retun null at this point.
   }
 
@@ -300,8 +302,8 @@ public class Place {
     str_format.strSpellCheck(buff, input);//Input check enhancement.
     if(str_format.match())
     {
-      System.out.println("Did you mean "+str_format.getString()+"? > [ 'y' | 'n' ]");
-      String str = keyboard.getInput();
+      io.display("Did you mean "+str_format.getString()+"? > [ 'y' | 'n' ]");
+      String str = io.getLine();
       if(str.equalsIgnoreCase("y")||str.equalsIgnoreCase("yes"))
         return str_format.getString(); 
       else
@@ -314,32 +316,32 @@ public class Place {
   //display() : Displays information of the place. User friendly.
   public void display()
   { 
-    System.out.println("\n>Currently at "+this.name()+".");
-    System.out.println("----------------------------------------------------------------------------------");
-    System.out.println(this.description());
-    System.out.println("\n>Artifacts available:");
+    io.display("\n>Currently at "+this.name()+".");
+    io.display("----------------------------------------------------------------------------------");
+    io.display(this.description());
+    io.display("\n>Artifacts available:");
 
     if(artifacts.isEmpty())
-      System.out.println("\tnone");
+      io.display("\tnone");
     else
     {
       for(String i: artifacts.keySet())
-        System.out.println("  *"+artifacts.get(i).name());
+        io.display("  *"+artifacts.get(i).name());
     }
-    System.out.println("\n>Characters in this place:");
+    io.display("\n>Characters in this place:");
     if(!characters.isEmpty())
     {
       for(String i: characters.keySet())
       {
          if(characters.get(i) instanceof NPC)
-           System.out.print("NPC: ");
+           io.display("NPC: ");
          else if(characters.get(i) instanceof Player)
-           System.out.print("Player: ");
+           io.display("Player: ");
          characters.get(i).display();
       }
     }
     else 
-      System.out.println("\tnone");
+      io.display("\tnone");
   }
 
   //helper for printAll()
@@ -390,32 +392,32 @@ public class Place {
   //Debugging method to output info about all Place Class objects.
   public static void printAll()
   {
-    System.out.println("\n(((((((((((((((((((((((((((((( PRINTING ALL INFO OF PLACES ))))))))))))))))))))))))))))))");
-    System.out.println("\n\t   name \t\t\t  Artifacts\t\t  Directions");
-    System.out.println("----------------------------------------------------------------------------------");
+    io.display("\n(((((((((((((((((((((((((((((( PRINTING ALL INFO OF PLACES ))))))))))))))))))))))))))))))");
+    io.display("\n\t   name \t\t\t  Artifacts\t\t  Directions");
+    io.display("----------------------------------------------------------------------------------");
     for(String i : places.keySet())
     {
       places.get(i).print();
     }
-    System.out.println("'/' indicates direction is locked.\n\n\t\t\t\tCharacters' info");
-    System.out.println("\n\t\tCharacter \t\t  Possessions\t\t   Type\t   Place");
-    System.out.println("----------------------------------------------------------------------------------");
+    io.display("'/' indicates direction is locked.\n\n\t\t\t\tCharacters' info");
+    io.display("\n\t\tCharacter \t\t  Possessions\t\t   Type\t   Place");
+    io.display("----------------------------------------------------------------------------------");
     for(String i : places.keySet())
     {
       places.get(i).print_characters();
     }
-    System.out.println("\n\t\t\t\tDirections' info\n");
-    System.out.println("----------------------------------------------------------------------------------");
+    io.display("\n\t\t\t\tDirections' info\n");
+    io.display("----------------------------------------------------------------------------------");
     for(String i : places.keySet())
     {
       places.get(i).print_directions();
     }
-    System.out.println("\n\t\t\t\tArtifacts' info\n");
-    System.out.println("----------------------------------------------------------------------------------");
+    io.display("\n\t\t\t\tArtifacts' info\n");
+    io.display("----------------------------------------------------------------------------------");
     for(String i : places.keySet())
     {
       places.get(i).print_artifacts();
     }
-    System.out.println("----------------------------------------------------------------------------------");
+    io.display("----------------------------------------------------------------------------------");
   }
 }

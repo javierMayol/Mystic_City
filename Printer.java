@@ -11,6 +11,8 @@ public class Printer
   private static StringPairCompare str_format;
   private String title;
   private boolean format_title;
+  private static IO io;
+
   protected Printer(){} 
   
   public static Printer getInstance()
@@ -18,6 +20,7 @@ public class Printer
     if(instance == null)
     {
       instance = new Printer();
+      io = new IO();
       str_format = str_format.getInstance();
     }
     return instance;
@@ -27,8 +30,8 @@ public class Printer
   {
     String format_str;
     format_str = String.format("|%23s ID:%3d|%28s|%8s|%8s",name,ID,secA,secB,secC);
-    System.out.println(format_str);
-    System.out.println("----------------------------------------------------------------------------------");
+    io.display(format_str);
+    io.display("----------------------------------------------------------------------------------");
   }
   
   public void print_info(String name, int ID, List<String> secA, String secB, String secC )
@@ -38,23 +41,23 @@ public class Printer
     if(secA.isEmpty())
     {
       format_str = String.format("|%23s ID:%3d|%28s|%8s|%8s",name,ID,space,secB,secC);
-      System.out.println(format_str);
-      System.out.println("----------------------------------------------------------------------------------");
+      io.display(format_str);
+      io.display("----------------------------------------------------------------------------------");
     }
     else
     {
       format_str = String.format("|%23s ID:%3d|%28s|%8s|%8s",name,ID,secA.get(0),secB,secC);
-      System.out.println(format_str);
+      io.display(format_str);
       int n = secA.size();
       if(n > 1)
       {
         for(int i = 1; i < n; i++)
         {
           format_str = String.format("|%23s    %3s|%28s|%8s|%8s",space,space,secA.get(i),space,space);
-          System.out.println(format_str);
+          io.display(format_str);
         }
       }   
-      System.out.println("----------------------------------------------------------------------------------");
+      io.display("----------------------------------------------------------------------------------");
     }
   }
   

@@ -9,16 +9,18 @@ public class Riddle implements Move
 {
   private static Character Ogre;
   private Character victim;
-  private keyboardScanner keyboard;
+  //private keyboardScanner keyboard;
   private static LinkedList<String>riddles = new LinkedList<String>();//Try includding riddles in the GDF document.
   private static LinkedList<String>answers = new LinkedList<String>();
+  private IO io;
 
   public Riddle(){}
 
   public Riddle(Character A)
   {
     victim = A;
-    keyboard = keyboard.getInstance();
+    //keyboard = keyboard.getInstance();
+    io = new IO();
   }
 
   public static Character getOgre()
@@ -31,19 +33,19 @@ public class Riddle implements Move
   public void execute()
   {
     if(Ogre ==  null ) getOgre();
-    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n"); 
-    System.out.println("HA HA HA! Let's see if you really know this stuff!\n");//Change for something better.
+    io.display("\n\n\n\n\n\n\n\n\n\n\n\n"); 
+    io.display("HA HA HA! Let's see if you really know this stuff!\n");//Change for something better.
     String right_answer = pickRiddle();
-    String answer = keyboard.getInput();
+    String answer = io.getLine();
     if(!(answer.equalsIgnoreCase(right_answer)))
     {
       loot(victim.emptyInventory());
-      System.out.println("\n\n\n\n\n\nHA HAHA HA!!! YOU LOSE !!!!!!\n");
+      io.display("\n\n\n\n\n\nHA HAHA HA!!! YOU LOSE !!!!!!\n");
       victim.message("\n>You have a new message:\n\n  "+Ogre.name()+" has stolen everything from you.");
     }
     else
     {
-      System.out.println("\n\n\n\n\n\nYikes!! YOU'RE SO SMART.\n");
+      io.display("\n\n\n\n\n\nYikes!! YOU'RE SO SMART.\n");
       getPrize();
     }
   }
@@ -53,7 +55,7 @@ public class Riddle implements Move
      Random rand = new Random();
      int index = rand.nextInt(riddles.size());
      String riddel = riddles.get(index);
-     System.out.println(riddel);
+     io.display(riddel);
      String answer = answers.get(index);
      return answer;
   }
@@ -68,12 +70,12 @@ public class Riddle implements Move
   {
     if(!Ogre.hasSomething())
     {
-      System.out.println("YOU WON! But the Ogre has nothing for you :(");
+      io.display("YOU WON! But the Ogre has nothing for you :(");
       return;
     }
-    System.out.println("YOU WON! You get to pick one item from the Ogre's inventory");
+    io.display("YOU WON! You get to pick one item from the Ogre's inventory");
     Ogre.viewInventory();
-    String prize = keyboard.getInput();
+    String prize = io.getLine();
     Drop thing = new Drop(Ogre, prize.trim());
     thing.execute();
     Get that = new Get(victim, prize.trim());

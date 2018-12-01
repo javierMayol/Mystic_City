@@ -16,7 +16,7 @@ abstract class Character
   //protected static HashMap<Integer, Character> characters = new HashMap<Integer, Character>();
   protected static HashMap<String, Character> characters = new HashMap<String, Character>();
   protected TreeMap<String, Artifact> inventory;
-  protected static keyboardScanner keyboard;
+  //protected static keyboardScanner keyboard;
   protected StringPairCompare str_format;
   protected Printer printer;
   protected DecisionMaker decider;
@@ -27,6 +27,7 @@ abstract class Character
   protected String message;
   protected int points;
   private boolean player_out;
+  protected static IO io;
 //******************************* Constructors ************************************
   public Character(){}
 
@@ -66,7 +67,7 @@ abstract class Character
         this.current.setCurrentCharacter();
       this.str_format = str_format.getInstance();
       this.printer = printer.getInstance();
-      this.keyboard = keyboard.getInstance();
+      //this.keyboard = keyboard.getInstance();
       this.player_out = false;
       this.artifact_handler = false;
       this.artifacts_weight = 0;
@@ -74,6 +75,7 @@ abstract class Character
       this.accept = false;
       this.message = new String();
       this.points = 0;
+      this.io = new IO();
 
     }
     catch(Exception e) {
@@ -103,7 +105,8 @@ abstract class Character
       this.current.setCurrentCharacter();
     this.str_format = str_format.getInstance();
     this.printer = printer.getInstance();
-    this.keyboard = keyboard.getInstance();
+    //this.keyboard = keyboard.getInstance();
+    this.io = new IO();
   }
 
 //****************************** Methods : atribute related *********************
@@ -180,11 +183,9 @@ abstract class Character
       this.artifacts_weight -= a.size();
       current.addArtifact(a);
       if(this instanceof Player)
-        System.out.println("\n\n\n\n\n\n  TOO MUCH WEIGHT. You'd need something to carry your items.\n");
+        io.display("\n\n\n\n\n\n  TOO MUCH WEIGHT. You'd need something to carry your items.\n");
       return;
     }
-  //  System.out.println("\n You are too old to carry this weight");
-//  }
     this.points += a.value();
     inventory.put(a.name(), a);
   }
@@ -233,7 +234,7 @@ abstract class Character
         }
       }
     if(this instanceof Player)
-      System.out.println("\n\n\n\n\n\n  :ARTIFACT NOT FOUND IN THE INVENTORY.\n");
+      io.display("\n\n\n\n\n\n  :ARTIFACT NOT FOUND IN THE INVENTORY.\n");
     return null;
   }
 
@@ -306,7 +307,7 @@ abstract class Character
 
   public void notification()
   {
-    System.out.println(this.message);
+    io.display(this.message);
     this.notification = false;
   }
 
@@ -322,31 +323,31 @@ abstract class Character
 
   public void viewInventory()
   {
-    if(inventory.isEmpty())System.out.println("The inventory is empty.");
+    if(inventory.isEmpty())io.display("The inventory is empty.");
     else
     {
-      System.out.println("---------Items in the inventory---------");
+      io.display("---------Items in the inventory---------");
       int i = 0, val = 0;
       for(String k : inventory.keySet())
       {
         String key = k;
         i++;
-        System.out.println(i+". "+inventory.get(key).name()+"\t pts : "+inventory.get(key).value());
+        io.display(i+". "+inventory.get(key).name()+"\t pts : "+inventory.get(key).value());
         //val += inventory.get(key).value();
       }
-        System.out.println("-----------Total points: "+this.points+"-------------\nweigth "+artifacts_weight);
+        io.display("-----------Total points: "+this.points+"-------------\nweigth "+artifacts_weight);
     }
   }
 
 //******************************** String check method **********************************
   private String strCheck(String buff, String input)
   {
-    keyboard = keyboard.getInstance();
+    //keyboard = keyboard.getInstance();
     str_format.strSpellCheck(buff, input);//Input check enhancement.
     if(str_format.match())
     {
-      System.out.println("Did you mean "+buff+"? > [ 'y' | 'n' ]");
-      String str = keyboard.getInput();
+      io.display("Did you mean "+buff+"? > [ 'y' | 'n' ]");
+      String str = io.getLine();
       if(str.equalsIgnoreCase("y")||str.equalsIgnoreCase("yes"))
         return str_format.getString();
       else
@@ -359,9 +360,9 @@ abstract class Character
   //display() : Displays information of the character. User friendly.
   public void display()
   {
-    System.out.println(this.name+"\n "+this.description);
+    io.display(this.name+"\n "+this.description);
     viewInventory();
-    System.out.println("----------------------------------------------------------------------------------");
+    io.display("----------------------------------------------------------------------------------");
   }
 
   public void print()

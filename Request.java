@@ -10,14 +10,16 @@ public class Request implements Move
   private Character character;
   private String argument;
   private StringPairCompare str_format;
-  private keyboardScanner keyboard;
+  //private keyboardScanner keyboard;
+  private IO io;
 
   public Request(Character A, String arg)
   {
     this.character = A;
     this.argument = arg;
     str_format = str_format.getInstance();
-    keyboard = keyboard.getInstance();
+    //keyboard = keyboard.getInstance();
+    this.io = new IO();
   }
 
   public void execute()
@@ -30,8 +32,8 @@ public class Request implements Move
     Character supplier = character.current.listening(player);
     if(supplier == null)return;
 
-    System.out.println("What would you like to trade?");
-    String thingA = keyboard.getInput(); 
+    io.display("What would you like to trade?");
+    String thingA = io.getLine(); 
     if(thingA == null) return;
     Artifact offer = character.use(thingA);
     if(offer == null) return;
@@ -41,8 +43,8 @@ public class Request implements Move
     String value = Integer.toString(val);
     thingA += " "+value+"pts";
 
-    System.out.println("What item are you interested from "+supplier.name()+"?");
-    String thingB = keyboard.getInput();
+    io.display("What item are you interested from "+supplier.name()+"?");
+    String thingB = io.getLine();
     if(thingB == "null") return;
     Artifact good = supplier.use(thingB);
     if(good == null) return;

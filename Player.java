@@ -8,13 +8,11 @@ import java.util.*;
 public class Player extends Character
 {
   private static int player_num = 0;
-  private static IO io;
 
   public Player(Scanner scan) 
   {
     super(scan);
     decider = new UI();
-    io = new IO();
     player_num++;
   } 
 
@@ -54,9 +52,24 @@ public class Player extends Character
     int ID_;
     ID_ = rand.nextInt(50);
 
+    int cnt = 0, max = 4, age = 0;
+
     //5. Age of the character.
     io.display("How old is "+inputName+"?");
-    int age = Integer.parseInt(io.getLine());
+    while(true) 
+    {
+      try
+      {
+        age = Integer.parseInt(io.getLine());
+        break;
+      }
+      catch(NumberFormatException e)
+      {
+        //If exception occurs, give the player another chance to enter int.
+        io.display("Please, enter an integer for the age of "+inputName+".");
+        continue;
+      }
+    }
 
     while(characters.containsKey(ID_))
       ID_ = rand.nextInt(50);

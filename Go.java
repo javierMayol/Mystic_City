@@ -10,11 +10,13 @@ public class Go implements Move
   private Character character;
   private String direction;
   private Character Ogre;
+  private IO io;
 
   public Go(Character client, String direc)
   {
      this.character = client;
      this.direction = direc;
+     this.io = new IO();
   }
   public void execute()
   {
@@ -25,7 +27,7 @@ public class Go implements Move
      else
        next = character.current.followDirection(direction); 
      if(next.getID() == character.current.getID() && character instanceof Player)
-       System.out.println("Oh no!! This direction is locked.");
+       io.display("Oh no!! This direction is locked.");
      character.goTo(next);
      character.getCurrentPlace().addCharacter(character);
 
@@ -33,7 +35,7 @@ public class Go implements Move
      {
        char sadFace = '\u2639';
        if(character instanceof Player)
-         System.out.println("\nYou have exited the game."+sadFace);
+         io.display("\nYou have exited the game."+sadFace);
        Exit exit = new Exit(character); 
        exit.execute();
      }
@@ -50,10 +52,10 @@ public class Go implements Move
        {
          if(character instanceof Player)
          {
-           System.out.println("Oh no!! The OGRE IS HERE!!");
+           io.display("Oh no!! The OGRE IS HERE!!");
            if(!character.hasSomething())
            {
-             System.out.println(">Ogre\n  Oh man! you broke. I'm not wasting my time on you.\n");
+             io.display(">Ogre\n  Oh man! you broke. I'm not wasting my time on you.\n");
              return;
            }
            Riddle riddle = new Riddle(character);

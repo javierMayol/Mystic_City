@@ -11,14 +11,12 @@ public class Use implements Move
   private String Key;
   private String direction; 
   private Artifact thing;
-  private keyboardScanner keyboard;
 
   public Use(Character client, String key)
   {
     this.character =  client;
     this.Key = key;
     this.direction = new String();
-    keyboard = keyboard.getInstance();
   }
 
   public void execute()

@@ -9,7 +9,8 @@ public class Get implements Move
 {
   private Artifact thing;
   private Character character;
-  private keyboardScanner keyboard;
+  //private keyboardScanner keyboard;
+  private IO io;
 
   public Get(){}
 
@@ -17,7 +18,8 @@ public class Get implements Move
   {
     this.character = client;
     this.thing = character.getCurrentPlace().removeArtifact(artifact);
-    keyboard = keyboard.getInstance();
+    //keyboard = keyboard.getInstance();
+    this.io = new IO();
   }
   public void execute()
   {
@@ -28,8 +30,8 @@ public class Get implements Move
       character.getCurrentPlace().addArtifact(this.thing);
       if(character instanceof Player)
       {
-        System.out.println("Cannot get artifact. It might be too heavy.");
-        keyboard.getInput();
+        io.display("Cannot get artifact. It might be too heavy.");
+        //keyboard.getInput();
         return;
       }
     }

@@ -8,10 +8,12 @@ import java.util.*;
 public class Exit implements Move
 {
   private Character character;
+  private IO io;
 
   public Exit(Character client)
   {
     this.character = client;
+    this.io = new IO();
   }
 
   public void execute()
@@ -23,6 +25,6 @@ public class Exit implements Move
     character.getCurrentPlace().removeCharacter(name);
     character.removeCharacter();
     if(character instanceof Player)
-      System.out.println("Bye, "+name+"!\n");
+      io.display("Bye, "+name+"!\n");
   }
 }

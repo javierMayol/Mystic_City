@@ -39,6 +39,5 @@ public class GameTeaster {
     Game g = new Game(sc, player_qty);
     //g.print();
     g.play();
-    System.out.println("Exit the Game. Hope you enjoyed it!!");
   }
 }

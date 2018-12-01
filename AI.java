@@ -14,7 +14,7 @@ public class AI implements DecisionMaker
   private Character character;
   private Place place;
   private StringPairCompare word;
-  private keyboardScanner keyboard;
+  //private keyboardScanner keyboard;
 
   //Constructor
   public AI(){}

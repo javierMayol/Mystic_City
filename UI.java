@@ -11,6 +11,7 @@ public class UI implements DecisionMaker
   private Place place;
   private StringPairCompare word;
   private keyboardScanner keyboard;
+  private IO io;
 
   //Constructor
   public UI(){}
@@ -19,6 +20,7 @@ public class UI implements DecisionMaker
      this.character = client;
      this.place = where; 
      keyboard = keyboard.getInstance();    
+     this.io = new IO();
      return this.execCommand(keyboard.commandLinePrompt(character.name()));
   }
 
@@ -118,12 +120,12 @@ public class UI implements DecisionMaker
 
   private void info()
   {
-   System.out.println("\nSOME COMMANDS:\nJust type GO and the direction you want to travel to.\n\tExample: 'GO South' or 'GO S'.");
-   System.out.println("To get an item from the current place, type 'GET' SPACE 'name of the artifact'.");
-   System.out.println("To drop an item in the current place, type 'DROP' SPACE 'name of the artifact'.");
-   System.out.println("If you want to use a key, type 'USE' SPACE 'name of the artifact key'.");
-   System.out.println("To know what items you have in the invetory just type 'Inventory' or 'inve'.");
-   System.out.println("Type 'Quit', 'Exit' or 'q' to exit the game.\n");   
+   io.display("\nSOME COMMANDS:\nJust type GO and the direction you want to travel to.\n\tExample: 'GO South' or 'GO S'.");
+   io.display("To get an item from the current place, type 'GET' SPACE 'name of the artifact'.");
+   io.display("To drop an item in the current place, type 'DROP' SPACE 'name of the artifact'.");
+   io.display("If you want to use a key, type 'USE' SPACE 'name of the artifact key'.");
+   io.display("To know what items you have in the invetory just type 'Inventory' or 'inve'.");
+   io.display("Type 'Quit', 'Exit' or 'q' to exit the game.\n");   
    character.getCurrentPlace().display();
   }
 }
