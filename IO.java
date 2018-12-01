@@ -8,16 +8,20 @@ public class IO implements UserInterface
   public static final int GUI_3 = 3;
   //implementor might need to be static.
   private UserInterface implementor;
+
+  //The default implementor if not otherwise specified should be the TextInterface.
+  public IO()
+  {
+    implementor = new TextInterface(); 
+  }
 	
   public void display(String s)
   {
-    implementor = new TextInterface(); 
     implementor.display(s);
   }
 
   public String getLine()
   {
-    implementor = new TextInterface();
     return implementor.getLine();
   }
 
