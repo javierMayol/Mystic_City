@@ -1,10 +1,5 @@
-
-
-interface UserInterface{
-
-	
-
-	public void display(String s);
-	public String getLine();
-
+interface UserInterface
+{
+  public void display(String s);
+  public String getLine();
 }

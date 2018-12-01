@@ -4,6 +4,7 @@
  * Javier Mayol NetID : cmayol2		UIN : 671352495
  */
 import java.util.*;
+import java.lang.*;
 
 public class keyboardScanner
 {
@@ -11,32 +12,39 @@ public class keyboardScanner
   private String input;
   private int num;
   protected keyboardScanner(){};
-  
+  private IO io = new IO();
+
   public static keyboardScanner getInstance()
   {
     if(instance == null) instance = new keyboardScanner();
     return instance;
   }
-  
+
+  //Try wildcard with this
+  public String getInput()
+  {
+     Scanner scan = new Scanner(System.in);
+     if(scan.hasNextInt())
+       this.input = CleanLineScanner.getCleanLine(scan.nextLine());
+     else
+       this.input = CleanLineScanner.getCleanLine(scan.nextLine());
+     return input;
+  }
+
+/*  
   public String getInput()
   {
      Scanner scan = new Scanner(System.in);
      this.input = CleanLineScanner.getCleanLine(scan.nextLine());
      return input;
   }
-  public int getInt()
-  {
-     Scanner scan = new Scanner(System.in);
-     if(scan.hasNextInt())
-       this.num = scan.nextInt();
-     else this.num = 0;
-     return num;
-  }
+*/
 
   public String commandLinePrompt(String prompt)
   {
     this.input = prompt+">";
-    System.out.print(input);
+    io.display(input);
+    //System.out.print(input);
     return getInput();
   }
 }

@@ -8,11 +8,12 @@
      175     518    4515 Direction.java
       28      73     610 Drop.java
       28      62     608 Exit.java
-     169     610    5785 Game.java
+     169     610    5787 Game.java
       44     135    1045 GameTeaster.java
       39      92     936 Get.java
       70     178    2030 Go.java
       13      23     200 HollyWand.java
+      21      59     383 IO.java
       19      48     350 Inventory.java
       32      79     789 Message.java
        9      29     158 Move.java
@@ -28,5 +29,6 @@
       60     172    1593 Trade.java
      130     351    3681 UI.java
       83     180    1916 Use.java
+       5      11      88 UserInterface.java
       42     106     920 keyboardScanner.java
-    2796    7745   75102 total
+    2822    7815   75575 total

@@ -27,7 +27,6 @@ abstract class Character
   protected String message;
   protected int points;
   private boolean player_out;
-
 //******************************* Constructors ************************************
   public Character(){}
 

@@ -44,4 +44,10 @@ public class CleanLineScanner {
      return str;
     //End of Clean Line method.
   }
+
+  //implementing polymorphism for getCleanLine that returns int.
+  public static int getCleanLine(int i)
+  {
+    return i;
+  }
 }

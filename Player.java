@@ -8,11 +8,13 @@ import java.util.*;
 public class Player extends Character
 {
   private static int player_num = 0;
- 
+  private static IO io;
+
   public Player(Scanner scan) 
   {
     super(scan);
     decider = new UI();
+    io = new IO();
     player_num++;
   } 
 
@@ -28,19 +30,21 @@ public class Player extends Character
   {
     if(characters.size() > 15)
     {
-      System.out.println("There are already too many characters");
+      io.display("There are already too many characters.");
       return;
     }
 
     int id = player_num;
+
     //1. Name the character.
-    System.out.println("How do you want to name your character?");
-    String inputName = keyboard.getInput();
+    io.display("How do you want to name your character?");
+    String inputName = io.getLine();
     if(inputName == null || inputName.isEmpty())//If the user doesn't input a name.
       inputName = Integer.toString(id++);//We create one to avoid error of player counts.
+
     //2. Describe the character.
-    System.out.println("In few words describe "+inputName+".");
-    String inputDesc = keyboard.getInput();
+    io.display("In few words describe "+inputName+".");
+    String inputDesc = io.getLine();
  
     //3. Randomly assign a place for the character.
     Place where = Place.chooseRandomPlace();
@@ -51,15 +55,15 @@ public class Player extends Character
     ID_ = rand.nextInt(50);
 
     //5. Age of the character.
-    System.out.println("How old is "+inputName);
-    int age = keyboard.getInt();
+    io.display("How old is "+inputName+"?");
+    int age = Integer.parseInt(io.getLine());
 
     while(characters.containsKey(ID_))
       ID_ = rand.nextInt(50);
-    //5. Finish.
 
+    //6. Finish.
     new Player(where, ID_, age, inputName, inputDesc);
-    System.out.println("We have created "+inputName+". It lives in "+where.name()+".");
+    io.display("We have created "+inputName+". It lives in "+where.name()+".");
   }
 
   public static void minPlayerNum(int players_qty)
@@ -70,7 +74,7 @@ public class Player extends Character
         createNewPlayer();
     }
     else if(players_qty > 15)
-      System.out.println("Too many players for this humble game.");
+      io.display("Too many players for this humble game.");
   }
 
   public static int retrievePlayer_num()
