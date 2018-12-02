@@ -10,7 +10,7 @@ public class UI implements DecisionMaker
   private Character character;
   private Place place;
   private StringPairCompare word;
-  private keyboardScanner keyboard;
+  //private keyboardScanner keyboard;
   private IO io;
 
   //Constructor
@@ -19,9 +19,10 @@ public class UI implements DecisionMaker
   {
      this.character = client;
      this.place = where; 
-     keyboard = keyboard.getInstance();    
+     //keyboard = keyboard.getInstance();    
      this.io = new IO();
-     return this.execCommand(keyboard.commandLinePrompt(character.name()));
+     //return this.execCommand(keyboard.commandLinePrompt(character.name()));
+     return this.execCommand(io.displayPrompt(character.name()));
   }
 
   private String getCommand(String userInput)

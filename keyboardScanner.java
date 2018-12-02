@@ -12,7 +12,6 @@ public class keyboardScanner
   private String input;
   private int num;
   protected keyboardScanner(){};
-  private IO io = new IO();
 
   public static keyboardScanner getInstance()
   {
@@ -30,8 +29,7 @@ public class keyboardScanner
   public String commandLinePrompt(String prompt)
   {
     this.input = prompt+">";
-    io.display(input);
-    //System.out.print(input);
-    return io.getLine();
+    System.out.print(input);
+    return getInput();
   }
 }

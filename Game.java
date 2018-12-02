@@ -152,7 +152,7 @@ public class Game {
           {
             if(c instanceof Player)
             {
-  	      Place.printAll();//For debugging purposess.
+  	      //Place.printAll();//For debugging purposess.
               io.display(">Current place: "+c.current.name()+"\n"+c.current.description());
               io.display("\nOK, "+c.name().toUpperCase()+", YOUR TURN.\n");
             }

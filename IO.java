@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class IO implements UserInterface
+public class IO //implements UserInterface
 {
   public static final int TEXT = 0;
   public static final int GUI_1 = 1;
@@ -18,6 +18,11 @@ public class IO implements UserInterface
   public void display(String s)
   {
     implementor.display(s);
+  }
+
+  public String displayPrompt(String s)
+  {
+    return implementor.displayPrompt(s);
   }
 
   public String getLine()
