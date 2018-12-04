@@ -9,17 +9,29 @@ public class GUI_1 implements UserInterface
   JPanel p;
   JButton b;
 
+  public static void main(String[] args)
+  {
+    GUI_1 gu = new GUI_1();
+    return;
+  }
+
   public GUI_1()
   {
     f = new JFrame();
-    p = new JPanel();//new FlowLayout(FlowLayout.CENTER, 5, 5));
+    area = new JTextArea();
+    p = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
     f.setLayout(new GridLayout(5, 2, 10, 10));
-    f.add(new Label("GUIIII"));
 
     p.add(new JButton("GO"));
     p.add(new JButton("GET"));
+    p.add(new JButton("USE"));
+    p.add(new JButton("LOOK"));
+    p.add(new JButton("TALK"));
+    p.add(new JButton("ASK"));
+    p.add(new JButton("TRADE"));
+  
 
-    area = new JTextArea();
+    f.add(new JScrollPane(area), BorderLayout.CENTER);
     b = new JButton("click here.");
     f.add(p);
     f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -38,9 +50,9 @@ public class GUI_1 implements UserInterface
   public void displayPrompt(String s)
   {
     area.setFont(new Font("Serif", Font.BOLD, 18));
-    area.setText(s);
+    area.setText(s +" >");
     f.add(new JScrollPane(area), BorderLayout.CENTER);
-  }
+  }    
 
   public String getLine()
   {
