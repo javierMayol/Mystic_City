@@ -54,9 +54,9 @@ public class UI implements DecisionMaker
 
   private Move execCommand(String userInput)
   {
-     String str = getCommand(userInput);
-     String arg;
-
+    String str = getCommand(userInput);
+    String arg;
+     
     //If the user input EXIT or QUIT, the game is terminated.
     if("QUIT".equalsIgnoreCase(str)||"EXIT".equalsIgnoreCase(str)||"Q".equalsIgnoreCase(str))
       return new Exit(character);

@@ -31,6 +31,11 @@ public class IO //implements UserInterface
       selectInterface(GUI_1);
       cmd = null;
     }
+    if("TEXT".equalsIgnoreCase(cmd))
+    {
+      selectInterface(TEXT);
+      cmd = null;
+    }
     return cmd;
   }
 

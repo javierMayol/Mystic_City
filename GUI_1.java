@@ -1,13 +1,15 @@
 import java.util.*;
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 
 public class GUI_1 implements UserInterface
 {
-  JFrame f;
-  JTextArea area;
-  JPanel p;
-  JButton b;
+  private JFrame f;
+  private JTextArea area;
+  private JPanel p;
+  private JButton b;
+  private keyboardScanner keyboard;
 
   public static void main(String[] args)
   {
@@ -17,22 +19,48 @@ public class GUI_1 implements UserInterface
 
   public GUI_1()
   {
+    keyboard = keyboard.getInstance();
     f = new JFrame();
     area = new JTextArea();
     p = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
-    f.setLayout(new GridLayout(5, 2, 10, 10));
+    f.setLayout(new GridLayout(5, 2, 5, 5));
+    area.setFont(new Font("SanSerif", Font.PLAIN, 14));
+    //area.setEditable(false);
 
-    p.add(new JButton("GO"));
-    p.add(new JButton("GET"));
-    p.add(new JButton("USE"));
-    p.add(new JButton("LOOK"));
-    p.add(new JButton("TALK"));
-    p.add(new JButton("ASK"));
-    p.add(new JButton("TRADE"));
+    b = new JButton("GO");
+    b.addActionListener(new GUIListener());
+    p.add(b);
+
+    b = new JButton("GET");
+    b.addActionListener(new GUIListener());
+    p.add(b);
+
+    b = new JButton("USE");
+    b.addActionListener(new GUIListener());
+    p.add(b);
+
+    b = new JButton("LOOK");
+    b.addActionListener(new GUIListener());
+    p.add(b);
+
+    b = new JButton("TALK");
+    b.addActionListener(new GUIListener());
+    p.add(b);
+
+    b = new JButton("ASK");
+    b.addActionListener(new GUIListener());
+    p.add(b);
+
+    b = new JButton("TRADE");
+    b.addActionListener(new GUIListener());
+    p.add(b);
+  
+    b = new JButton("EXIT");
+    b.addActionListener(new GUIListener());
+    p.add(b);
   
 
     f.add(new JScrollPane(area), BorderLayout.CENTER);
-    b = new JButton("click here.");
     f.add(p);
     f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     f.setSize(400, 640);
@@ -42,24 +70,31 @@ public class GUI_1 implements UserInterface
 
   public void display(String s)
   {
-    area.setFont(new Font("Serif", Font.BOLD, 18));
     area.setText(s);
-    f.add(new JScrollPane(area), BorderLayout.CENTER);
   }
 
   public void displayPrompt(String s)
   {
-    area.setFont(new Font("Serif", Font.BOLD, 18));
     area.setText(s +" >");
-    f.add(new JScrollPane(area), BorderLayout.CENTER);
   }    
 
   public String getLine()
   {
-    return null;
+     //Say something like if(button is press, get the source and return text)    
+    return keyboard.getInput();
   } 
+
+  class GUIListener implements ActionListener
+  {
+    public void actionPerformed(ActionEvent e)
+    {
+      Object o = e.getSource();
+      JButton b = null;
+      if(o instanceof JButton)
+      {
+        b = (JButton) o;
+        display("You pressed "+ b.getText()); 
+      }
+    }
+  }  
 }
-
-//public class Gui_component extends JComponent
-
-  
