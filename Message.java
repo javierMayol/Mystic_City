@@ -15,6 +15,7 @@ public class Message implements Move
     //keyboard = keyboard.getInstance();
     str_format = str_format.getInstance();
     this.io = new IO();
+    this.io.selectInterface(io.TEXT);
   }
 
   public void execute()

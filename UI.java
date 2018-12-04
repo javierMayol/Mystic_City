@@ -14,15 +14,17 @@ public class UI implements DecisionMaker
   private IO io;
 
   //Constructor
-  public UI(){}
+  public UI()
+  {
+    this.io = new IO();
+    this.io.selectInterface(io.TEXT);
+  }
   public Move getMove(Character client, Place where)
   {
      this.character = client;
-     this.place = where; 
-     //keyboard = keyboard.getInstance();    
-     this.io = new IO();
-     //return this.execCommand(keyboard.commandLinePrompt(character.name()));
-     return this.execCommand(io.displayPrompt(character.name()));
+     this.place = where;
+     this.io.displayPrompt(character.name()); 
+     return this.execCommand(io.getLine());
   }
 
   private String getCommand(String userInput)

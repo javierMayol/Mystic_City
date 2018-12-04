@@ -76,7 +76,7 @@ abstract class Character
       this.message = new String();
       this.points = 0;
       this.io = new IO();
-
+      this.io.selectInterface(io.TEXT);
     }
     catch(Exception e) {
       System.err.println("Error : Verify that the file is correctly formatted to initialize Character class.");
@@ -107,6 +107,7 @@ abstract class Character
     this.printer = printer.getInstance();
     //this.keyboard = keyboard.getInstance();
     this.io = new IO();
+    this.io.selectInterface(io.TEXT);
   }
 
 //****************************** Methods : atribute related *********************

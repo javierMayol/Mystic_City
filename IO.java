@@ -11,25 +11,43 @@ public class IO //implements UserInterface
 
   //The default implementor if not otherwise specified should be the TextInterface.
   public IO()
-  {
-    implementor = new TextInterface(); 
-  }
+  { }
 	
   public void display(String s)
   {
     implementor.display(s);
   }
 
-  public String displayPrompt(String s)
+  public void displayPrompt(String s)
   {
-    return implementor.displayPrompt(s);
+    implementor.displayPrompt(s);
   }
 
   public String getLine()
   {
-    return implementor.getLine();
+    String cmd = implementor.getLine();
+    if("GUI 1".equalsIgnoreCase(cmd))
+    {
+      selectInterface(GUI_1);
+      cmd = null;
+    }
+    return cmd;
   }
 
   public void selectInterface(int n)
-  { }
+  {
+/*
+    switch (n) {
+        case 0:
+    	       implementor = new TextInterface(); 
+               //display("implementor"); 
+        case 1:
+   	       implementor = new GUI_1(); //(GUI_1)implementor; 
+*/
+    if(n == GUI_1)
+      implementor = new GUI_1(); //(GUI_1)implementor; 
+    else
+      implementor = new TextInterface(); 
+    //}
+  }
 }

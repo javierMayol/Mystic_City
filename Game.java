@@ -100,6 +100,7 @@ public class Game {
       Riddle.addRiddle(file);
     //keyboard = keyboard.getInstance();
     this.io = new IO();
+    this.io.selectInterface(io.TEXT);
   }
 
   // helper method to find the number of places, directions, characters, and 

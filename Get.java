@@ -20,6 +20,7 @@ public class Get implements Move
     this.thing = character.getCurrentPlace().removeArtifact(artifact);
     //keyboard = keyboard.getInstance();
     this.io = new IO();
+    this.io.selectInterface(io.TEXT);
   }
   public void execute()
   {

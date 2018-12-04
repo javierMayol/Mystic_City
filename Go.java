@@ -17,6 +17,7 @@ public class Go implements Move
      this.character = client;
      this.direction = direc;
      this.io = new IO();
+     this.io.selectInterface(io.TEXT);
   }
   public void execute()
   {

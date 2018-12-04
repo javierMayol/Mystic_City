@@ -59,7 +59,8 @@ public class Place {
     isPlayer = false;
     firstTime = true;
     //keyboard = keyboard.getInstance();
-    this.io =  new IO();
+    this.io = new IO();
+    this.io.selectInterface(io.TEXT);
   }
   
   //Old constructor.
@@ -76,7 +77,8 @@ public class Place {
     isPlayer = false;
     firstTime = true;
     //keyboard = keyboard.getInstance();
-    this.io =  new IO();
+    this.io = new IO();
+    this.io.selectInterface(io.TEXT);
   }
 
 //****************************** Methods : atribute related *********************
@@ -161,6 +163,16 @@ public class Place {
       Place Nowhere = new Place(0,"Nowhere","This is a void.");
     }
     return places.get(Integer.toString(ID));
+  }
+
+  public static Place placeByName(String name)
+  {
+    for(Place i : places.values())
+    {
+      if(i.name().equalsIgnoreCase(name))
+       return i;
+    }
+    return null;
   }
 
   //followDirection() : Checks to see if this place has a valid unlocked Direction

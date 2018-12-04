@@ -14,9 +14,10 @@ public class TextInterface implements UserInterface
     System.out.println(s); 
   }
 
-  public String displayPrompt(String s)
+  public void displayPrompt(String prompt)
   {
-    return keyboard.commandLinePrompt(s);
+    String input = prompt+">";
+    System.out.print(input);
   }
 
   public String getLine()

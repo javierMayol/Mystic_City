@@ -7,6 +7,7 @@ public class ReadScroll extends ArtifactUse
   public ReadScroll()
   {
     this.io = new IO();
+    this.io.selectInterface(io.TEXT);
   }
 
   public void use()

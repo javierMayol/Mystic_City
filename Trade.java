@@ -19,7 +19,7 @@ public class Trade implements Move
     this.lender = A;
     this.requester = B;
     //keyboard = keyboard.getInstance();
-    this.io = new IO();
+    this.io.selectInterface(io.TEXT);
   }
 
   public void execute()

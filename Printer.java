@@ -21,6 +21,7 @@ public class Printer
     {
       instance = new Printer();
       io = new IO();
+      io.selectInterface(io.TEXT);
       str_format = str_format.getInstance();
     }
     return instance;

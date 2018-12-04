@@ -18,8 +18,8 @@ public class Request implements Move
     this.character = A;
     this.argument = arg;
     str_format = str_format.getInstance();
-    //keyboard = keyboard.getInstance();
     this.io = new IO();
+    this.io.selectInterface(io.TEXT);
   }
 
   public void execute()

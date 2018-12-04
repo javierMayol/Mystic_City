@@ -19,8 +19,8 @@ public class Riddle implements Move
   public Riddle(Character A)
   {
     victim = A;
-    //keyboard = keyboard.getInstance();
-    io = new IO();
+    this.io = new IO();
+    this.io.selectInterface(io.TEXT);
   }
 
   public static Character getOgre()

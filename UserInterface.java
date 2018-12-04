@@ -1,6 +1,6 @@
 interface UserInterface
 {
   public void display(String s);
-  public String displayPrompt(String s);
+  public void displayPrompt(String prompt);
   public String getLine();
 }

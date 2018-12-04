@@ -14,6 +14,7 @@ public class Exit implements Move
   {
     this.character = client;
     this.io = new IO();
+    this.io.selectInterface(io.TEXT);
   }
 
   public void execute()
