@@ -324,7 +324,7 @@ abstract class Character
     return this.accept;
   }
 
-  public void viewInventory()
+  public String viewInventory()
   {
    String display = ""; 
    if(inventory.isEmpty())io.display("The inventory is empty.");
@@ -342,6 +342,7 @@ abstract class Character
       display += "-----------Total points: "+this.points+"-------------\nweigth "+artifacts_weight+"\n";
       io.display(display);
     }
+    return display;
   }
 //******************************** String check method **********************************
   private String strCheck(String buff, String input)
@@ -362,11 +363,18 @@ abstract class Character
 
 //******************************** Stdout printing methods **********************************
   //display() : Displays information of the character. User friendly.
-  public void display()
+  public void externalDisplay(String s)
   {
-    io.display(this.name+"\n "+this.description);
-    viewInventory();
-    io.display("----------------------------------------------------------------------------------");
+    decider.externalDisplay(s);
+  }
+
+  public String display()
+  {
+    String display = this.name+"\n "+this.description+"\n";
+    display += viewInventory();
+    display += "----------------------------------------------------------------------------------";
+    io.display(display);
+    return display;
   }
 
   public void print()

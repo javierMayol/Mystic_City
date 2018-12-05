@@ -15,10 +15,10 @@ public class GUI_1 implements UserInterface
   {
     keyboard = keyboard.getInstance();
     f = new JFrame();
-    area = new JTextArea(5, 5);
+    area = new JTextArea(25, 25);
     p = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
-    f.setLayout(new GridLayout(5, 2, 5, 5));
-    area.setFont(new Font("SanSerif", Font.PLAIN, 11));
+    f.setLayout(new GridLayout(3, 2, 5, 5));
+    area.setFont(new Font("SanSerif", Font.PLAIN, 13));
     //area.setEditable(false);
 
     b = new JButton("GO");

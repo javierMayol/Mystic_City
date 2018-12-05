@@ -326,34 +326,36 @@ public class Place {
 
 //******************************** Stdout printing methods **********************************
   //display() : Displays information of the place. User friendly.
-  public void display()
+  public String display()
   { 
-    io.display("\n>Currently at "+this.name()+".");
-    io.display("----------------------------------------------------------------------------------");
-    io.display(this.description());
-    io.display("\n>Artifacts available:");
+    String display = "\n>Currently at "+this.name()+".\n";
+    display += "----------------------------------------------------------------------------------\n";
+    display += this.description()+"\n";
+    display += "\n>Artifacts available:\n";
 
     if(artifacts.isEmpty())
-      io.display("\tnone");
+      display += "\tnone\n";
     else
     {
       for(String i: artifacts.keySet())
-        io.display("  *"+artifacts.get(i).name());
+        display +="  *"+artifacts.get(i).name()+"\n";
     }
-    io.display("\n>Characters in this place:");
+    display += "\n>Characters in this place:\n";
     if(!characters.isEmpty())
     {
       for(String i: characters.keySet())
       {
          if(characters.get(i) instanceof NPC)
-           io.display("NPC: ");
+           display += "NPC: \n";
          else if(characters.get(i) instanceof Player)
-           io.display("Player: ");
-         characters.get(i).display();
+           display += "Player: \n";
+         display += characters.get(i).display();
       }
     }
     else 
-      io.display("\tnone");
+      display += "\tnone\n";
+    io.display(display);
+    return display;
   }
 
   //helper for printAll()

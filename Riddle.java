@@ -33,19 +33,25 @@ public class Riddle implements Move
   public void execute()
   {
     if(Ogre ==  null ) getOgre();
-    io.display("\n\n\n\n\n\n\n\n\n\n\n\n"); 
-    io.display("HA HA HA! Let's see if you really know this stuff!\n");//Change for something better.
-    String right_answer = pickRiddle();
+    String display = "\n\n\n\n\n\n\n\n\n\n\n\n"; 
+    display +="HA HA HA! Let's see if you really know this stuff!\n\n";//Change for something better.
+    //GUI pickRiddle method.
+    Random rand = new Random();
+    int index = rand.nextInt(riddles.size());
+    String riddle = riddles.get(index);
+    String right_answer = answers.get(index);
+    display += riddle;
+    victim.externalDisplay(display);
     String answer = io.getLine();
     if(!(answer.equalsIgnoreCase(right_answer)))
     {
       loot(victim.emptyInventory());
-      io.display("\n\n\n\n\n\nHA HAHA HA!!! YOU LOSE !!!!!!\n");
+      victim.externalDisplay("\n\n\n\n\n\nHA HAHA HA!!! YOU LOSE !!!!!!\n\n");
       victim.message("\n>You have a new message:\n\n  "+Ogre.name()+" has stolen everything from you.");
     }
     else
     {
-      io.display("\n\n\n\n\n\nYikes!! YOU'RE SO SMART.\n");
+      victim.externalDisplay("\n\n\n\n\n\nYikes!! YOU'RE SO SMART.\n\n");
       getPrize();
     }
   }
@@ -54,8 +60,8 @@ public class Riddle implements Move
   {
      Random rand = new Random();
      int index = rand.nextInt(riddles.size());
-     String riddel = riddles.get(index);
-     io.display(riddel);
+     String riddle = riddles.get(index);
+     io.display(riddle);
      String answer = answers.get(index);
      return answer;
   }

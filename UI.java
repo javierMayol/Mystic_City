@@ -27,6 +27,11 @@ public class UI implements DecisionMaker
      return this.execCommand(io.getLine());
   }
 
+  public void externalDisplay(String s)
+  {
+    io.display(s);
+  }
+
   private String getCommand(String userInput)
   {
      String cmd = new String();
@@ -123,13 +128,16 @@ public class UI implements DecisionMaker
 
   private void info()
   {
-   io.display("\nSOME COMMANDS:\nJust type GO and the direction you want to travel to.\n\tExample: 'GO South' or 'GO S'.");
-   io.display("To get an item from the current place, type 'GET' SPACE 'name of the artifact'.");
-   io.display("To drop an item in the current place, type 'DROP' SPACE 'name of the artifact'.");
-   io.display("If you want to use a key, type 'USE' SPACE 'name of the artifact key'.");
-   io.display("To know what items you have in the invetory just type 'Inventory' or 'inve'.");
-   io.display("Type 'Quit', 'Exit' or 'q' to exit the game.\n");   
-   character.getCurrentPlace().display();
+    String display = new String();
+    display = "\nSOME COMMANDS:\nJust type GO and the direction you want to travel to.\n\tExample: 'GO South' or 'GO S'.\n";
+    display += "To get an item from the current place, type 'GET' SPACE 'name of the artifact'.\n";
+    display += "To drop an item in the current place, type 'DROP' SPACE 'name of the artifact'.\n";
+    display += "If you want to use a key, type 'USE' SPACE 'name of the artifact key'.\n";
+    display +="To know what items you have in the invetory just type 'Inventory' or 'inve'.\n";
+    display += "Type 'Quit', 'Exit' or 'q' to exit the game.\n";   
+    String displayPlayer = character.getCurrentPlace().display();
+    display += displayPlayer;
+    io.display(display);
   }
 }
   

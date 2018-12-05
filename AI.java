@@ -25,6 +25,7 @@ public class AI implements DecisionMaker
      return this.execCommand();
   }
 
+  public void externalDisplay(String s){}
   private String AI_cmd()
   {
     String [] cmdBank = new String[]{"GO", "GO", "GO", "GET", "USE", "DROP"};
