@@ -10,7 +10,8 @@ public class GUI_1 implements UserInterface
   private JPanel p;
   private JButton b;
   private keyboardScanner keyboard;
-  private String cmd;
+  private static String cmd;
+  private MouseEvent event;
 
   public GUI_1()
   {
@@ -62,7 +63,14 @@ public class GUI_1 implements UserInterface
     b.addActionListener(new GUIListener());
     b.addMouseListener(new GUIListener());
     p.add(b); 
-    b = new JButton("LOOK");
+
+    b = new JButton("INVE");
+    b.addActionListener(new GUIListener());
+    b.addMouseListener(new GUIListener());
+    p.add(b); 
+    long when;
+     when  = System.currentTimeMillis();
+//    event = new MouseEvent(b, MouseEvent.MOUSE_CLICKED, 0,0,100,100,1,false);
 
     f.add(new JScrollPane(area), BorderLayout.CENTER);
     f.add(p);
@@ -81,16 +89,16 @@ public class GUI_1 implements UserInterface
     f.setTitle(s); 
   }    
 
-  public String buttonPress(String e)
+  private static String buttonPressed(String B)
   {
-    return e;
+    return B;
   }
 
   public String getLine()
   {
-    cmd = keyboard.getInput();
+//    cmd = keyboard.getInput();
     //Say something like if(button is press, get the source and return text)
-    return cmd;
+    return cmd; 
   } 
 
   class GUIListener extends JComponent implements MouseListener, ActionListener
@@ -99,26 +107,28 @@ public class GUI_1 implements UserInterface
     {
       addMouseListener(this);
       Object o = e.getSource();
-      JButton b = null;
+      JButton button = null;
       if(o instanceof JButton)
       {
-        b = (JButton) o;
-        display(b.getText()); 
+        button = (JButton) o;
+        display(button.getText()); 
       }
     }
     public void mouseMoved(MouseEvent e){}//Needed for MouseMotionListener interface.
     public void mouseDragged(MouseEvent e){}// "    "      "	"	".
     public void mouseExited(MouseEvent e){}
     public void mouseEntered(MouseEvent e){}
-    public void mouseReleased(MouseEvent e){}
-    public void mousePressed(MouseEvent e){}
-    public void mouseClicked(MouseEvent e)
+    public void mouseReleased(MouseEvent e)
+    {
+      cmd = "";
+    }
+    public void mousePressed(MouseEvent e)
     {
       Object o = e.getSource();
-      JButton b = null;
-      b = (JButton) o;
-      if(e.getClickCount() == 1)
-        display("You pressed "+b.getText());
+      JButton button = (JButton) o;
+      cmd = button.getText();
+      //buttonPressed(button.getText());
     }
+    public void mouseClicked(MouseEvent e){}
   }  
 }

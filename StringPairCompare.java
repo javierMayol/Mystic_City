@@ -53,7 +53,7 @@ public class StringPairCompare
   public String getWordAt(int index, String inputUser)
   { 
     if(inputUser.isEmpty()){
-      System.out.println("String is empty.");
+      //System.out.println("String is empty.");
        this.str = "";
        return null;
     }
