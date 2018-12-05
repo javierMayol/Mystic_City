@@ -14,5 +14,4 @@
 */
 interface DecisionMaker {
 	 Move getMove(Character c, Place p);
-	 void externalDisplay(String s);
 }

@@ -27,11 +27,6 @@ public class UI implements DecisionMaker
      return this.execCommand(io.getLine());
   }
 
-  public void externalDisplay(String s)
-  {
-    io.display(s);
-  }
-
   private String getCommand(String userInput)
   {
      String cmd = new String();

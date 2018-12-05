@@ -150,23 +150,29 @@ abstract class Character
     return player_out;
   }
 
-/*
-  public static LinkedList<Character> getList()
-  {
-    return new LinkedList<Character>(characters.values());
-  }
-*/
-
   public static Iterator<Character> getIterator()
   {
     return characters.values().iterator();
   }
 
 //****************************** GUI or TextInterface implementor ***********************
-  static void ioChange(int n)
+  public IO getImplementor()
+  {
+    return io;
+  }
+
+  public static void ioChange(int n)
   {
     io.selectInterface(n);
   }
+
+  public boolean GUIMode()
+  {
+     if(io.implementorGUI())
+       return true;
+     return false;
+  }
+  
 //**************************** END OF GUI or TextInterface implementor *********************
 
 //****************************** Methods : Artifact related *********************
@@ -363,16 +369,11 @@ abstract class Character
 
 //******************************** Stdout printing methods **********************************
   //display() : Displays information of the character. User friendly.
-  public void externalDisplay(String s)
-  {
-    decider.externalDisplay(s);
-  }
-
   public String display()
   {
     String display = this.name+"\n "+this.description+"\n";
     display += viewInventory();
-    display += "----------------------------------------------------------------------------------";
+    display += "----------------------------------------------------------------------------------\n";
     io.display(display);
     return display;
   }

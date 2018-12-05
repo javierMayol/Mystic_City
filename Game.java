@@ -166,6 +166,8 @@ public class Game {
             if(c.gotNotification())
               c.notification();
             c.makeMove();
+            if(c.GUIMode())
+              System.out.println(c.name()+" is in GUI Mode.");
           }
           if(Player.retrievePlayer_num() < 1)break;
         }

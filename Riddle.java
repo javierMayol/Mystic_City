@@ -41,17 +41,17 @@ public class Riddle implements Move
     String riddle = riddles.get(index);
     String right_answer = answers.get(index);
     display += riddle;
-    victim.externalDisplay(display);
+    io.display(display);
     String answer = io.getLine();
     if(!(answer.equalsIgnoreCase(right_answer)))
     {
       loot(victim.emptyInventory());
-      victim.externalDisplay("\n\n\n\n\n\nHA HAHA HA!!! YOU LOSE !!!!!!\n\n");
+      io.display("\n\n\n\n\n\nHA HAHA HA!!! YOU LOSE !!!!!!\n\n");
       victim.message("\n>You have a new message:\n\n  "+Ogre.name()+" has stolen everything from you.");
     }
     else
     {
-      victim.externalDisplay("\n\n\n\n\n\nYikes!! YOU'RE SO SMART.\n\n");
+      io.display("\n\n\n\n\n\nYikes!! YOU'RE SO SMART.\n\n");
       getPrize();
     }
   }

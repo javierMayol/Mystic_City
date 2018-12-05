@@ -39,6 +39,13 @@ public class IO //implements UserInterface
     return cmd;
   }
 
+  public boolean implementorGUI()
+  {
+    if(implementor instanceof GUI_1)
+      return true;
+    return false;
+  }
+
   public void selectInterface(int n)
   {
 

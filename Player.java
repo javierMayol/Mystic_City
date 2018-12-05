@@ -120,5 +120,6 @@ public class Player extends Character
     while(move == null)
       move = decider.getMove(this, current);
     move.execute();
+    display();
   }
 } 

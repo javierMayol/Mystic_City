@@ -20,7 +20,7 @@ public class StringPairCompare
   private boolean match;
   private double lowerBound;
   private double upperBound;
-
+  private keyboardScanner keyboard;
   private static StringPairCompare instance = null;
 
   protected StringPairCompare(){  
@@ -29,6 +29,7 @@ public class StringPairCompare
     this.match = false;
     this.lowerBound = 0.25;
     this.upperBound = 1.333;
+    keyboard = keyboard.getInstance();
   }
   
   public static StringPairCompare getInstance()

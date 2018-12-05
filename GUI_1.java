@@ -2,6 +2,7 @@ import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.util.concurrent.TimeUnit;
 
 public class GUI_1 implements UserInterface
 {
@@ -96,24 +97,15 @@ public class GUI_1 implements UserInterface
 
   public String getLine()
   {
-//    cmd = keyboard.getInput();
-    //Say something like if(button is press, get the source and return text)
+    String out = cmd;
+    if(out.equalsIgnoreCase("GO"))
+      return out +" e";
     return cmd; 
   } 
 
   class GUIListener extends JComponent implements MouseListener, ActionListener
   {
-    public void actionPerformed(ActionEvent e)
-    {
-      addMouseListener(this);
-      Object o = e.getSource();
-      JButton button = null;
-      if(o instanceof JButton)
-      {
-        button = (JButton) o;
-        display(button.getText()); 
-      }
-    }
+    public void actionPerformed(ActionEvent e){}
     public void mouseMoved(MouseEvent e){}//Needed for MouseMotionListener interface.
     public void mouseDragged(MouseEvent e){}// "    "      "	"	".
     public void mouseExited(MouseEvent e){}
@@ -127,7 +119,7 @@ public class GUI_1 implements UserInterface
       Object o = e.getSource();
       JButton button = (JButton) o;
       cmd = button.getText();
-      //buttonPressed(button.getText());
+      //keyboard.getInput();
     }
     public void mouseClicked(MouseEvent e){}
   }  
