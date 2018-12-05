@@ -6,12 +6,12 @@ import java.util.concurrent.TimeUnit;
 
 public class GUI_1 implements UserInterface
 {
-  private JFrame f;
+  private static JFrame f;
   private JTextArea area;
   private JPanel p;
   private JButton b;
   private keyboardScanner keyboard;
-  private static String cmd;
+  private String cmd;
   private MouseEvent event;
 
   public GUI_1()
@@ -69,10 +69,6 @@ public class GUI_1 implements UserInterface
     b.addActionListener(new GUIListener());
     b.addMouseListener(new GUIListener());
     p.add(b); 
-    long when;
-     when  = System.currentTimeMillis();
-//    event = new MouseEvent(b, MouseEvent.MOUSE_CLICKED, 0,0,100,100,1,false);
-
     f.add(new JScrollPane(area), BorderLayout.CENTER);
     f.add(p);
     f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -90,17 +86,21 @@ public class GUI_1 implements UserInterface
     f.setTitle(s); 
   }    
 
-  private static String buttonPressed(String B)
-  {
-    return B;
-  }
-
   public String getLine()
   {
     String out = cmd;
-    if(out.equalsIgnoreCase("GO"))
-      return out +" e";
-    return cmd; 
+    if(out.equalsIgnoreCase("GET"))
+      return out +" leather bag";
+    else if(out.equalsIgnoreCase("GO"))
+    {
+      out = "GO N";
+      return out;
+    }
+    else if(out.equalsIgnoreCase("TALK"))
+      return out + " N";
+    else if(out.equalsIgnoreCase("USE"))
+      return out + " N";
+    return out; 
   } 
 
   class GUIListener extends JComponent implements MouseListener, ActionListener
@@ -112,6 +112,7 @@ public class GUI_1 implements UserInterface
     public void mouseEntered(MouseEvent e){}
     public void mouseReleased(MouseEvent e)
     {
+      f.dispose();
       cmd = "";
     }
     public void mousePressed(MouseEvent e)
@@ -119,7 +120,6 @@ public class GUI_1 implements UserInterface
       Object o = e.getSource();
       JButton button = (JButton) o;
       cmd = button.getText();
-      //keyboard.getInput();
     }
     public void mouseClicked(MouseEvent e){}
   }  

@@ -23,7 +23,7 @@ public class UI implements DecisionMaker
   {
      this.character = client;
      this.place = where;
-     this.io.displayPrompt(character.name()); 
+     this.io.displayPrompt(character.name()+character.pInter()); 
      return this.execCommand(io.getLine());
   }
 
@@ -56,10 +56,15 @@ public class UI implements DecisionMaker
   {
     String str = getCommand(userInput);
     String arg;
-     
     //If the user input EXIT or QUIT, the game is terminated.
     if("QUIT".equalsIgnoreCase(str)||"EXIT".equalsIgnoreCase(str)||"Q".equalsIgnoreCase(str))
       return new Exit(character);
+
+    else if("GUI".equalsIgnoreCase(str))
+    {
+      character.setInterface(io.GUI_1);
+      return null;
+    }
 
     //Display information of the current place.
     else if("LOOK".equalsIgnoreCase(str))
@@ -71,6 +76,7 @@ public class UI implements DecisionMaker
     else if("GO".equalsIgnoreCase(str))
     {
       arg = getArgument(userInput);
+    System.out.println(str+" "+arg);    
       return new Go(character, arg.toUpperCase());
     }
 

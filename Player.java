@@ -15,7 +15,8 @@ public class Player extends Character
     decider = new UI();
     player_num++;
     this.io = new IO();
-    this.io.selectInterface(io.TEXT);
+    playerInterface = io.TEXT;
+    //this.io.selectInterface(io.TEXT);
   } 
 
   public Player(Place place, int id, int age, String name_character, String desc)
@@ -24,7 +25,8 @@ public class Player extends Character
     decider = new UI();
     player_num++;
     this.io = new IO();
-    this.io.selectInterface(io.TEXT);
+    playerInterface = io.TEXT;
+    //this.io.selectInterface(io.TEXT);
   }
   //Step by step Character constructor. Prints a prompt to 
   //command line and waits for the user to input a string.
@@ -116,10 +118,10 @@ public class Player extends Character
  
   public void makeMove ()
   {
+    io.selectInterface(playerInterface);
     Move move = decider.getMove(this, current);
     while(move == null)
       move = decider.getMove(this, current);
     move.execute();
-    display();
   }
 } 

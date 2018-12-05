@@ -28,6 +28,7 @@ abstract class Character
   protected int points;
   private boolean player_out;
   protected static IO io;
+  protected int playerInterface;
 //******************************* Constructors ************************************
   public Character(){}
 
@@ -112,6 +113,13 @@ abstract class Character
     return characters.get(Integer.toString(ID));
   }
 
+  public String pInter()
+  {
+    if(playerInterface == io.GUI_1)
+      return " GUI_1";
+    else
+      return " TEXT";
+  }
   //getID() : Returns ID of character. Used in ..
   public int getID()
   {
@@ -156,23 +164,12 @@ abstract class Character
   }
 
 //****************************** GUI or TextInterface implementor ***********************
-  public IO getImplementor()
+  public void setInterface(int n)
   {
-    return io;
-  }
-
-  public static void ioChange(int n)
-  {
+    playerInterface = n;
     io.selectInterface(n);
   }
 
-  public boolean GUIMode()
-  {
-     if(io.implementorGUI())
-       return true;
-     return false;
-  }
-  
 //**************************** END OF GUI or TextInterface implementor *********************
 
 //****************************** Methods : Artifact related *********************

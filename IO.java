@@ -26,9 +26,10 @@ public class IO //implements UserInterface
   public String getLine()
   {
     String cmd = implementor.getLine();
+/*
     if("GUI 1".equalsIgnoreCase(cmd))
     {
-      Game.ioChange(GUI_1);
+      selectInterface(GUI_1);
       cmd = null;
     }
     if("TEXT".equalsIgnoreCase(cmd))
@@ -36,6 +37,7 @@ public class IO //implements UserInterface
       selectInterface(TEXT);
       cmd = null;
     }
+*/
     return cmd;
   }
 
