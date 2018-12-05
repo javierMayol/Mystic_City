@@ -7,7 +7,7 @@ public class IO //implements UserInterface
   public static final int GUI_2 = 2;
   public static final int GUI_3 = 3;
   //implementor might need to be static.
-  private UserInterface implementor;
+  private static UserInterface implementor;
 
   //The default implementor if not otherwise specified should be the TextInterface.
   public IO()
@@ -28,7 +28,7 @@ public class IO //implements UserInterface
     String cmd = implementor.getLine();
     if("GUI 1".equalsIgnoreCase(cmd))
     {
-      selectInterface(GUI_1);
+      Game.ioChange(GUI_1);
       cmd = null;
     }
     if("TEXT".equalsIgnoreCase(cmd))
@@ -41,18 +41,23 @@ public class IO //implements UserInterface
 
   public void selectInterface(int n)
   {
-/*
+
     switch (n) {
         case 0:
     	       implementor = new TextInterface(); 
                //display("implementor"); 
+    	       break;
         case 1:
    	       implementor = new GUI_1(); //(GUI_1)implementor; 
-*/
+	       break;
+    }
+/*
     if(n == GUI_1)
+    {
       implementor = new GUI_1(); //(GUI_1)implementor; 
+    }
     else
       implementor = new TextInterface(); 
-    //}
+*/
   }
 }

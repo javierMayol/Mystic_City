@@ -75,8 +75,6 @@ abstract class Character
       this.accept = false;
       this.message = new String();
       this.points = 0;
-      this.io = new IO();
-      this.io.selectInterface(io.TEXT);
     }
     catch(Exception e) {
       System.err.println("Error : Verify that the file is correctly formatted to initialize Character class.");
@@ -106,8 +104,6 @@ abstract class Character
     this.str_format = str_format.getInstance();
     this.printer = printer.getInstance();
     //this.keyboard = keyboard.getInstance();
-    this.io = new IO();
-    this.io.selectInterface(io.TEXT);
   }
 
 //****************************** Methods : atribute related *********************
@@ -166,6 +162,12 @@ abstract class Character
     return characters.values().iterator();
   }
 
+//****************************** GUI or TextInterface implementor ***********************
+  static void ioChange(int n)
+  {
+    io.selectInterface(n);
+  }
+//**************************** END OF GUI or TextInterface implementor *********************
 
 //****************************** Methods : Artifact related *********************
   public boolean hasSomething()
@@ -324,22 +326,23 @@ abstract class Character
 
   public void viewInventory()
   {
-    if(inventory.isEmpty())io.display("The inventory is empty.");
+   String display = ""; 
+   if(inventory.isEmpty())io.display("The inventory is empty.");
     else
     {
-      io.display("---------Items in the inventory---------");
+      display = "---------Items in the inventory---------\n";
       int i = 0, val = 0;
       for(String k : inventory.keySet())
       {
         String key = k;
         i++;
-        io.display(i+". "+inventory.get(key).name()+"\t pts : "+inventory.get(key).value());
+        display += i+". "+inventory.get(key).name()+"\t pts : "+inventory.get(key).value()+"\n";
         //val += inventory.get(key).value();
       }
-        io.display("-----------Total points: "+this.points+"-------------\nweigth "+artifacts_weight);
+      display += "-----------Total points: "+this.points+"-------------\nweigth "+artifacts_weight+"\n";
+      io.display(display);
     }
   }
-
 //******************************** String check method **********************************
   private String strCheck(String buff, String input)
   {

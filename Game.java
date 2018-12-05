@@ -19,7 +19,7 @@ public class Game {
   private String game_name;// name of the game
   private int nCharacters;
   //private keyboardScanner keyboard;		
-  private IO io;
+  private static IO io;
 
   Game(){};
 
@@ -103,6 +103,12 @@ public class Game {
     this.io.selectInterface(io.TEXT);
   }
 
+//****************************** GUI or TextInterface implementor ***********************
+  static void ioChange(int n)
+  {
+    io.selectInterface(n);
+  }
+//**************************** END OF GUI or TextInterface implementor *********************
   // helper method to find the number of places, directions, characters, and 
   //artifacts during the file reading to make file reading easier
   private int keyCount(Scanner file, String key) {

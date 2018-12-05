@@ -14,6 +14,8 @@ public class Player extends Character
     super(scan);
     decider = new UI();
     player_num++;
+    this.io = new IO();
+    this.io.selectInterface(io.TEXT);
   } 
 
   public Player(Place place, int id, int age, String name_character, String desc)
@@ -21,6 +23,8 @@ public class Player extends Character
     super(place, id, age, name_character, desc);
     decider = new UI();
     player_num++;
+    this.io = new IO();
+    this.io.selectInterface(io.TEXT);
   }
   //Step by step Character constructor. Prints a prompt to 
   //command line and waits for the user to input a string.
