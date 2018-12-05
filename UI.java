@@ -62,7 +62,13 @@ public class UI implements DecisionMaker
 
     else if("GUI".equalsIgnoreCase(str))
     {
-      character.setInterface(io.GUI_1);
+      arg = getArgument(userInput);
+      if(Integer.parseInt(arg) == 1) 
+        character.setInterface(io.GUI_1);
+      if(Integer.parseInt(arg) == 2) 
+        character.setInterface(io.GUI_2);
+      if(Integer.parseInt(arg) == 3) 
+        character.setInterface(io.GUI_3);
       return null;
     }
 
@@ -76,7 +82,6 @@ public class UI implements DecisionMaker
     else if("GO".equalsIgnoreCase(str))
     {
       arg = getArgument(userInput);
-    System.out.println(str+" "+arg);    
       return new Go(character, arg.toUpperCase());
     }
 
