@@ -105,8 +105,7 @@ public class Player extends Character
   {
     player_num--;
   }
-
-  
+ 
   public LinkedList<Artifact> emptyInventory()
   {
     LinkedList<Artifact> loot = new LinkedList<Artifact>(inventory.values());
@@ -119,9 +118,15 @@ public class Player extends Character
   public void makeMove ()
   {
     io.selectInterface(playerInterface);
+    if(gotNotification())
+    {
+      notification();
+      if(needResponse)
+        respond(io.getLine());
+    }
     Move move = decider.getMove(this, current);
     while(move == null)
-      move = decider.getMove(this, current);
+      move = decider.getMove(this, current); 
     move.execute();
   }
 } 

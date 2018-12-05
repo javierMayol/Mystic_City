@@ -28,7 +28,7 @@ public class Go implements Move
      else
        next = character.current.followDirection(direction); 
      if(next.getID() == character.current.getID() && character instanceof Player)
-       io.display("Oh no!! This direction is locked.");
+       character.message("Oh no!! This direction is locked.");
      character.goTo(next);
      character.getCurrentPlace().addCharacter(character);
 
@@ -36,7 +36,7 @@ public class Go implements Move
      {
        char sadFace = '\u2639';
        if(character instanceof Player)
-         io.display("\nYou have exited the game."+sadFace);
+         character.message("\nYou have exited the game."+sadFace);
        Exit exit = new Exit(character); 
        exit.execute();
      }
@@ -53,10 +53,10 @@ public class Go implements Move
        {
          if(character instanceof Player)
          {
-           io.display("Oh no!! The OGRE IS HERE!!");
+           character.message("Oh no!! The OGRE IS HERE!!");
            if(!character.hasSomething())
            {
-             io.display(">Ogre\n  Oh man! you broke. I'm not wasting my time on you.\n");
+             character.message(">Ogre\n  Oh man! you broke. I'm not wasting my time on you.\n");
              return;
            }
            Riddle riddle = new Riddle(character);

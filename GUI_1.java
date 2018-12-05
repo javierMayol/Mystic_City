@@ -19,7 +19,7 @@ public class GUI_1 implements UserInterface
     keyboard = keyboard.getInstance();
     cmd = new String();
     f = new JFrame();
-    area = new JTextArea(25, 25);
+    area = new JTextArea(5, 5);
     p = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
     f.setLayout(new GridLayout(2, 2, 5, 5));
     area.setFont(new Font("SanSerif", Font.PLAIN, 13));
@@ -112,7 +112,6 @@ public class GUI_1 implements UserInterface
     public void mouseEntered(MouseEvent e){}
     public void mouseReleased(MouseEvent e)
     {
-      f.dispose();
       cmd = "";
     }
     public void mousePressed(MouseEvent e)

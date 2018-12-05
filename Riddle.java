@@ -8,12 +8,12 @@ import java.util.*;
 public class Riddle implements Move
 {
   private static Character Ogre;
-  private Character victim;
+  private static Character victim;
   //private keyboardScanner keyboard;
   private static LinkedList<String>riddles = new LinkedList<String>();//Try includding riddles in the GDF document.
   private static LinkedList<String>answers = new LinkedList<String>();
   private IO io;
-
+  private static String right_answer;
   public Riddle(){}
 
   public Riddle(Character A)
@@ -21,6 +21,7 @@ public class Riddle implements Move
     victim = A;
     this.io = new IO();
     this.io.selectInterface(io.TEXT);
+    right_answer = "";
   }
 
   public static Character getOgre()
@@ -39,19 +40,23 @@ public class Riddle implements Move
     Random rand = new Random();
     int index = rand.nextInt(riddles.size());
     String riddle = riddles.get(index);
-    String right_answer = answers.get(index);
+    this.right_answer = answers.get(index);
     display += riddle;
-    io.display(display);
-    String answer = io.getLine();
+    victim.message(display);
+    victim.needResponse(Ogre);
+  }
+  public static void Answer(String s)
+  {
+    String answer = s; //victim.io.getLine();
     if(!(answer.equalsIgnoreCase(right_answer)))
     {
       loot(victim.emptyInventory());
-      io.display("\n\n\n\n\n\nHA HAHA HA!!! YOU LOSE !!!!!!\n\n");
+      victim.message("\n\n\n\n\n\nHA HAHA HA!!! YOU LOSE !!!!!!\n\n");
       victim.message("\n>You have a new message:\n\n  "+Ogre.name()+" has stolen everything from you.");
     }
     else
     {
-      io.display("\n\n\n\n\n\nYikes!! YOU'RE SO SMART.\n\n");
+      victim.message("\n\n\n\n\n\nYikes!! YOU'RE SO SMART.\n\n");
       getPrize();
     }
   }
@@ -66,22 +71,22 @@ public class Riddle implements Move
      return answer;
   }
 
-  private void loot(LinkedList<Artifact>things)
+  private static void loot(LinkedList<Artifact>things)
   {
     for(Artifact i : things)
       Ogre.addArtifact(i);
   }
 
-  private void getPrize()
+  private static void getPrize()
   {
     if(!Ogre.hasSomething())
     {
-      io.display("YOU WON! But the Ogre has nothing for you :(");
+      victim.message("YOU WON! But the Ogre has nothing for you :(");
       return;
     }
-    io.display("YOU WON! You get to pick one item from the Ogre's inventory");
-    Ogre.viewInventory();
-    String prize = io.getLine();
+    victim.message("YOU WON!"); // You get to pick one item from the Ogre's inventory");
+    //Ogre.viewInventory();
+    String prize = NPC.randomArtifact(Ogre.shuffleArtifacts());
     Drop thing = new Drop(Ogre, prize.trim());
     thing.execute();
     Get that = new Get(victim, prize.trim());

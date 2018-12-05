@@ -62,13 +62,19 @@ public class UI implements DecisionMaker
 
     else if("GUI".equalsIgnoreCase(str))
     {
-      arg = getArgument(userInput);
-      if(Integer.parseInt(arg) == 1) 
-        character.setInterface(io.GUI_1);
-      if(Integer.parseInt(arg) == 2) 
-        character.setInterface(io.GUI_2);
-      if(Integer.parseInt(arg) == 3) 
-        character.setInterface(io.GUI_3);
+      try {
+        arg = getArgument(userInput);
+        if(Integer.parseInt(arg) == 1) 
+          character.setInterface(io.GUI_1);
+        if(Integer.parseInt(arg) == 2) 
+          character.setInterface(io.GUI_2);
+        if(Integer.parseInt(arg) == 3) 
+          character.setInterface(io.GUI_3);
+      }
+      catch(NumberFormatException e)
+      {
+        return null;
+      }
       return null;
     }
 

@@ -24,11 +24,14 @@ abstract class Character
   protected int artifacts_weight;
   protected boolean notification;
   protected boolean accept;
+  protected boolean needResponse;
   protected String message;
   protected int points;
   private boolean player_out;
   protected static IO io;
   protected int playerInterface;
+  private Character requester;
+
 //******************************* Constructors ************************************
   public Character(){}
 
@@ -75,7 +78,9 @@ abstract class Character
       this.notification = false;
       this.accept = false;
       this.message = new String();
+      this.needResponse = false;
       this.points = 0;
+      this.requester = null;
     }
     catch(Exception e) {
       System.err.println("Error : Verify that the file is correctly formatted to initialize Character class.");
@@ -104,6 +109,7 @@ abstract class Character
       this.current.setCurrentCharacter();
     this.str_format = str_format.getInstance();
     this.printer = printer.getInstance();
+    this.requester = null;
     //this.keyboard = keyboard.getInstance();
   }
 
@@ -325,6 +331,17 @@ abstract class Character
   public boolean isAwaiting()
   {
     return this.accept;
+  }
+
+  public void needResponse(Character c)
+  {
+    this.needResponse = true;
+    this.requester = c;
+  }  
+
+  protected void respond(String s)
+  {
+    requester.message(s);
   }
 
   public String viewInventory()

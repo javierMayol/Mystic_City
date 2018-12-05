@@ -160,11 +160,9 @@ public class Game {
             if(c instanceof Player)
             {
   	      //Place.printAll();//For debugging purposess.
-              io.display(">Current place: "+c.current.name()+"\n"+c.current.description());
-              io.display("\nOK, "+c.name().toUpperCase()+", YOUR TURN.\n");
+              c.message(">Current place: "+c.current.name()+"\n"+c.current.description());
+              c.message("\nOK, "+c.name().toUpperCase()+", YOUR TURN.\n");
             }
-            if(c.gotNotification())
-              c.notification();
             c.makeMove();
           }
           if(Player.retrievePlayer_num() < 1)break;
