@@ -10,14 +10,16 @@ public class GUI_1 implements UserInterface
   private JPanel p;
   private JButton b;
   private keyboardScanner keyboard;
+  private String cmd;
 
   public GUI_1()
   {
     keyboard = keyboard.getInstance();
+    cmd = new String();
     f = new JFrame();
     area = new JTextArea(25, 25);
     p = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
-    f.setLayout(new GridLayout(3, 2, 5, 5));
+    f.setLayout(new GridLayout(2, 2, 5, 5));
     area.setFont(new Font("SanSerif", Font.PLAIN, 13));
     //area.setEditable(false);
 
@@ -60,6 +62,7 @@ public class GUI_1 implements UserInterface
     b.addActionListener(new GUIListener());
     b.addMouseListener(new GUIListener());
     p.add(b); 
+    b = new JButton("LOOK");
 
     f.add(new JScrollPane(area), BorderLayout.CENTER);
     f.add(p);
@@ -78,16 +81,23 @@ public class GUI_1 implements UserInterface
     f.setTitle(s); 
   }    
 
+  public String buttonPress(String e)
+  {
+    return e;
+  }
+
   public String getLine()
   {
-     //Say something like if(button is press, get the source and return text)
-    return keyboard.getInput();
+    cmd = keyboard.getInput();
+    //Say something like if(button is press, get the source and return text)
+    return cmd;
   } 
 
   class GUIListener extends JComponent implements MouseListener, ActionListener
   {
     public void actionPerformed(ActionEvent e)
     {
+      addMouseListener(this);
       Object o = e.getSource();
       JButton b = null;
       if(o instanceof JButton)
@@ -104,8 +114,11 @@ public class GUI_1 implements UserInterface
     public void mousePressed(MouseEvent e){}
     public void mouseClicked(MouseEvent e)
     {
-      if(e.getClickCount() == 2)
-        display("YES");
+      Object o = e.getSource();
+      JButton b = null;
+      b = (JButton) o;
+      if(e.getClickCount() == 1)
+        display("You pressed "+b.getText());
     }
   }  
 }
