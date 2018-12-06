@@ -31,7 +31,7 @@ public class GUI_1 implements UserInterface
     f.add(new JScrollPane(area), BorderLayout.CENTER);
     f.add(new JScrollPane(text), BorderLayout.CENTER);
     //Buttons names.
-    String [] button_label = new String[] {"GO", "GET","USE","LOOK","TALK","ASK","TRADE","INVE","EXIT","ENTER"};
+    String [] button_label = new String[] {"GO", "GET","USE","LOOK","TALK","ASK","TRADE","INVE","EXIT","ENTER","CLEAR"};
 
     for(int i = 0; i < button_label.length ; i++)
     {
@@ -52,7 +52,7 @@ public class GUI_1 implements UserInterface
     }
     f.add(p);
     f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    f.setSize(850, 620);
+    f.setSize(920, 620);
     f.setVisible(true);
   }
 
@@ -97,6 +97,20 @@ public class GUI_1 implements UserInterface
     public void mouseEntered(MouseEvent e){}
     public void mouseReleased(MouseEvent e)
     {
+      Object o = e.getSource();
+      button = (JButton) o;
+      if(button.getText().equals("LOOK") || button.getText().equals("INVE"))
+      {
+        pre = button.getText();
+        post = "";
+        cmd = button.getText();
+      }
+      if(button.getText().equals("CLEAR"))
+      {
+        pre ="";
+        post = "";
+        text.setText("");
+      }
       text.setText(pre+" ");
       cmd = "";
     }
@@ -113,11 +127,10 @@ public class GUI_1 implements UserInterface
       {
         post = text.getText()+"\n";
         cmd = post;
+        f.dispose();
       }
       pre = text.getText();
       pre += " "+button.getText();
-      if(pre.equals("LOOK") || pre.equals("INVE"))
-        cmd = pre;
     }
     public void mouseClicked(MouseEvent e){}
   }  
