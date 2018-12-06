@@ -20,18 +20,18 @@ public class GUI_1 implements UserInterface
     keyboard = keyboard.getInstance();
     cmd = new String();
     f = new JFrame();
-    text = new JTextField("ENTER INPUT");
+    text = new JTextField();
     text.addActionListener(new GUIListener());
     area = new JTextArea(5, 5);
     area.setFont(new Font("SanSerif", Font.PLAIN, 13));
     area.setEditable(false);
-    p = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
-    f.setLayout(new GridLayout(4, 1, 5, 5));
+    p = new JPanel(); //new FlowLayout(FlowLayout.CENTER, 5, 5));
+    f.setLayout(new GridLayout(3, 1, 5, 15));
 
-    //button dimensions.
+    f.add(new JScrollPane(area), BorderLayout.CENTER);
+    f.add(new JScrollPane(text), BorderLayout.CENTER);
+    //Buttons names.
     String [] button_label = new String[] {"GO", "GET","USE","LOOK","TALK","ASK","TRADE","INVE","EXIT","ENTER"};
-
-    p.add(text);
 
     for(int i = 0; i < button_label.length ; i++)
     {
@@ -39,49 +39,20 @@ public class GUI_1 implements UserInterface
         b.addMouseListener(new GUIListener());
         p.add(b);
     }
-/*
-    b = new JButton("GET");
-    b.addMouseListener(new GUIListener());
-    //p.add(b);
+    f.add(p);
+    //Coordinate names.
+    String [] coord = new String[]{"N","S","E","W","U","D","NE","NW","SE","SW","NNE","NNW","ENE","WNW","ESE","WSW","SSE","SSW"};
 
-    b = new JButton("USE");
-    b.addMouseListener(new GUIListener());
-    p.add(b);
-
-    b = new JButton("LOOK");
-    b.addMouseListener(new GUIListener());
-    p.add(b);
-
-    b = new JButton("TALK");
-    b.addMouseListener(new GUIListener());
-    p.add(b);
-
-    b = new JButton("ASK");
-    b.addMouseListener(new GUIListener());
-    p.add(b);
-
-    b = new JButton("TRADE");
-    b.addMouseListener(new GUIListener());
-    p.add(b);
-  
-    b = new JButton("EXIT");
-    b.addMouseListener(new GUIListener());
-    p.add(b); 
-
-    b = new JButton("ENTER");
-    b.addMouseListener(new GUIListener());
-    p.add(b); 
-
-    b = new JButton("INVE");
-    //b.addActionListener(new GUIListener());
-    b.addMouseListener(new GUIListener());
-    p.add(b); 
-*/
-    f.add(new JScrollPane(area), BorderLayout.CENTER);
-    f.add(new JScrollPane(text), BorderLayout.CENTER);
+    for(int i = 0; i < coord.length ; i++)
+    {
+        b = new JButton(coord[i]);
+        b.setPreferredSize(new Dimension(40, 20));
+        b.addMouseListener(new GUIListener());
+        p.add(b);
+    }
     f.add(p);
     f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    f.setSize(400, 640);
+    f.setSize(850, 620);
     f.setVisible(true);
   }
 
@@ -104,13 +75,11 @@ public class GUI_1 implements UserInterface
   class GUIListener extends JComponent implements MouseListener, ActionListener
   {
     private JButton button;
-    private boolean pressed;
     String pre;
     String post;
     public GUIListener()
     {
       button = new JButton();
-      pressed = false;
       pre = new String();
       post = new String();
     }
@@ -121,7 +90,6 @@ public class GUI_1 implements UserInterface
       cmd = textField;
       pre = "";
       post = "";
-      display(textField);
     }
     public void mouseMoved(MouseEvent e){}//Needed for MouseMotionListener interface.
     public void mouseDragged(MouseEvent e){}// "    "      "	"	".
@@ -129,11 +97,11 @@ public class GUI_1 implements UserInterface
     public void mouseEntered(MouseEvent e){}
     public void mouseReleased(MouseEvent e)
     {
+      text.setText(pre+" ");
       cmd = "";
     }
     public void mousePressed(MouseEvent e)
     {
-      pressed = true;
       Object o = e.getSource();
       button = (JButton) o;
       if(button.getText().equals("EXIT"))
@@ -146,8 +114,8 @@ public class GUI_1 implements UserInterface
         post = text.getText()+"\n";
         cmd = post;
       }
-      pre = button.getText();
-      text.setText(pre+" ");
+      pre = text.getText();
+      pre += " "+button.getText();
       if(pre.equals("LOOK") || pre.equals("INVE"))
         cmd = pre;
     }
