@@ -62,15 +62,19 @@ public class StringPairCompare
     StringTokenizer strT = parse_str(inputUser);
     String[] array = new String[strT.countTokens()];
     int i = 0;
-    while(strT.hasMoreTokens())
-    {
-      array[i] = strT.nextToken();
-      i++;
+    try{
+      while(strT.hasMoreTokens())
+      {
+        array[i] = strT.nextToken();
+        i++;
+      }
+      if(index >= 1)
+        this.str = array[index - 1];
+      else
+        return null;
     }
-    if(index >= 1)
-      this.str = array[index - 1];
-    else
-      return null;
+    catch(ArrayIndexOutOfBoundsException d){
+    }
     return this.str;
   }
 

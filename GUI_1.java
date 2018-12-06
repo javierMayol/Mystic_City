@@ -106,18 +106,21 @@ public class GUI_1 implements UserInterface
     private JButton button;
     private boolean pressed;
     String pre;
+    String post;
     public GUIListener()
     {
       button = new JButton();
       pressed = false;
       pre = new String();
+      post = new String();
     }
 
     public void actionPerformed(ActionEvent e)
     {
-      String textField = pre+" "+text.getText();
+      String textField = text.getText();
       cmd = textField;
       pre = "";
+      post = "";
       display(textField);
     }
     public void mouseMoved(MouseEvent e){}//Needed for MouseMotionListener interface.
@@ -133,16 +136,20 @@ public class GUI_1 implements UserInterface
       pressed = true;
       Object o = e.getSource();
       button = (JButton) o;
+      if(button.getText().equals("EXIT"))
+      {
+        cmd = "Q";
+        System.exit(0); 
+      }
+      if(button.getText().equals("ENTER"))
+      {
+        post = text.getText()+"\n";
+        cmd = post;
+      }
       pre = button.getText();
       text.setText(pre+" ");
       if(pre.equals("LOOK") || pre.equals("INVE"))
         cmd = pre;
-      if(pre.equals("ENTER"))
-      {
-        pre = text.getText()+"\n";
-        text.setText(pre);
-        cmd = text.getText();
-      }
     }
     public void mouseClicked(MouseEvent e){}
   }  

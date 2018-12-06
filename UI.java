@@ -36,6 +36,8 @@ public class UI implements DecisionMaker
      }
      catch(NullPointerException e){
      }
+     catch(ArrayIndexOutOfBoundsException d){
+     }
      return word.getString().toUpperCase();
   }
 
