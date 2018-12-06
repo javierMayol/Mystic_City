@@ -7,7 +7,11 @@ public class ArtifactCache
   public static ArtifactUse getArtifact(int ID)
   {
     ArtifactUse cachedArt = ArtHash.get(ID);
-    return (ArtifactUse) cachedArt.clone();
+    try{
+      return (ArtifactUse) cachedArt.clone();
+    }
+    catch(NullPointerException e){}
+    return null;
   }
 
   public static void loadCache()

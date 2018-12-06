@@ -21,22 +21,28 @@ public class GUI_1 implements UserInterface
     cmd = new String();
     f = new JFrame();
     text = new JTextField("ENTER INPUT");
-
     text.addActionListener(new GUIListener());
-
     area = new JTextArea(5, 5);
-    p = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
-    f.setLayout(new GridLayout(2, 2, 5, 5));
     area.setFont(new Font("SanSerif", Font.PLAIN, 13));
-    //area.setEditable(false);
+    area.setEditable(false);
+    p = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
+    f.setLayout(new GridLayout(4, 1, 5, 5));
 
-    b = new JButton("GO");
-    b.addMouseListener(new GUIListener());
-    p.add(b);
+    //button dimensions.
+    String [] button_label = new String[] {"GO", "GET","USE","LOOK","TALK","ASK","TRADE","INVE","EXIT","ENTER"};
 
+    p.add(text);
+
+    for(int i = 0; i < button_label.length ; i++)
+    {
+        b = new JButton(button_label[i]);
+        b.addMouseListener(new GUIListener());
+        p.add(b);
+    }
+/*
     b = new JButton("GET");
     b.addMouseListener(new GUIListener());
-    p.add(b);
+    //p.add(b);
 
     b = new JButton("USE");
     b.addMouseListener(new GUIListener());
@@ -62,10 +68,15 @@ public class GUI_1 implements UserInterface
     b.addMouseListener(new GUIListener());
     p.add(b); 
 
+    b = new JButton("ENTER");
+    b.addMouseListener(new GUIListener());
+    p.add(b); 
+
     b = new JButton("INVE");
     //b.addActionListener(new GUIListener());
     b.addMouseListener(new GUIListener());
     p.add(b); 
+*/
     f.add(new JScrollPane(area), BorderLayout.CENTER);
     f.add(new JScrollPane(text), BorderLayout.CENTER);
     f.add(p);
@@ -87,27 +98,27 @@ public class GUI_1 implements UserInterface
   public String getLine()
   {
     String out = cmd;
-    if(out.equalsIgnoreCase("GET"))
-      return out +" leather bag";
-    else if(out.equalsIgnoreCase("GO"))
-    {
-      out = "GO N";
-      return out;
-    }
-    else if(out.equalsIgnoreCase("TALK"))
-      return out + " N";
-    else if(out.equalsIgnoreCase("USE"))
-      return out + " N";
     return out; 
   } 
 
   class GUIListener extends JComponent implements MouseListener, ActionListener
   {
+    private JButton button;
+    private boolean pressed;
+    String pre;
+    public GUIListener()
+    {
+      button = new JButton();
+      pressed = false;
+      pre = new String();
+    }
+
     public void actionPerformed(ActionEvent e)
     {
-      String textField = text.getText();
-      display(textField);
+      String textField = pre+" "+text.getText();
       cmd = textField;
+      pre = "";
+      display(textField);
     }
     public void mouseMoved(MouseEvent e){}//Needed for MouseMotionListener interface.
     public void mouseDragged(MouseEvent e){}// "    "      "	"	".
@@ -119,9 +130,19 @@ public class GUI_1 implements UserInterface
     }
     public void mousePressed(MouseEvent e)
     {
+      pressed = true;
       Object o = e.getSource();
-      JButton button = (JButton) o;
-      cmd = button.getText();
+      button = (JButton) o;
+      pre = button.getText();
+      text.setText(pre+" ");
+      if(pre.equals("LOOK") || pre.equals("INVE"))
+        cmd = pre;
+      if(pre.equals("ENTER"))
+      {
+        pre = text.getText()+"\n";
+        text.setText(pre);
+        cmd = text.getText();
+      }
     }
     public void mouseClicked(MouseEvent e){}
   }  

@@ -118,12 +118,7 @@ public class Player extends Character
   public void makeMove ()
   {
     io.selectInterface(playerInterface);
-    if(gotNotification())
-    {
-      notification();
-      if(needResponse)
-        respond(io.getLine());
-    }
+    notification();
     Move move = decider.getMove(this, current);
     while(move == null)
       move = decider.getMove(this, current); 

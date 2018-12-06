@@ -23,7 +23,7 @@ public class UI implements DecisionMaker
   {
      this.character = client;
      this.place = where;
-     this.io.displayPrompt(character.name()+character.pInter()); 
+     this.io.displayPrompt(character.name()+" "+character.pInter()); 
      return this.execCommand(io.getLine());
   }
 

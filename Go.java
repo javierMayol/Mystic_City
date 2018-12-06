@@ -59,6 +59,9 @@ public class Go implements Move
              character.message(">Ogre\n  Oh man! you broke. I'm not wasting my time on you.\n");
              return;
            }
+ 
+    	   if(character.pInter().equals("GUI_1"))
+             character.setInterface(io.GUI_1);
            Riddle riddle = new Riddle(character);
            riddle.execute();
          }

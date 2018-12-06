@@ -122,9 +122,9 @@ abstract class Character
   public String pInter()
   {
     if(playerInterface == io.GUI_1)
-      return " GUI_1";
+      return "GUI_1";
     else
-      return " TEXT";
+      return "TEXT";
   }
   //getID() : Returns ID of character. Used in ..
   public int getID()
