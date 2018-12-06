@@ -8,6 +8,7 @@ public class GUI_1 implements UserInterface
 {
   private static JFrame f;
   private JTextArea area;
+  private JTextField text;
   private JPanel p;
   private JButton b;
   private keyboardScanner keyboard;
@@ -19,6 +20,10 @@ public class GUI_1 implements UserInterface
     keyboard = keyboard.getInstance();
     cmd = new String();
     f = new JFrame();
+    text = new JTextField("ENTER INPUT");
+
+    text.addActionListener(new GUIListener());
+
     area = new JTextArea(5, 5);
     p = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
     f.setLayout(new GridLayout(2, 2, 5, 5));
@@ -26,50 +31,43 @@ public class GUI_1 implements UserInterface
     //area.setEditable(false);
 
     b = new JButton("GO");
-    b.addActionListener(new GUIListener());
     b.addMouseListener(new GUIListener());
     p.add(b);
 
     b = new JButton("GET");
-    b.addActionListener(new GUIListener());
     b.addMouseListener(new GUIListener());
     p.add(b);
 
     b = new JButton("USE");
-    b.addActionListener(new GUIListener());
     b.addMouseListener(new GUIListener());
     p.add(b);
 
     b = new JButton("LOOK");
-    b.addActionListener(new GUIListener());
     b.addMouseListener(new GUIListener());
     p.add(b);
 
     b = new JButton("TALK");
-    b.addActionListener(new GUIListener());
     b.addMouseListener(new GUIListener());
     p.add(b);
 
     b = new JButton("ASK");
-    b.addActionListener(new GUIListener());
     b.addMouseListener(new GUIListener());
     p.add(b);
 
     b = new JButton("TRADE");
-    b.addActionListener(new GUIListener());
     b.addMouseListener(new GUIListener());
     p.add(b);
   
     b = new JButton("EXIT");
-    b.addActionListener(new GUIListener());
     b.addMouseListener(new GUIListener());
     p.add(b); 
 
     b = new JButton("INVE");
-    b.addActionListener(new GUIListener());
+    //b.addActionListener(new GUIListener());
     b.addMouseListener(new GUIListener());
     p.add(b); 
     f.add(new JScrollPane(area), BorderLayout.CENTER);
+    f.add(new JScrollPane(text), BorderLayout.CENTER);
     f.add(p);
     f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     f.setSize(400, 640);
@@ -105,7 +103,12 @@ public class GUI_1 implements UserInterface
 
   class GUIListener extends JComponent implements MouseListener, ActionListener
   {
-    public void actionPerformed(ActionEvent e){}
+    public void actionPerformed(ActionEvent e)
+    {
+      String textField = text.getText();
+      display(textField);
+      cmd = textField;
+    }
     public void mouseMoved(MouseEvent e){}//Needed for MouseMotionListener interface.
     public void mouseDragged(MouseEvent e){}// "    "      "	"	".
     public void mouseExited(MouseEvent e){}
