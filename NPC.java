@@ -32,8 +32,6 @@ public class NPC extends Character
 
 	public void makeMove()
 	{
-                if(gotNotification()&&this.getID() == 2)
-                  Riddle.Answer(this.message);
 		Move move = decider.getMove(this, current);
 		while(move == null)
 			move = decider.getMove(this, current);

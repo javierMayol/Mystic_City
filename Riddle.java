@@ -8,20 +8,17 @@ import java.util.*;
 public class Riddle implements Move
 {
   private static Character Ogre;
-  private static Character victim;
-  //private keyboardScanner keyboard;
+  private Character victim;
+  private keyboardScanner keyboard;
   private static LinkedList<String>riddles = new LinkedList<String>();//Try includding riddles in the GDF document.
   private static LinkedList<String>answers = new LinkedList<String>();
-  private IO io;
-  private static String right_answer;
+
   public Riddle(){}
 
   public Riddle(Character A)
   {
     victim = A;
-    this.io = new IO();
-    this.io.selectInterface(io.TEXT);
-    right_answer = "";
+    keyboard = keyboard.getInstance();
   }
 
   public static Character getOgre()
@@ -34,29 +31,19 @@ public class Riddle implements Move
   public void execute()
   {
     if(Ogre ==  null ) getOgre();
-    String display = "\n\n\n\n\n\n\n\n\n\n\n\n"; 
-    display +="HA HA HA! Let's see if you really know this stuff!\n\n";//Change for something better.
-    //GUI pickRiddle method.
-    Random rand = new Random();
-    int index = rand.nextInt(riddles.size());
-    String riddle = riddles.get(index);
-    this.right_answer = answers.get(index);
-    display += riddle;
-    victim.message(display);
-    victim.needResponse(Ogre);
-  }
-  public static void Answer(String s)
-  {
-    String answer = s; //victim.io.getLine();
+    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n"); 
+    System.out.println("HA HA HA! Let's see if you really know this stuff!\n");//Change for something better.
+    String right_answer = pickRiddle();
+    String answer = keyboard.getInput();
     if(!(answer.equalsIgnoreCase(right_answer)))
     {
       loot(victim.emptyInventory());
-      victim.message("\n\n\n\n\n\nHA HAHA HA!!! YOU LOSE !!!!!!\n\n");
+      System.out.println("\n\n\n\n\n\nHA HAHA HA!!! YOU LOSE !!!!!!\n");
       victim.message("\n>You have a new message:\n\n  "+Ogre.name()+" has stolen everything from you.");
     }
     else
     {
-      victim.message("\n\n\n\n\n\nYikes!! YOU'RE SO SMART.\n\n");
+      System.out.println("\n\n\n\n\n\nYikes!! YOU'RE SO SMART.\n");
       getPrize();
     }
   }
@@ -65,28 +52,28 @@ public class Riddle implements Move
   {
      Random rand = new Random();
      int index = rand.nextInt(riddles.size());
-     String riddle = riddles.get(index);
-     io.display(riddle);
+     String riddel = riddles.get(index);
+     System.out.println(riddel);
      String answer = answers.get(index);
      return answer;
   }
 
-  private static void loot(LinkedList<Artifact>things)
+  private void loot(LinkedList<Artifact>things)
   {
     for(Artifact i : things)
       Ogre.addArtifact(i);
   }
 
-  private static void getPrize()
+  private void getPrize()
   {
     if(!Ogre.hasSomething())
     {
-      victim.message("YOU WON! But the Ogre has nothing for you :(");
+      System.out.println("YOU WON! But the Ogre has nothing for you :(");
       return;
     }
-    victim.message("YOU WON!"); // You get to pick one item from the Ogre's inventory");
-    //Ogre.viewInventory();
-    String prize = NPC.randomArtifact(Ogre.shuffleArtifacts());
+    System.out.println("YOU WON! You get to pick one item from the Ogre's inventory");
+    Ogre.viewInventory();
+    String prize = keyboard.getInput();
     Drop thing = new Drop(Ogre, prize.trim());
     thing.execute();
     Get that = new Get(victim, prize.trim());
