@@ -59,10 +59,12 @@ public class Use implements Move
 
   private void setArtifact()
   {
-    ArtifactCache.loadCache();
-    ArtifactUse a = ArtifactCache.getArtifact(this.thing.getID());
-    a.setCharacter(this.character);
-    a.use();
+    try{
+      ArtifactCache.loadCache();
+      ArtifactUse a = ArtifactCache.getArtifact(this.thing.getID());
+      a.setCharacter(this.character);
+      a.use();
+    }catch(NullPointerException e) {}
   } 
 
   private void openArtifact()

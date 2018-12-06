@@ -307,7 +307,17 @@ public class Place {
     }
     return null;
   }
-
+  public String[] artNames()
+  {
+    String[] arts = new String[artifacts.size()];
+    int in = 0;
+    for(Artifact i : artifacts.values())
+    {
+      arts[in] = i.name();
+      in++;
+    }
+    return arts;
+  }
 //********************************* Spell Check implementation ***************************** 
   private String strCheck(String buff, String input)
   {

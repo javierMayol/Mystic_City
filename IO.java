@@ -26,26 +26,7 @@ public class IO //implements UserInterface
   public String getLine()
   {
     String cmd = implementor.getLine();
-/*
-    if("GUI 1".equalsIgnoreCase(cmd))
-    {
-      selectInterface(GUI_1);
-      cmd = null;
-    }
-    if("TEXT".equalsIgnoreCase(cmd))
-    {
-      selectInterface(TEXT);
-      cmd = null;
-    }
-*/
     return cmd;
-  }
-
-  public boolean implementorGUI()
-  {
-    if(implementor instanceof GUI_1)
-      return true;
-    return false;
   }
 
   public void selectInterface(int n)

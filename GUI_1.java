@@ -14,6 +14,7 @@ public class GUI_1 implements UserInterface
   private keyboardScanner keyboard;
   private String cmd;
   private MouseEvent event;
+  private static String[] PA;
 
   public GUI_1()
   {
@@ -25,7 +26,7 @@ public class GUI_1 implements UserInterface
     area = new JTextArea(5, 5);
     area.setFont(new Font("SanSerif", Font.PLAIN, 13));
     area.setEditable(false);
-    p = new JPanel(); //new FlowLayout(FlowLayout.CENTER, 5, 5));
+    p = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
     f.setLayout(new GridLayout(3, 1, 5, 15));
 
     f.add(new JScrollPane(area), BorderLayout.CENTER);
@@ -51,8 +52,22 @@ public class GUI_1 implements UserInterface
         p.add(b);
     }
     f.add(p);
+
+    for(int i = 0; i < PA.length ; i++)
+    {
+        b = new JButton(PA[i]);
+        b.setPreferredSize(new Dimension(150, 30));
+        b.addMouseListener(new GUIListener());
+        p.add(b);
+    }
+ 
+    if(PA.length > 0)
+      f.add(p);
+    
+    f.add(p);
     f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     f.setSize(920, 620);
+    f.setResizable(false);
     f.setVisible(true);
   }
 
@@ -72,6 +87,10 @@ public class GUI_1 implements UserInterface
     return out; 
   } 
 
+  public static void gettingArtifacts(String[] list)
+  {
+    PA = list;
+  }
   class GUIListener extends JComponent implements MouseListener, ActionListener
   {
     private JButton button;
@@ -101,7 +120,7 @@ public class GUI_1 implements UserInterface
       button = (JButton) o;
       if(button.getText().equals("LOOK") || button.getText().equals("INVE"))
       {
-        pre = button.getText();
+        pre = "";
         post = "";
         cmd = button.getText();
       }

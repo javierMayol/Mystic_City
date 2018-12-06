@@ -150,8 +150,9 @@ public class UI implements DecisionMaker
     display +="To know what items you have in the invetory just type 'Inventory' or 'inve'.\n";
     display += "Type 'Quit', 'Exit' or 'q' to exit the game.\n";   
     String displayPlayer = character.getCurrentPlace().display();
+    io.display(displayPlayer);
     display += displayPlayer;
-    io.display(display);
+    System.out.println(display);
   }
 }
   

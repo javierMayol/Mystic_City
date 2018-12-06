@@ -176,8 +176,6 @@ abstract class Character
     io.selectInterface(n);
   }
 
-//**************************** END OF GUI or TextInterface implementor *********************
-
 //****************************** Methods : Artifact related *********************
   public boolean hasSomething()
   {

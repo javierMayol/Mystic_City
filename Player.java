@@ -114,11 +114,28 @@ public class Player extends Character
     this.artifacts_weight = 0;
     return loot;    
   }
- 
+  public String[] artNames()
+  {
+    try{ 
+       String[] arts = new String[inventory.size()];
+       int in = 0;
+       for(Artifact i : inventory.values())
+       {
+         arts[in] = i.name();
+         in++;
+       }
+       return arts;
+    }catch(NullPointerException e){}
+    return null;
+  }
+
   public void makeMove ()
   {
     io.selectInterface(playerInterface);
     notification();
+    if(!inventory.isEmpty())
+      GUI_1.gettingArtifacts(artNames());
+
     Move move = decider.getMove(this, current);
     while(move == null)
       move = decider.getMove(this, current); 
