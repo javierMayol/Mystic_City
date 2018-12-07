@@ -41,7 +41,10 @@ public class IO //implements UserInterface
    	       implementor = new GUI_1(); //(GUI_1)implementor; 
 	       break;
 	case 2:
-		implementor = new GUI_2();
+		//implementor = new GUI_2();
+		break;
+	case 3:
+		implementor = new GUI_3();
 		break;
     }
 /*
