@@ -1,3 +1,7 @@
+/*	Javier Mayol 	ACCC: cmayol
+#  	Neel Patel 	NETID : npate315	UIN : 674004711
+# 	Keval Patel
+*/
 import java.util.*;
 
 public class IO //implements UserInterface
@@ -38,16 +42,16 @@ public class IO //implements UserInterface
                //display("implementor"); 
     	       break;
         case 1:
-   	       implementor = new GUI_1(); //(GUI_1)implementor; 
+   	       implementor = new GUI_1();
 	       break;
-    }
 /*
-    if(n == GUI_1)
-    {
-      implementor = new GUI_1(); //(GUI_1)implementor; 
-    }
-    else
-      implementor = new TextInterface(); 
+        case 2:
+   	       implementor = new GUI_2();
+	       break;
+        case 3:
+   	       implementor = new GUI_3();
+	       break;
 */
+    }
   }
 }

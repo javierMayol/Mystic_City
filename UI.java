@@ -72,6 +72,8 @@ public class UI implements DecisionMaker
           character.setInterface(io.GUI_2);
         if(Integer.parseInt(arg) == 3) 
           character.setInterface(io.GUI_3);
+        if(Integer.parseInt(arg) > 3)
+	  System.out.println("GUI not implemented."); 
       }
       catch(NumberFormatException e)
       {

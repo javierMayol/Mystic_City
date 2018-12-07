@@ -1,3 +1,10 @@
+/*
+  Javier Mayol
+  cmayol
+	Artifact power for
+	Parchment scroll artifact.
+	Follows a Prototype design pattern.
+*/
 import java.util.*;
 
 public class ReadScroll extends ArtifactUse

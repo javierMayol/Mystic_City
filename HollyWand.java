@@ -1,3 +1,10 @@
+/*
+  Javier Mayol
+  cmayol
+	Artifact power for
+    	HollyWand.
+	Follows a Prototype design pattern.
+*/
 import java.util.*;
 
 public class HollyWand extends ArtifactUse

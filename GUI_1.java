@@ -1,3 +1,27 @@
+/*
+  Javier Mayol
+  cmayol
+  GUI_1 implementation 
+  follows a Bridge design pattern.
+  Interfaces:
+	UserInterface
+    In GUIListener class :
+	ActionListener
+	MouseListerner
+  GUIListener extends JComponents.
+
+  The initialization takes care of the creation
+  of panels, text fields, buttons, and frames.
+  Once loadded this GUI displays the following:
+  * A read-only text area.
+  * A text field that allows to input command as well.
+	Once the correct command is displayed in the text field,
+  	whether using the button or directly typing the command,
+	the command gets executed by pressing the ENTER key in
+	the keyboard or by clicking ENTER in the button panel.
+  * A button for each command.
+  * A button for each artifact in the inventory of the player.
+*/
 import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -52,18 +76,19 @@ public class GUI_1 implements UserInterface
         p.add(b);
     }
     f.add(p);
-
-    for(int i = 0; i < PA.length ; i++)
-    {
-        b = new JButton(PA[i]);
-        b.setPreferredSize(new Dimension(150, 30));
-        b.addMouseListener(new GUIListener());
-        p.add(b);
-    }
- 
-    if(PA.length > 0)
-      f.add(p);
+    try{
+      for(int i = 0; i < PA.length ; i++)
+      {
+         b = new JButton(PA[i]);
+         b.setPreferredSize(new Dimension(150, 30));
+         b.addMouseListener(new GUIListener());
+         p.add(b);
+      }
+      if(PA.length > 0)
+        f.add(p);
     
+    }catch(NullPointerException e){}
+ 
     f.add(p);
     f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     f.setSize(920, 620);
@@ -71,6 +96,7 @@ public class GUI_1 implements UserInterface
     f.setVisible(true);
   }
 
+  //Display text to the read only text area.
   public void display(String s)
   {
     area.setText(s);
@@ -80,17 +106,23 @@ public class GUI_1 implements UserInterface
   {
     f.setTitle(s); 
   }    
-
+  
+  //Executes commands.
   public String getLine()
   {
     String out = cmd;
     return out; 
   } 
 
+  //Populate Player's artifacts array for purpose of creating 
+  //buttons for them. The argument get pass by artNames() method
+  //in the Player class.
   public static void gettingArtifacts(String[] list)
   {
     PA = list;
   }
+  
+  //Class to implement mouse and action events.
   class GUIListener extends JComponent implements MouseListener, ActionListener
   {
     private JButton button;
@@ -118,6 +150,7 @@ public class GUI_1 implements UserInterface
     {
       Object o = e.getSource();
       button = (JButton) o;
+      //Command LOOK and INVE should allow the player to stay in the same round.
       if(button.getText().equals("LOOK") || button.getText().equals("INVE"))
       {
         pre = "";
@@ -146,7 +179,7 @@ public class GUI_1 implements UserInterface
       {
         post = text.getText()+"\n";
         cmd = post;
-        f.dispose();
+        f.dispose();//Close frame after the command is sent for execution.
       }
       pre = text.getText();
       pre += " "+button.getText();

@@ -146,7 +146,7 @@ public class Game {
         }
       }
       io.display("*****************************LET'S PLAY*****************************");
-
+     
       int index = 0;
       //Infinet loop. Uses scanner objects to get inputs from the user.
       while(true) 
