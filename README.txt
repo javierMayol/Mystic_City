@@ -63,9 +63,9 @@ See ##GAME COMMANDS section below for game commands.
 ##GAME COMMANDS:
   
   GUI 1, GUI 2, GUI 3 :
-	GUI 1 to work on graphical userinterface 1
-	GUI 2 to work on graphical userinterface 2
-	GUI 3 to work on graphical userinterface 3
+	Javier Mayol- GUI 1 to work on graphical userinterface 1
+	keval Patel-  GUI 2 to work on graphical userinterface 2
+	Neel Patel -  GUI 3 to work on graphical userinterface 3 
 		on GUI 3 there are we created labels of GO, USE, DROP, GET and textfield to enter the instruction 
 			i.e 
 				if you enter N next to GO lable GO NORTH command will execute
