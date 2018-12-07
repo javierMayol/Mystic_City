@@ -61,6 +61,16 @@ See ##GAME COMMANDS section below for game commands.
 
 ----------------------------------------
 ##GAME COMMANDS:
+  
+  GUI 1, GUI 2, GUI 3 :
+	GUI 1 to work on graphical userinterface 1
+	GUI 2 to work on graphical userinterface 2
+	GUI 3 to work on graphical userinterface 3
+		on GUI 3 there are we created labels of GO, USE, DROP, GET and textfield to enter the instruction 
+			i.e 
+				if you enter N next to GO lable GO NORTH command will execute
+		there are button fot LOOK, EXIT, INVE 
+		Informtion about player and inventory will display on textArea
 
   GO [DIRECTION]:
   	Direction is one of the cardinal positions that a player can move to in a game, e.g. south.
