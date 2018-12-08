@@ -5,7 +5,7 @@
  */
 import java.util.*;
 
-public class Riddle implements Move
+public class Riddle 
 {
   private static Character Ogre;
   private Character victim;
@@ -15,14 +15,17 @@ public class Riddle implements Move
   private static IO io;
   private static String right_answer;
 
-  public Riddle(){}
+  public Riddle()
+  {
+    keyboard = keyboard.getInstance();
+    io = new IO(); //victim.get_io();
+  }
 
   public Riddle(Character A)
   {
     victim = A;
-    io = new IO();
     keyboard = keyboard.getInstance();
-    io.selectInterface(io.TEXT);
+    io = victim.get_io();
   }
 
   public static Character getOgre()
@@ -35,15 +38,16 @@ public class Riddle implements Move
   public void execute()
   {
     if(Ogre ==  null ) getOgre();
-    String display = "\n\n\n\n\n\n\n\n\n\n\n\n"; 
-    display += "HA HA HA! Let's see if you really know this stuff!\n";//Change for something better.
+    String display = "\n\nHA HA HA! Let's see if you really know this stuff!\n";//Change for something better.
     Random rand = new Random();
     int index = rand.nextInt(riddles.size());
     String riddle = riddles.get(index);
     display += riddle;
     right_answer = answers.get(index);
+    io.selectInterface(victim.getPlayerInterface());
     io.display(display); 
-    String answer = keyboard.getInput();
+    io.displayPrompt(victim.name());
+    String answer = io.getLine();
     Answer_method(answer);
   }
 
@@ -52,12 +56,12 @@ public class Riddle implements Move
     if(!(answer.equalsIgnoreCase(right_answer)))
     {
       loot(victim.emptyInventory());
-      victim.message("\n\n\n\n\n\nHA HAHA HA!!! YOU LOSE !!!!!!\n");
+      io.display("\n\n\n\n\n\nHA HAHA HA!!! YOU LOSE !!!!!!\n");
       victim.message("\n>You have a new message:\n\n  "+Ogre.name()+" has stolen everything from you.");
     }
     else
     {
-      victim.message("\n\n\n\n\n\nYikes!! YOU'RE SO SMART.\n");
+      io.display("\n\n\n\n\n\nYikes!! YOU'RE SO SMART.\n");
       getPrize();
     }
   }
@@ -82,7 +86,7 @@ public class Riddle implements Move
   {
     if(!Ogre.hasSomething())
     {
-      victim.message("YOU WON! But the Ogre has nothing for you :(");
+      io.display("YOU WON! But the Ogre has nothing for you :(");
       return;
     }
     io.display("YOU WON! You get to pick one item from the Ogre's inventory");

@@ -31,6 +31,7 @@ abstract class Character
   protected static IO io;
   protected int playerInterface;
   private Character requester;
+  protected boolean riddle;
 
 //******************************* Constructors ************************************
   public Character(){}
@@ -81,6 +82,7 @@ abstract class Character
       this.needResponse = false;
       this.points = 0;
       this.requester = null;
+      this.riddle = false;
     }
     catch(Exception e) {
       System.err.println("Error : Verify that the file is correctly formatted to initialize Character class.");
@@ -176,6 +178,15 @@ abstract class Character
     io.selectInterface(n);
   }
 
+  public IO get_io()
+  {
+    return io;
+  }
+  
+  public int getPlayerInterface()
+  {
+    return playerInterface;
+  }
 //****************************** Methods : Artifact related *********************
   public boolean hasSomething()
   {

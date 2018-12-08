@@ -30,14 +30,15 @@ import java.util.concurrent.TimeUnit;
 
 public class GUI_1 implements UserInterface
 {
-  private static JFrame f;
+  private JFrame f;
   private JTextArea area;
   private JTextField text;
   private JPanel p;
   private JButton b;
   private keyboardScanner keyboard;
-  private String cmd;
+  private static String cmd;
   private MouseEvent event;
+  private JOptionPane pop;
   private static String[] PA;
 
   public GUI_1()
@@ -51,8 +52,9 @@ public class GUI_1 implements UserInterface
     area.setFont(new Font("SanSerif", Font.PLAIN, 13));
     area.setEditable(false);
     p = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
+    pop = new JOptionPane();
     f.setLayout(new GridLayout(3, 1, 5, 15));
-
+    p.add(text);
     f.add(new JScrollPane(area), BorderLayout.CENTER);
     f.add(new JScrollPane(text), BorderLayout.CENTER);
     //Buttons names.
@@ -110,8 +112,8 @@ public class GUI_1 implements UserInterface
   //Executes commands.
   public String getLine()
   {
-    String out = cmd;
-    return out; 
+    cmd = JOptionPane.showInputDialog(p,null,"Please input a value");
+    return cmd; 
   } 
 
   //Populate Player's artifacts array for purpose of creating 
