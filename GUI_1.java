@@ -36,11 +36,11 @@ public class GUI_1 implements UserInterface
   private JPanel p;
   private JButton b;
   private keyboardScanner keyboard;
-  private static String cmd;
+  private String cmd;
   private MouseEvent event;
   private JOptionPane pop;
   private static String[] PA;
-
+  public static boolean pop_window = false;
   public GUI_1()
   {
     keyboard = keyboard.getInstance();
@@ -51,12 +51,11 @@ public class GUI_1 implements UserInterface
     area = new JTextArea(5, 5);
     area.setFont(new Font("SanSerif", Font.PLAIN, 13));
     area.setEditable(false);
-    p = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
-    pop = new JOptionPane();
-    f.setLayout(new GridLayout(3, 1, 5, 15));
-    p.add(text);
+    f.setLayout(new GridLayout(3, 1, 5, 5));
     f.add(new JScrollPane(area), BorderLayout.CENTER);
     f.add(new JScrollPane(text), BorderLayout.CENTER);
+    p =  new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));    //Coordinate names.
+
     //Buttons names.
     String [] button_label = new String[] {"GO", "GET","USE","LOOK","TALK","ASK","TRADE","INVE","EXIT","ENTER","CLEAR"};
 
@@ -67,7 +66,6 @@ public class GUI_1 implements UserInterface
         p.add(b);
     }
     f.add(p);
-    //Coordinate names.
     String [] coord = new String[]{"N","S","E","W","U","D","NE","NW","SE","SW","NNE","NNW","ENE","WNW","ESE","WSW","SSE","SSW"};
 
     for(int i = 0; i < coord.length ; i++)
@@ -108,14 +106,25 @@ public class GUI_1 implements UserInterface
   {
     f.setTitle(s); 
   }    
-  
+
+  public static void setWindow(boolean b)
+  {
+    pop_window = b;
+  }
+
   //Executes commands.
   public String getLine()
   {
-    cmd = JOptionPane.showInputDialog(p,null,"Please input a value");
+    if(pop_window) 
+    {
+      f.setVisible(false);
+      String riddle = area.getText();
+      cmd = JOptionPane.showInputDialog(null,riddle,"OH NO! The Ogre", JOptionPane.QUESTION_MESSAGE);
+      pop_window = false;
+      f.dispose();
+    }
     return cmd; 
   } 
-
   //Populate Player's artifacts array for purpose of creating 
   //buttons for them. The argument get pass by artNames() method
   //in the Player class.

@@ -47,6 +47,7 @@ public class Riddle
     io.selectInterface(victim.getPlayerInterface());
     io.display(display); 
     io.displayPrompt(victim.name());
+    GUI_1.setWindow(true);
     String answer = io.getLine();
     Answer_method(answer);
   }
@@ -61,7 +62,6 @@ public class Riddle
     }
     else
     {
-      io.display("\n\n\n\n\n\nYikes!! YOU'RE SO SMART.\n");
       getPrize();
     }
   }
@@ -89,8 +89,11 @@ public class Riddle
       io.display("YOU WON! But the Ogre has nothing for you :(");
       return;
     }
-    io.display("YOU WON! You get to pick one item from the Ogre's inventory");
-    Ogre.viewInventory();
+    String display = "\n\n\n\n\n\nYikes!! YOU'RE SO SMART.\n\n";
+    display +="YOU WON! You get to pick one item from the Ogre's inventory\n";
+    display += Ogre.viewInventory();
+    io.display(display);
+    GUI_1.setWindow(true);
     String prize = io.getLine();
     Drop thing = new Drop(Ogre, prize.trim());
     thing.execute();
