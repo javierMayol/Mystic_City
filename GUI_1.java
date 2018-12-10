@@ -37,61 +37,88 @@ public class GUI_1 implements UserInterface
   private JButton b;
   private keyboardScanner keyboard;
   private String cmd;
+  private String buffer;
+  private boolean bufferReady;
   private MouseEvent event;
   private JOptionPane pop;
   private static String[] PA;
   public static boolean pop_window = false;
   public GUI_1()
   {
-    keyboard = keyboard.getInstance();
+    bufferReady =  false;
+    buffer = new String();
     cmd = new String();
+    keyboard = keyboard.getInstance();
     f = new JFrame();
     text = new JTextField();
     text.addActionListener(new GUIListener());
     area = new JTextArea(5, 5);
     area.setFont(new Font("SanSerif", Font.PLAIN, 13));
     area.setEditable(false);
-    f.setLayout(new GridLayout(3, 1, 5, 5));
+    f.setLayout(new GridLayout(5, 1, 5, 5));
+    //f.setLayout(new GridBagLayout());
     f.add(new JScrollPane(area), BorderLayout.CENTER);
     f.add(new JScrollPane(text), BorderLayout.CENTER);
-    p =  new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));    //Coordinate names.
-
+    //Panel Grid Bag
+    p =  new JPanel(new GridBagLayout());  //new FlowLayout(FlowLayout.CENTER, 5, 5));    //Coordinate names.
+    
+    GridBagConstraints c = new GridBagConstraints();
     //Buttons names.
-    String [] button_label = new String[] {"GO", "GET","USE","LOOK","TALK","ASK","TRADE","INVE","EXIT","ENTER","CLEAR"};
-
-    for(int i = 0; i < button_label.length ; i++)
+    String [] button_label = new String[] {"GO", "GET","USE","LOOK","DROP","TALK","ASK","TRADE","INVE","EXIT","ENTER","CLEAR"};
+    int l = 0;
+    for(int i = 0; i < 4 ; i++)
     {
-        b = new JButton(button_label[i]);
+      for(int j = 0; j < 3; j++)
+      {
+        b = new JButton(button_label[l]);
         b.addMouseListener(new GUIListener());
-        p.add(b);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 0.5;
+        c.gridx = j;
+        c.gridy = i;
+        p.add(b, c);
+        l++;
+      }
     }
-    f.add(p);
+    f.add(p);  
+ 
+    //Coordinate names.
     String [] coord = new String[]{"N","S","E","W","U","D","NE","NW","SE","SW","NNE","NNW","ENE","WNW","ESE","WSW","SSE","SSW"};
 
-    for(int i = 0; i < coord.length ; i++)
+    p =  new JPanel(new GridBagLayout());
+    l = 0;
+    for(int i = 0; i < 3 ; i++)
     {
-        b = new JButton(coord[i]);
+      for(int j = 0; j < 6; j++)
+      {
+        b = new JButton(coord[l]);
         b.setPreferredSize(new Dimension(40, 20));
         b.addMouseListener(new GUIListener());
-        p.add(b);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weighty = 0.5;
+        c.gridx = j;
+        c.gridy = i + 4;
+        p.add(b, c);
+  	l++;
+      }
     }
     f.add(p);
+    p =  new JPanel(new GridLayout(3, 10, 5, 5));  //new FlowLayout(FlowLayout.CENTER, 5, 5)); 
     try{
       for(int i = 0; i < PA.length ; i++)
       {
-         b = new JButton(PA[i]);
-         b.setPreferredSize(new Dimension(150, 30));
-         b.addMouseListener(new GUIListener());
-         p.add(b);
+          b = new JButton(PA[i]);
+          b.setPreferredSize(new Dimension(150, 30));
+          b.addMouseListener(new GUIListener());
+          p.add(b);
       }
       if(PA.length > 0)
         f.add(p);
-    
     }catch(NullPointerException e){}
  
     f.add(p);
     f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    f.setSize(920, 620);
+    f.setSize(465, 700);
     f.setResizable(false);
     f.setVisible(true);
   }
@@ -112,17 +139,49 @@ public class GUI_1 implements UserInterface
     pop_window = b;
   }
 
+  public String popUpWindow()
+  {
+     String ret = null;
+     try{
+      Object[] OPA = Arrays.copyOf(PA, PA.length, Object[].class);
+      Object select = null;
+      f.setVisible(false);
+      String riddle = area.getText();
+      String label = f.getTitle();
+      if(label.equals("Oh no!! The OGRE IS HERE!!"))
+      {
+        select = JOptionPane.showInputDialog(null,riddle,label, JOptionPane.QUESTION_MESSAGE, null, OPA, OPA[0]);
+        ret = (String) select;
+      }
+      else
+        ret = JOptionPane.showInputDialog(null,riddle,label, JOptionPane.QUESTION_MESSAGE);
+      pop_window = false;
+      f.dispose();
+      //PA = null;
+      }
+      catch(NullPointerException e){}
+      return ret;
+   }
   //Executes commands.
   public String getLine()
   {
     if(pop_window) 
+      cmd = popUpWindow();
+/*
+    else 
     {
-      f.setVisible(false);
-      String riddle = area.getText();
-      cmd = JOptionPane.showInputDialog(null,riddle,"OH NO! The Ogre", JOptionPane.QUESTION_MESSAGE);
-      pop_window = false;
-      f.dispose();
+      try{
+        while(!bufferReady)
+          Thread.sleep(500);
+        synchronized(buffer)
+        {
+          cmd = buffer;
+          bufferReady = false;
+        }
+      }
+      catch(InterruptedException e){}
     }
+*/
     return cmd; 
   } 
   //Populate Player's artifacts array for purpose of creating 

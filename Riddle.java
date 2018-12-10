@@ -25,7 +25,8 @@ public class Riddle
   {
     victim = A;
     keyboard = keyboard.getInstance();
-    io = victim.get_io();
+    this.io = new IO();
+    io.selectInterface(io.TEXT); //victim.get_io();
   }
 
   public static Character getOgre()
@@ -38,15 +39,18 @@ public class Riddle
   public void execute()
   {
     if(Ogre ==  null ) getOgre();
-    String display = "\n\nHA HA HA! Let's see if you really know this stuff!\n";//Change for something better.
     Random rand = new Random();
     int index = rand.nextInt(riddles.size());
+    String display = "\n\nHA HA HA! Let's see if you really know this stuff!\n";//Change for something better.
     String riddle = riddles.get(index);
     display += riddle;
     right_answer = answers.get(index);
+    //this.io = victim.get_io();
     io.selectInterface(victim.getPlayerInterface());
+    io.displayPrompt("Oh no!! The OGRE IS HERE!!");
     io.display(display); 
-    io.displayPrompt(victim.name());
+    String[] options = {"A","B","C","D","E"};
+    GUI_1.gettingArtifacts(options);
     GUI_1.setWindow(true);
     String answer = io.getLine();
     Answer_method(answer);
@@ -93,6 +97,7 @@ public class Riddle
     display +="YOU WON! You get to pick one item from the Ogre's inventory\n";
     display += Ogre.viewInventory();
     io.display(display);
+    GUI_1.gettingArtifacts(Ogre.artNames());
     GUI_1.setWindow(true);
     String prize = io.getLine();
     Drop thing = new Drop(Ogre, prize.trim());

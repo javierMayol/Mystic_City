@@ -8,8 +8,10 @@ import java.util.*;
 public class Request implements Move
 {
   private Character character;
+  private Character supplier;
   private String argument;
   private StringPairCompare str_format;
+  private String thingA, thingB;
   //private keyboardScanner keyboard;
   private IO io;
 
@@ -29,11 +31,19 @@ public class Request implements Move
     //Look for the supplier
     String player = argument;
     if(player == null) return;
-    Character supplier = character.current.listening(player);
+    supplier = character.current.listening(player);
     if(supplier == null)return;
 
+    io.selectInterface(character.getPlayerInterface());
     io.display("What would you like to trade?");
-    String thingA = io.getLine(); 
+    io.displayPrompt("TRADE");
+    GUI_1.setWindow(true);
+    thingA = io.getLine(); 
+    sendIt();
+  }
+  
+  public void sendIt()
+  {
     if(thingA == null) return;
     Artifact offer = character.use(thingA);
     if(offer == null) return;
@@ -42,20 +52,26 @@ public class Request implements Move
     int val = offer.value();
     String value = Integer.toString(val);
     thingA += " "+value+"pts";
+    finishRequest();
+  }  
 
-    io.display("What item are you interested from "+supplier.name()+"?");
-    String thingB = io.getLine();
-    if(thingB == "null") return;
-    Artifact good = supplier.use(thingB);
-    if(good == null) return;
-    thingB = good.name();
-    Trade.setGood(thingB);
-    val = good.value();
-    value = Integer.toString(val);
-    thingB += " "+value+"pts";
-
-//    if(character.getID() == supplier.getID())return;
-
+  public void finishRequest()
+  {
+      GUI_1.setWindow(true);
+ //     io.selectInterface(character.getPlayerInterface());
+      io.display("What item are you interested from "+supplier.name()+"?");
+      io.displayPrompt("TRADE");
+      thingB = io.getLine(); 
+      System.out.println(thingB);
+      if(thingB == null) return;
+      Artifact good = supplier.use(thingB);
+      if(good == null) return;
+      thingB = good.name();
+      Trade.setGood(thingB);
+      int val = good.value();
+      String value = Integer.toString(val);
+      thingB += " "+value+"pts";
+    // if(character.getID() == supplier.getID())return;
     String message = ">You have a request from "+character.name()+":";
     String message2 = "\nWould you like to trade "+thingA+" for "+thingB+"?\nType TRADE "+character.name();
     message += " "+message2;

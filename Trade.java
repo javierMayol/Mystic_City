@@ -19,6 +19,7 @@ public class Trade implements Move
     this.lender = A;
     this.requester = B;
     //keyboard = keyboard.getInstance();
+    this.io = new IO();
     this.io.selectInterface(io.TEXT);
   }
 
@@ -26,7 +27,10 @@ public class Trade implements Move
   {
     if(requester.isAwaiting()&&(offer != null || good != null))
     {
+      io.selectInterface(lender.getPlayerInterface());
       io.display("Would you like to accept "+requester.name()+" offer?"+offer+" "+good);
+      io.displayPrompt("Trade");
+      GUI_1.setWindow(true);
       String answer = io.getLine();
       if("Yes".equalsIgnoreCase(answer) || "Y".equalsIgnoreCase(answer))
       {

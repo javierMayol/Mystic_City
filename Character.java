@@ -213,11 +213,13 @@ abstract class Character
 
   public String hasThing(String key)
   {
-    for(String k : inventory.keySet())
-    {
-      if(key.contains(k.toLowerCase()))
+    try{
+      for(String k : inventory.keySet())
+      {
+        if(key.contains(k.toLowerCase()))
         return k;
-    }
+      }
+    }catch(NullPointerException e) {}
     return key;
   }
 
@@ -231,6 +233,7 @@ abstract class Character
         thing = strCheck(k, thing);
         use(thing);
       }
+    System.out.println(thing);
     return null;
   }
 
@@ -299,9 +302,28 @@ abstract class Character
     this.points = 0;
     this.artifacts_weight = 0;
   }
-
+  //To be implemented differently in Player and NPC
   abstract LinkedList<Artifact> emptyInventory();
 
+  public String[] artNames()
+  {
+    try{ 
+       String[] arts = new String[inventory.size()];
+       int in = 0;
+       for(Artifact i : inventory.values())
+       {
+         arts[in] = i.name();
+         in++;
+       }
+       return arts;
+    }catch(NullPointerException e){}
+    return null;
+  }
+
+  public int getPoints()
+  {
+    return points;
+  }
 //****************************** Methods : Move related *********************
   abstract void makeMove();
 

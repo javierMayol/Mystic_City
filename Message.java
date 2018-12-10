@@ -27,6 +27,9 @@ public class Message implements Move
     Character supplier = character.current.listening(player.toLowerCase().trim());
     if(supplier == null)return;
     String message = "\n>You have a messag from "+character.name()+":\n\n  ";
+    io.selectInterface(character.getPlayerInterface());
+    GUI_1.setWindow(true);
+    io.display("Message to "+supplier.name());
     message += io.getLine(); 
     supplier.message(message);
     return;

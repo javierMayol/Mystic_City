@@ -52,7 +52,6 @@ public class Go implements Move
        {
          if(character instanceof Player)
          {
-           io.display("Oh no!! The OGRE IS HERE!!");
            if(!character.hasSomething())
            {
              io.display(">Ogre\n  Oh man! you broke. I'm not wasting my time on you.\n");
@@ -65,7 +64,7 @@ public class Go implements Move
      }
      else
      {
-     System.out.println("We're here.");
+     System.out.println("Character current.followDirection failed || Riddle instantiation failed.");
        return;
      }  
   }

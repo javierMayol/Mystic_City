@@ -13,26 +13,35 @@ public class HollyWand extends ArtifactUse
   public HollyWand()
   {
     this.io = new IO();
-    io.selectInterface(io.TEXT);;
+    this.io.selectInterface(io.TEXT);
   }
 
   public void use()
   {
     Character c = getCharacter();
-    io.display("Tell the Holly wand where to.");
-    String destination = io.getLine();
-    Place placeTo = Place.placeByName(destination);;
-    if(placeTo == null) 
+    if(c.getPoints() >= 200)
     {
-      Go magicMove = new Go(getCharacter(), "None");
-      magicMove.execute();
-    }
-    else
-    {
-      c.getCurrentPlace().removeCharacter(c.name());
-      c.goTo(placeTo);
-      c.getCurrentPlace().addCharacter(c);
-      c.current.setCurrentCharacter();
+      io.selectInterface(c.getPlayerInterface());
+      io.displayPrompt("Holly Wand");
+      io.display("Tell the Holly wand where to.");
+      String [] options = {"12", "24", "108", "105"}; 
+      // GUI_1.gettingArtifacts(options);
+      GUI_1.setWindow(true);
+      String destination = io.getLine();
+      Place placeTo = Place.placeByName(destination);;
+      if(placeTo == null) 
+      {
+        Go magicMove = new Go(getCharacter(), "None");
+        magicMove.execute();
+      }
+      else
+      {
+        c.getCurrentPlace().removeCharacter(c.name());
+        c.goTo(placeTo);
+        c.getCurrentPlace().addCharacter(c);
+        c.current.setCurrentCharacter();
+      }
+      c.addPoints(-200);
     } 
   }
 }
