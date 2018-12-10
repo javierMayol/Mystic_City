@@ -163,6 +163,8 @@ public class Game {
               c.message(">Current place: "+c.current.name()+"\n"+c.current.description());
               c.message("\nOK, "+c.name().toUpperCase()+", YOUR TURN.\n");
             }
+       	    if(c.hasSomething())
+      	      GUI_1.gettingArtifacts(c.artNames());
             c.makeMove();
           }
           if(Player.retrievePlayer_num() < 1)break;

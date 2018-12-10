@@ -37,6 +37,7 @@ public class Get implements Move
       }
     }
     this.character.addArtifact(thing);
+ //   GUI_1.gettingArtifacts(character.artNames());
   }
 
 }

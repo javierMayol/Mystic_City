@@ -166,7 +166,11 @@ public class GUI_1 implements UserInterface
   public String getLine()
   {
     if(pop_window) 
+    {
+      String [] tmp = Arrays.copyOf(PA, PA.length, String[].class);
       cmd = popUpWindow();
+      PA = tmp;
+    }
 /*
     else 
     {

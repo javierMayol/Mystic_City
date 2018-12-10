@@ -118,12 +118,10 @@ public class Player extends Character
   {
     io.selectInterface(playerInterface);
     notification();
-    if(!inventory.isEmpty())
-      GUI_1.gettingArtifacts(artNames());
-
     Move move = decider.getMove(this, current);
     while(move == null)
       move = decider.getMove(this, current); 
     move.execute();
+
   }
 } 

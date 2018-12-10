@@ -91,6 +91,7 @@ public class Riddle
     if(!Ogre.hasSomething())
     {
       io.display("YOU WON! But the Ogre has nothing for you :(");
+      //GUI_1.gettingArtifacts(victim.artNames());
       return;
     }
     String display = "\n\n\n\n\n\nYikes!! YOU'RE SO SMART.\n\n";
