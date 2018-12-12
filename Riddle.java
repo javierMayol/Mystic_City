@@ -4,6 +4,7 @@
  * Javier Mayol NetID : cmayol2		UIN : 671352495
  */
 import java.util.*;
+import javax.swing.*;
 
 public class Riddle 
 {
@@ -41,17 +42,14 @@ public class Riddle
     if(Ogre ==  null ) getOgre();
     Random rand = new Random();
     int index = rand.nextInt(riddles.size());
-    String display = "\n\nHA HA HA! Let's see if you really know this stuff!\n";//Change for something better.
-    String riddle = riddles.get(index);
-    display += riddle;
+    String display = "\n\nHA HA HA! Let's see if you really know this stuff!\n";
+    display += riddles.get(index);
+    //display += riddle;
     right_answer = answers.get(index);
-    //this.io = victim.get_io();
     io.selectInterface(victim.getPlayerInterface());
-    io.displayPrompt("Oh no!! The OGRE IS HERE!!");
-    io.display(display); 
-    String[] options = {"A","B","C","D","E"};
-    GUI_1.gettingArtifacts(options);
-    GUI_1.setWindow(true);
+    ImageIcon icon = new ImageIcon("GreenOgre.png");
+    Object[] options = {"A","B","C","D","E"};
+    GUI_1.setOptionPane(display, "Oh no!! THE OGRE IS HERE!!", icon, options);
     String answer = io.getLine();
     Answer_method(answer);
   }
@@ -91,15 +89,15 @@ public class Riddle
     if(!Ogre.hasSomething())
     {
       io.display("YOU WON! But the Ogre has nothing for you :(");
-      //GUI_1.gettingArtifacts(victim.artNames());
       return;
     }
     String display = "\n\n\n\n\n\nYikes!! YOU'RE SO SMART.\n\n";
     display +="YOU WON! You get to pick one item from the Ogre's inventory\n";
     display += Ogre.viewInventory();
-    io.display(display);
-    GUI_1.gettingArtifacts(Ogre.artNames());
-    GUI_1.setWindow(true);
+    //String[] OgreThings = Ogre.artNames();
+    Object[] options = Arrays.copyOf(Ogre.artNames(), Ogre.artNames().length, Object[].class);
+    ImageIcon icon = new ImageIcon("GreenOgre.png");
+    GUI_1.setOptionPane(display, "You Won!!", icon, options);
     String prize = io.getLine();
     Drop thing = new Drop(Ogre, prize.trim());
     thing.execute();

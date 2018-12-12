@@ -6,6 +6,7 @@
 	Follows a Prototype design pattern.
 */
 import java.util.*;
+import javax.swing.*;
 
 public class HollyWand extends ArtifactUse
 {
@@ -19,14 +20,11 @@ public class HollyWand extends ArtifactUse
   public void use()
   {
     Character c = getCharacter();
-    if(c.getPoints() >= 200)
+    if(c.getPoints() >= 100)
     {
       io.selectInterface(c.getPlayerInterface());
-      io.displayPrompt("Holly Wand");
-      io.display("Tell the Holly wand where to.");
-      String [] options = {"12", "24", "108", "105"}; 
-      // GUI_1.gettingArtifacts(options);
-      GUI_1.setWindow(true);
+      ImageIcon icon =  new ImageIcon("HollyWand.png");
+      GUI_1.setOptionPane("Tell the Holly Wand where to.", "Holly Wand", icon, null);
       String destination = io.getLine();
       Place placeTo = Place.placeByName(destination);;
       if(placeTo == null) 
@@ -41,7 +39,7 @@ public class HollyWand extends ArtifactUse
         c.getCurrentPlace().addCharacter(c);
         c.current.setCurrentCharacter();
       }
-      c.addPoints(-200);
+      c.addPoints(-100);
     } 
   }
 }

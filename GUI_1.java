@@ -30,25 +30,25 @@ import java.util.concurrent.TimeUnit;
 
 public class GUI_1 implements UserInterface
 {
-  private JFrame f;
-  private JTextArea area;
-  private JTextField text;
+  private static JFrame f;
   private JPanel p;
   private JButton b;
-  private keyboardScanner keyboard;
+  private JTextArea area;
+  private JTextField text;
   private String cmd;
   private String buffer;
   private boolean bufferReady;
-  private MouseEvent event;
-  private JOptionPane pop;
+  private static Object OptionPaneObj;
   private static String[] PA;
-  public static boolean pop_window = false;
+  private static boolean pop_window = false;
+  private static ImageIcon icon;
+
   public GUI_1()
   {
     bufferReady =  false;
     buffer = new String();
+    OptionPaneObj = new Object();
     cmd = new String();
-    keyboard = keyboard.getInstance();
     f = new JFrame();
     text = new JTextField();
     text.addActionListener(new GUIListener());
@@ -56,13 +56,12 @@ public class GUI_1 implements UserInterface
     area.setFont(new Font("SanSerif", Font.PLAIN, 13));
     area.setEditable(false);
     f.setLayout(new GridLayout(5, 1, 5, 5));
-    //f.setLayout(new GridBagLayout());
     f.add(new JScrollPane(area), BorderLayout.CENTER);
     f.add(new JScrollPane(text), BorderLayout.CENTER);
-    //Panel Grid Bag
-    p =  new JPanel(new GridBagLayout());  //new FlowLayout(FlowLayout.CENTER, 5, 5));    //Coordinate names.
-    
+
+    p =  new JPanel(new GridBagLayout()); 
     GridBagConstraints c = new GridBagConstraints();
+
     //Buttons names.
     String [] button_label = new String[] {"GO", "GET","USE","LOOK","DROP","TALK","ASK","TRADE","INVE","EXIT","ENTER","CLEAR"};
     int l = 0;
@@ -103,7 +102,9 @@ public class GUI_1 implements UserInterface
       }
     }
     f.add(p);
-    p =  new JPanel(new GridLayout(3, 10, 5, 5));  //new FlowLayout(FlowLayout.CENTER, 5, 5)); 
+
+    //Populate panel with artifact names of the player.
+    p =  new JPanel(new GridLayout(3, 10, 5, 5));
     try{
       for(int i = 0; i < PA.length ; i++)
       {
@@ -134,74 +135,40 @@ public class GUI_1 implements UserInterface
     f.setTitle(s); 
   }    
 
-  public static void setWindow(boolean b)
-  {
-    pop_window = b;
-  }
-
-  public String popUpWindow()
-  {
-     String ret = null;
-     try{
-      Object[] OPA = Arrays.copyOf(PA, PA.length, Object[].class);
-      Object select = null;
-      f.setVisible(false);
-      String riddle = area.getText();
-      String label = f.getTitle();
-      if(label.equals("Oh no!! The OGRE IS HERE!!"))
-      {
-        select = JOptionPane.showInputDialog(null,riddle,label, JOptionPane.QUESTION_MESSAGE, null, OPA, OPA[0]);
-        ret = (String) select;
-      }
-      else
-        ret = JOptionPane.showInputDialog(null,riddle,label, JOptionPane.QUESTION_MESSAGE);
-      pop_window = false;
-      f.dispose();
-      //PA = null;
-      }
-      catch(NullPointerException e){}
-      return ret;
-   }
-  //Executes commands.
-  public String getLine()
-  {
-    if(pop_window) 
-    {
-      String [] tmp = Arrays.copyOf(PA, PA.length, String[].class);
-      cmd = popUpWindow();
-      PA = tmp;
-    }
-/*
-    else 
-    {
-      try{
-        while(!bufferReady)
-          Thread.sleep(500);
-        synchronized(buffer)
-        {
-          cmd = buffer;
-          bufferReady = false;
-        }
-      }
-      catch(InterruptedException e){}
-    }
-*/
-    return cmd; 
-  } 
-  //Populate Player's artifacts array for purpose of creating 
-  //buttons for them. The argument get pass by artNames() method
-  //in the Player class.
+  //gettingArtifacts() method populates PA[] with player's artifact. 
   public static void gettingArtifacts(String[] list)
   {
     PA = list;
   }
-  
-  //Class to implement mouse and action events.
+
+  // Sets OptionPaneObj var with the returned value of JOptionPane dialog window. 
+  // Pops a JOptionPane window when the getLine() method gets called.
+  public static void setOptionPane(String disp, String label, ImageIcon icon, Object[] OPA)
+  {
+    pop_window = true;
+    f.setVisible(false);
+    if(OPA == null)
+      OptionPaneObj = JOptionPane.showInputDialog(null,disp,label, JOptionPane.PLAIN_MESSAGE, icon, null, null);
+    else 
+      OptionPaneObj = JOptionPane.showInputDialog(null,disp,label, JOptionPane.PLAIN_MESSAGE, icon, OPA, OPA[0]);
+  }
+
+  //Executes commands.
+  public String getLine()
+  {
+    if(pop_window){ 
+      cmd = (String) OptionPaneObj;
+      pop_window = false;
+    }
+    return cmd; 
+  } 
+
+  //*************** Nested class to implement mouse and action events.********************//
   class GUIListener extends JComponent implements MouseListener, ActionListener
   {
     private JButton button;
-    String pre;
-    String post;
+    private String pre;
+    private String post;
     public GUIListener()
     {
       button = new JButton();

@@ -19,9 +19,14 @@ public class ReadScroll extends ArtifactUse
 
   public void use()
   {
-    io.display("*********************& Parchment Scroll &*************************");
-    io.display("\t\t\tXYZZY");
-    io.display("******************************************************************");
+    Character c = getCharacter();
+    String display = "**************& Parchment Scroll &*************\n";
+    display +="\t\t\tXYZZY\n";
+    display += "********************************************\n";
+    io.selectInterface(c.getPlayerInterface());
+    //Add options to do with the scroll.
+    GUI_1.setOptionPane(display,"Parchment Scroll", null, null);
+    io.getLine();
   }
 }
    

@@ -66,6 +66,8 @@ public class UI implements DecisionMaker
     {
       try {
         arg = getArgument(userInput);
+        if(Integer.parseInt(arg) == 0) 
+          character.setInterface(io.TEXT);
         if(Integer.parseInt(arg) == 1) 
           character.setInterface(io.GUI_1);
         if(Integer.parseInt(arg) == 2) 
@@ -130,10 +132,7 @@ public class UI implements DecisionMaker
  
     else if("TRADE".equalsIgnoreCase(str))
     {
-      arg = getArgument(userInput);
-      Character requester = character.current.listening(arg.toLowerCase());
-      if(requester == null) return null;
-      return new Trade(character, requester);
+      return new Trade(character); 
     } 
  
     else if("I".equalsIgnoreCase(str)||"INVE".equalsIgnoreCase(str)||"INVENTORY".equalsIgnoreCase(str))

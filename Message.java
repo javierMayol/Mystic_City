@@ -28,10 +28,9 @@ public class Message implements Move
     if(supplier == null)return;
     String message = "\n>You have a messag from "+character.name()+":\n\n  ";
     io.selectInterface(character.getPlayerInterface());
-    GUI_1.setWindow(true);
-    io.display("Message to "+supplier.name());
+    GUI_1.setOptionPane("What would you like to say to"+supplier.name(),"Message to"+supplier.name(), null, null);
     message += io.getLine(); 
-    supplier.message(message);
+    supplier.message(message+"\n");
     return;
  }
 }

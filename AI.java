@@ -28,7 +28,7 @@ public class AI implements DecisionMaker
   public void externalDisplay(String s){}
   private String AI_cmd()
   {
-    String [] cmdBank = new String[]{"GO", "GO", "GO", "GET", "USE", "DROP"};
+    String [] cmdBank = new String[]{"GO", "GO", "GO", "GET", "DROP"};
     Random rand = new Random();
     int index = rand.nextInt(cmdBank.length);
     return cmdBank[index];

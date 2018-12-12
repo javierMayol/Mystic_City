@@ -286,3 +286,12 @@ C. The method cannot be overridden.
 D. The method is not inherited by descendants.
 E. The class may not be extended.
 C
+
+8
+Which of the following can be made generic in Java?
+A. Classes, but not methods
+B. Methods, but not classes
+C. Either classes or methods
+D. Only stand-alone methods, that are not part of any class.
+E. None of the above. Java does not support generics.
+C

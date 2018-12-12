@@ -123,10 +123,17 @@ abstract class Character
 
   public String pInter()
   {
-    if(playerInterface == io.GUI_1)
-      return "GUI_1";
-    else
-      return "TEXT";
+    switch(playerInterface){ 
+      	case 0:
+ 	   return "TEXT";
+	case 1:
+	   return "GUI 1";
+	case 2:
+	   return "GUI 2";
+	case 3:
+	   return "GUI 3";
+    }
+    return null;
   }
   //getID() : Returns ID of character. Used in ..
   public int getID()
@@ -390,7 +397,7 @@ abstract class Character
         display += i+". "+inventory.get(key).name()+"\t pts : "+inventory.get(key).value()+"\n";
         //val += inventory.get(key).value();
       }
-      display += "-----------Total points: "+this.points+"-------------\nweigth "+artifacts_weight+"\n";
+      display += "-----------Total points: "+this.points+"-------------\nweight "+artifacts_weight+"\n";
       io.display(display);
     }
     return display;

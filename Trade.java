@@ -10,14 +10,13 @@ public class Trade implements Move
   private static String offer;
   private static String good;
   private Character lender;
-  private Character requester;
+  private static Character requester;
   //private keyboardScanner keyboard;
   private IO io;
 
-  public Trade(Character A, Character B)
+  public Trade(Character A)
   {
     this.lender = A;
-    this.requester = B;
     //keyboard = keyboard.getInstance();
     this.io = new IO();
     this.io.selectInterface(io.TEXT);
@@ -27,10 +26,11 @@ public class Trade implements Move
   {
     if(requester.isAwaiting()&&(offer != null || good != null))
     {
+      Character person = lender.current.listening(requester.name());
+      if(person == null)return;
       io.selectInterface(lender.getPlayerInterface());
-      io.display("Would you like to accept "+requester.name()+" offer?"+offer+" "+good);
-      io.displayPrompt("Trade");
-      GUI_1.setWindow(true);
+      Object[] options = {"YES", "NO"};
+      GUI_1.setOptionPane("Would you like to accept "+requester.name()+" offer?\n","Trade", null, options);
       String answer = io.getLine();
       if("Yes".equalsIgnoreCase(answer) || "Y".equalsIgnoreCase(answer))
       {
@@ -43,16 +43,17 @@ public class Trade implements Move
         that = new Get(requester, good);
         that.execute();
         requester.awaiting(false);
-        String greeting = "\n>You have a message from "+lender.name()+"\n\nThanks for your business!";
+        String greeting = "\n>You have a message from "+lender.name()+"\n\nThanks for your business!\n";
         requester.message(greeting);
       }
       else
       {
-        String reject = "\n>You have a message from "+lender.name()+"\n\nSorry, not interested.";
+        String reject = "\n>You have a message from "+lender.name()+"\n\nSorry, not interested.\n";
         requester.message(reject);
         requester.awaiting(false);
       }  
     }
+    requester = null;
   }
   public static void setOffer(String thing)
   {
@@ -62,5 +63,9 @@ public class Trade implements Move
   public static void setGood(String that)
   {
     good = that;
+  }
+  public static void setRequester(Character r)
+  {
+    requester = r;
   }
 }

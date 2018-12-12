@@ -35,9 +35,9 @@ public class Request implements Move
     if(supplier == null)return;
 
     io.selectInterface(character.getPlayerInterface());
-    io.display("What would you like to trade?");
-    io.displayPrompt("TRADE");
-    GUI_1.setWindow(true);
+    //String[] things = character.artNames();
+    Object[] options = Arrays.copyOf(character.artNames(), character.artNames().length, Object[].class);
+    GUI_1.setOptionPane("What would you like to trade?","Trade", null, options);
     thingA = io.getLine(); 
     sendIt();
   }
@@ -57,24 +57,22 @@ public class Request implements Move
 
   public void finishRequest()
   {
-      GUI_1.setWindow(true);
- //     io.selectInterface(character.getPlayerInterface());
-      io.display("What item are you interested from "+supplier.name()+"?");
-      io.displayPrompt("TRADE");
-      thingB = io.getLine(); 
-      System.out.println(thingB);
-      if(thingB == null) return;
-      Artifact good = supplier.use(thingB);
-      if(good == null) return;
-      thingB = good.name();
-      Trade.setGood(thingB);
-      int val = good.value();
-      String value = Integer.toString(val);
-      thingB += " "+value+"pts";
+    Object[] options = Arrays.copyOf(supplier.artNames(), supplier.artNames().length, Object[].class);
+    GUI_1.setOptionPane("What item are you interested in from "+supplier.name()+"?","Trade", null, options);
+    thingB = io.getLine(); 
+    if(thingB == null) return;
+    Artifact good = supplier.use(thingB);
+    if(good == null) return;
+    thingB = good.name();
+    Trade.setGood(thingB);
+    Trade.setRequester(character);
+    int val = good.value();
+    String value = Integer.toString(val);
+    thingB += " "+value+"pts";
     // if(character.getID() == supplier.getID())return;
     String message = ">You have a request from "+character.name()+":";
-    String message2 = "\nWould you like to trade "+thingA+" for "+thingB+"?\nType TRADE "+character.name();
-    message += " "+message2;
+    String message2 = "\nWould you like to trade "+thingA+" for "+thingB+"?\nType TRADE to continue.";
+    message += " "+message2+"\n\n";
     character.awaiting(true);
     supplier.message(message);
   }
