@@ -59,9 +59,7 @@ public class GUI_1 implements UserInterface
     f.add(new JScrollPane(area), BorderLayout.CENTER);
     f.add(new JScrollPane(text), BorderLayout.CENTER);
 
-    p =  new JPanel(new GridBagLayout()); 
-    GridBagConstraints c = new GridBagConstraints();
-
+    p =  new JPanel(new GridLayout(4, 3, 5, 5)); 
     //Buttons names.
     String [] button_label = new String[] {"GO", "GET","USE","LOOK","DROP","TALK","ASK","TRADE","INVE","EXIT","ENTER","CLEAR"};
     int l = 0;
@@ -71,38 +69,53 @@ public class GUI_1 implements UserInterface
       {
         b = new JButton(button_label[l]);
         b.addMouseListener(new GUIListener());
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.weightx = 0.5;
-        c.gridx = j;
-        c.gridy = i;
-        p.add(b, c);
+        p.add(b);
         l++;
       }
     }
     f.add(p);  
  
     //Coordinate names.
-    String [] coord = new String[]{"N","S","E","W","U","D","NE","NW","SE","SW","NNE","NNW","ENE","WNW","ESE","WSW","SSE","SSW"};
+    String [] coord = new String[]{"NW","NNW","N","NNE","NE","WNW","ENE","W","E","WSW","ESE","SW","SSW","S","SSE","SE","U","D"};
 
-    p =  new JPanel(new GridBagLayout());
+    p =  new JPanel(new GridLayout(5,5,5,5));
     l = 0;
-    for(int i = 0; i < 3 ; i++)
+    for(int i = 0; i < 5 ; i++)
     {
-      for(int j = 0; j < 6; j++)
+      for(int j = 0; j < 5; j++)
       {
-        b = new JButton(coord[l]);
-        b.setPreferredSize(new Dimension(40, 20));
-        b.addMouseListener(new GUIListener());
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.weighty = 0.5;
-        c.gridx = j;
-        c.gridy = i + 4;
-        p.add(b, c);
-  	l++;
+        if((i==1)&&(j==2))
+        {
+          b = new JButton("U");
+          b.setPreferredSize(new Dimension(40, 20));
+          b.addMouseListener(new GUIListener());
+          p.add(b);
+        }
+        else if((i==3)&&(j==2))
+        {
+          b = new JButton("D");
+          b.setPreferredSize(new Dimension(40, 20));
+          b.addMouseListener(new GUIListener());
+          p.add(b);
+        }
+        else if((j%4!=0)&&((i>0)&&(i<4)))
+        {
+          b = new JButton("");
+          b.setVisible(false); 
+          p.add(b);
+        }
+        else
+        {
+          b = new JButton(coord[l]);
+          b.setPreferredSize(new Dimension(40, 20));
+          b.addMouseListener(new GUIListener());
+          p.add(b);
+  	  l++;
+       }
       }
     }
     f.add(p);
-
+    
     //Populate panel with artifact names of the player.
     p =  new JPanel(new GridLayout(3, 10, 5, 5));
     try{
@@ -116,10 +129,9 @@ public class GUI_1 implements UserInterface
       if(PA.length > 0)
         f.add(p);
     }catch(NullPointerException e){}
- 
     f.add(p);
     f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    f.setSize(465, 700);
+    f.setSize(460, 700);
     f.setResizable(false);
     f.setVisible(true);
   }

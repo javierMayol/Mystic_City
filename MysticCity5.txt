@@ -249,7 +249,7 @@ This beautifully filigreed golden key has "TS" inscribed on it.
 This key is made of finely carved ivory.
 It looks like it took a long time to make.
 
-RIDDLES 3
+RIDDLES 5
 
 10
 What is the difference between Objects and Classes?
@@ -287,7 +287,7 @@ D. The method is not inherited by descendants.
 E. The class may not be extended.
 C
 
-8
+6
 Which of the following can be made generic in Java?
 A. Classes, but not methods
 B. Methods, but not classes
@@ -295,3 +295,16 @@ C. Either classes or methods
 D. Only stand-alone methods, that are not part of any class.
 E. None of the above. Java does not support generics.
 C
+
+10
+Which of the following is NOT a problem with multiple inheritance?
+A. How to store fields inherited from multiple parents, 
+   even when the fields are different.
+B. How to resolve conflicts between the same field name 
+   inherited from different parents, especially when the
+   data types are different.
+C. How to handle the same field inherited from a  common ancestor 
+   via multiple parents ( The diamond problem. )
+D. None of the above. That is to say that all of the above are problems.
+E. The sparkling ruby problem.
+D
