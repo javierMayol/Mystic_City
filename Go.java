@@ -32,7 +32,7 @@ public class Go implements Move
      character.goTo(next);
      character.getCurrentPlace().addCharacter(character);
 
-     if(character.current.getID() == 1||character.current.getID() == 0)
+     if(character.current.getID() == 1)//||character.current.getID() == 0)
      {
        char sadFace = '\u2639';
        if(character instanceof Player)

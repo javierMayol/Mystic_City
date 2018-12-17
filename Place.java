@@ -256,6 +256,17 @@ public class Place {
     return null;
   }
       
+  public String[] charNames()
+  {
+    String[] chars = new String[characters.size()];
+    int in = 0;
+    for(Character i : characters.values())
+    {
+      chars[in] = i.name();
+      in++;
+    }
+    return chars;
+  }
 //****************************** Methods : Artifact related *********************
   //Adds an artifact to this place's collection of artifacts.
   public void addArtifact(Artifact a)
@@ -266,22 +277,24 @@ public class Place {
   //Remove an artifact from this place collection and returns the removed artifact.
   public Artifact removeArtifact(String key)
   {
-    if(artifacts.containsKey(key))
-    {
-      Artifact removed = artifacts.get(key);
-      artifacts.remove(key);
-      return removed;    
-    }
-    else if(isPlayer)
-      for(String k : artifacts.keySet())
+    try{
+      if(artifacts.containsKey(key))
       {
-        key = strCheck(k, key);
         Artifact removed = artifacts.get(key);
         artifacts.remove(key);
         return removed;    
       }
-    else if(isPlayer)
-      io.display("\n\n\n\n\n\n  :ARTIFACT NOT FOUND IN CURRENT PLACE.\n");
+      else if(isPlayer)
+        for(String k : artifacts.keySet())
+        {
+          key = strCheck(k, key);
+          Artifact removed = artifacts.get(key);
+          artifacts.remove(key);
+          return removed;    
+        }
+      else if(isPlayer)
+        io.display("\n\n\n\n\n\n  :ARTIFACT NOT FOUND IN CURRENT PLACE.\n");
+    }catch(NullPointerException e){}
     return null; //Artifact();//try retun null at this point.
   }
 
@@ -324,7 +337,9 @@ public class Place {
     str_format.strSpellCheck(buff, input);//Input check enhancement.
     if(str_format.match())
     {
-      io.display("Did you mean "+str_format.getString()+"? > [ 'y' | 'n' ]");
+      String display = "Did you mean "+str_format.getString()+"? > [ 'y' | 'n' ]";
+      Object[] options = {"yes", "no"};
+      GUI_1.setOptionPane(display, "spell check", null, options);
       String str = io.getLine();
       if(str.equalsIgnoreCase("y")||str.equalsIgnoreCase("yes"))
         return str_format.getString(); 

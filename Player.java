@@ -15,7 +15,7 @@ public class Player extends Character
     decider = new UI();
     player_num++;
     this.io = new IO();
-    playerInterface = io.TEXT;
+    playerInterface = io.GUI_1;
     //this.io.selectInterface(io.TEXT);
   } 
 

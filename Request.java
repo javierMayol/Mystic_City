@@ -42,7 +42,7 @@ public class Request implements Move
     sendIt();
   }
   
-  public void sendIt()
+  private void sendIt()
   {
     if(thingA == null) return;
     Artifact offer = character.use(thingA);
@@ -55,7 +55,7 @@ public class Request implements Move
     finishRequest();
   }  
 
-  public void finishRequest()
+  private void finishRequest()
   {
     Object[] options = Arrays.copyOf(supplier.artNames(), supplier.artNames().length, Object[].class);
     GUI_1.setOptionPane("What item are you interested in from "+supplier.name()+"?","Trade", null, options);

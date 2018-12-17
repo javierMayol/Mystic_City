@@ -61,7 +61,7 @@ public class GUI_1 implements UserInterface
 
     p =  new JPanel(new GridLayout(4, 3, 5, 5)); 
     //Buttons names.
-    String [] button_label = new String[] {"GO", "GET","USE","LOOK","DROP","TALK","ASK","TRADE","INVE","EXIT","ENTER","CLEAR"};
+    String [] button_label = new String[] {"GO", "GET","USE","LOOK","DROP","TALK","TRADE","INVE","CLEAR","EXIT","ENTER","GUI 0"};
     int l = 0;
     for(int i = 0; i < 4 ; i++)
     {
@@ -157,21 +157,26 @@ public class GUI_1 implements UserInterface
   // Pops a JOptionPane window when the getLine() method gets called.
   public static void setOptionPane(String disp, String label, ImageIcon icon, Object[] OPA)
   {
-    pop_window = true;
-    f.setVisible(false);
-    if(OPA == null)
-      OptionPaneObj = JOptionPane.showInputDialog(null,disp,label, JOptionPane.PLAIN_MESSAGE, icon, null, null);
-    else 
-      OptionPaneObj = JOptionPane.showInputDialog(null,disp,label, JOptionPane.PLAIN_MESSAGE, icon, OPA, OPA[0]);
+    try{
+      pop_window = true;
+      f.setVisible(false);
+      if(OPA == null)
+        OptionPaneObj = JOptionPane.showInputDialog(null,disp,label, JOptionPane.PLAIN_MESSAGE, icon, null, null);
+      else 
+        OptionPaneObj = JOptionPane.showInputDialog(null,disp,label, JOptionPane.PLAIN_MESSAGE, icon, OPA, OPA[0]);
+    }catch(NullPointerException e){}
+    catch(ArrayIndexOutOfBoundsException e){}
   }
 
   //Executes commands.
   public String getLine()
   {
-    if(pop_window){ 
-      cmd = (String) OptionPaneObj;
-      pop_window = false;
-    }
+    try{
+      if(pop_window){ 
+        cmd = (String) OptionPaneObj;
+        pop_window = false;
+      }
+    }catch( ClassCastException e){}
     return cmd; 
   } 
 

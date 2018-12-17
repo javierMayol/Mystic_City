@@ -409,7 +409,9 @@ abstract class Character
     str_format.strSpellCheck(buff, input);//Input check enhancement.
     if(str_format.match())
     {
-      io.display("Did you mean "+buff+"? > [ 'y' | 'n' ]");
+      String display = "Did you mean "+buff+"? > [ 'y' | 'n' ]";
+      Object[] options = {"yes", "no"};
+      GUI_1.setOptionPane(display, "spell check", null, options);
       String str = io.getLine();
       if(str.equalsIgnoreCase("y")||str.equalsIgnoreCase("yes"))
         return str_format.getString();

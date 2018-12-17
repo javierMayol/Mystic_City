@@ -99,10 +99,12 @@ public class Riddle
     ImageIcon icon = new ImageIcon("GreenOgre.png");
     GUI_1.setOptionPane(display, "You Won!!", icon, options);
     String prize = io.getLine();
-    Drop thing = new Drop(Ogre, prize.trim());
-    thing.execute();
-    Get that = new Get(victim, prize.trim());
-    that.execute();
+    try{
+      Drop thing = new Drop(Ogre, prize.trim());
+      thing.execute();
+      Get that = new Get(victim, prize.trim());
+      that.execute();
+    }catch(NullPointerException e){};
   }
 
   public static void addRiddle(Scanner scan)

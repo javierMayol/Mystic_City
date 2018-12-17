@@ -99,7 +99,15 @@ public class UI implements DecisionMaker
 
     else if("GET".equalsIgnoreCase(str))
     {
-      arg = getArgument(userInput);
+      if(character.getPlayerInterface() == io.GUI_1)
+      {
+        io.selectInterface(character.getPlayerInterface());
+        Object [] options = Arrays.copyOf(character.current.artNames(), character.current.artNames().length, Object[].class);
+        GUI_1.setOptionPane("Place artifacts","Select artifact",null, options);
+        arg = io.getLine();
+      }
+      else
+        arg = getArgument(userInput);
       return new Get(character, arg);
     }
 

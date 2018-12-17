@@ -165,6 +165,8 @@ public class Game {
             }
        	    if(c.hasSomething())
       	      GUI_1.gettingArtifacts(c.artNames());
+            else
+      	      GUI_1.gettingArtifacts(null);
             c.makeMove();
           }
           if(Player.retrievePlayer_num() < 1)break;
