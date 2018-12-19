@@ -67,13 +67,19 @@ public class UI implements DecisionMaker
       try {
         arg = getArgument(userInput);
         if(Integer.parseInt(arg) == 0) 
+        {
+          io.selectInterface(io.TEXT);
           character.setInterface(io.TEXT);
+        }
         if(Integer.parseInt(arg) == 1) 
+        {
+	  io.selectInterface(io.GUI_1);
           character.setInterface(io.GUI_1);
+        }
         if(Integer.parseInt(arg) == 2) 
-          character.setInterface(io.GUI_2);
+          io.selectInterface(io.GUI_2);
         if(Integer.parseInt(arg) == 3) 
-          character.setInterface(io.GUI_3);
+          io.selectInterface(io.GUI_3);
         if(Integer.parseInt(arg) > 3)
 	  System.out.println("GUI not implemented."); 
       }

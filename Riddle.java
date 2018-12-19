@@ -49,7 +49,10 @@ public class Riddle
     io.selectInterface(victim.getPlayerInterface());
     ImageIcon icon = new ImageIcon("GreenOgre.png");
     Object[] options = {"A","B","C","D","E"};
-    GUI_1.setOptionPane(display, "Oh no!! THE OGRE IS HERE!!", icon, options);
+    if(victim.getPlayerInterface() == io.GUI_1)
+      GUI_1.setOptionPane(display, "Oh no!! THE OGRE IS HERE!!", icon, options);
+    else
+      io.display(display);
     String answer = io.getLine();
     Answer_method(answer);
   }
