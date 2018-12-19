@@ -1,8 +1,8 @@
-#	Javier Mayol 	ACCC: cmayol
-#  	Neel Patel 	NETID : npate315	UIN : 674004711
+#	Javier Mayol 
+#  	Neel Patel 
 # 	Keval Patel
 
-Project  Game version 4.0
+Project  Game version 5.0
 ——————————————————
 CS-342 Software Design fall 2018 term project part 4. Implementation of the semester project.
 Group project that involves having the files of every member work togetehr to run and play
@@ -141,29 +141,29 @@ See ##GAME COMMANDS section below for game commands.
 ----------------------------------------
 ## Riddle class
 
-The Ogre can now challenge a player with a "riddle". If a player finds the Ogre, he is needs to answer a 
-question in order to continue. If the player does not has anything it is possession the Ogre will leave
-her/him alone. If the player fails the answer, the Ogre takes everything from the players inventory. If the
-player wins and the Ogre has somthing in the inventry, then the player gets to choose one artifact from the 
-Ogre.
+  The Ogre can now challenge a player with a "riddle". When walking into a place with the Ogre in it, players need to answer a 
+  question in order to continue. If the player does not has anything in its possession the Ogre will leave
+  her/him alone. If the player fails the answer, the Ogre takes everything from the players inventory. If the
+  player wins and the Ogre has something in the inventory, then the player gets to choose one artifact from the 
+  Ogre.
 
 ----------------------------------------
 ## HollyWand.java
 
-Moves the character to a randomly picked place.
+  Moves the character to a randomly picked place.
 
 _________________________________________
 ##Contribution
 
-Keval Patel 
+  Keval Patel 
 
-Neel Patel
+  Neel Patel
 	Creation and implementation  of IO.java and UserIntefcae.java
 	Following methods in Place Class:
   	  public boolean checkPlayerInstance(Character obj)
    	  public Place goToRoom(Character ponpc, int ID)
 
-Javier Mayol
+ Javier Mayol
 	Implementation of TextInterface.
 	GUI_1
 
