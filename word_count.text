@@ -1,75 +1,36 @@
-      97     254    2434 AI.java
+      97     253    2427 AI.java
       87     261    2201 Artifact.java
       29      62     648 ArtifactCache.java
       44      74     608 ArtifactUse.java
-     448    1094   11526 Character.java
+     457    1122   11724 Character.java
       53     201    1487 CleanLineScanner.java
       17      59     367 DecisionMaker.java
      175     518    4515 Direction.java
       28      73     610 Drop.java
       31      70     679 Exit.java
-     263     776    7101 GUI_1.java
-     106     191    2550 GUI_3.java
-     180     647    6164 Game.java
-      43     128     980 GameTeaster.java
+     247     735    6890 GUI_1.java
+     182     649    6226 Game.java
+      43     128     979 GameTester.java
       43     102    1065 Get.java
-      72     185    2087 Go.java
-      48      97    1094 HollyWand.java
-      54     140     996 IO.java
+      72     185    2090 Go.java
+      46      95    1043 HollyWand.java
+      47     125     895 IO.java
       19      48     350 Inventory.java
-      38      92     995 Message.java
+      37      98    1041 Message.java
        9      29     158 Move.java
       89     239    2090 NPC.java
       35      89     540 Pet.java
-     447    1275   13631 Place.java
-     127     369    3181 Player.java
+     462    1317   14039 Place.java
+     127     369    3182 Player.java
       93     235    2414 Printer.java
-      27      48     530 ReadScroll.java
-      82     229    2276 Request.java
-     130     357    3526 Riddle.java
+      32      71     703 ReadScroll.java
+      80     245    2402 Request.java
+     133     381    3720 Riddle.java
      234     703    6517 StringPairCompare.java
       27      45     442 TextInterface.java
-      66     183    1778 Trade.java
-     160     423    4467 UI.java
+      94     259    2616 Trade.java
+     173     441    4867 UI.java
       83     178    1896 Use.java
        6      15     132 UserInterface.java
       35      88     760 keyboardScanner.java
-      28      75    1819 AI.class
-      27     107    2863 Artifact.class
-      16      49    1099 ArtifactCache.class
-      11      35     817 ArtifactUse.class
-     112     379    9956 Character.class
-      13      40    1017 CleanLineScanner.class
-       1       4     154 DecisionMaker.class
-      13     112    2625 Direction$DirType.class
-      34     130    3281 Direction.class
-       7      35     703 Drop.class
-      16      49    1314 Exit.class
-      28      96    2699 GUI_1$GUIListener.class
-      58     190    5204 GUI_1.class
-      31     117    2541 GUI_3.class
-      65     230    4524 Game.class
-      13      47    1159 GameTeaster.class
-      16      61    1143 Get.class
-      32     116    2432 Go.class
-      24      75    1411 HollyWand.class
-      12      44     878 IO.class
-       6      27     403 Inventory.class
-      22      80    1793 Message.class
-       1       4     113 Move.class
-      55     166    4574 NPC.class
-      10      28     502 Pet.class
-     142     444   11058 Place.class
-      70     239    5699 Player.class
-      27      90    2485 Printer.class
-       8      27     589 ReadScroll.class
-      31     134    2930 Request.class
-      80     230    4457 Riddle.class
-      41     164    4050 StringPairCompare.class
-      13      39    1188 TextInterface.class
-      37     116    2200 Trade.class
-      53     223    4411 UI.class
-      36     106    1995 Use.class
-       2       7     214 UserInterface.class
-      17      48    1452 keyboardScanner.class
-    4733   13740  190547 total
+    3466    9562   92323 total

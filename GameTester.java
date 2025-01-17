@@ -12,7 +12,7 @@ import java.util.*;
 // this the game teaster class where I test my code.
 // I hardcode this class for testing purpose
 
-public class GameTeaster {
+public class GameTester {
 
   public static void main(String[] args) throws Exception{
     String fileName = "MysticCity5.txt";

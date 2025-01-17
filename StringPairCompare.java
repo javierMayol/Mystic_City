@@ -5,7 +5,6 @@
 *	a spelling penalty of at most 5.
 * 	The first argument is a buffer string which is to 
 * 	be compared with the second string argument.
-* 	Matching refers to 
 *       The int counter variable stores the number of
 *      	penalties for mismatch and dislaignents.
 * 	The mismatch penalty is 1.
